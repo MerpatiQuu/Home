@@ -50,8 +50,11 @@
 }
 
 .plus-icon {
-    color: blue;
-    font-size: 1rem; /* Menyesuaikan ukuran icon pada perangkat kecil */
+    font-size: 0.575rem;
+    padding: 0rem;
+    border: 1px solid #007bff;
+    color: #007bff;
+    background-color: transparent;
 }
 
 .ml-1 {
@@ -59,7 +62,8 @@
 }
 
 .btn-no-bg:hover .plus-icon {
-    color: darkblue;
+    background-color: #007bff;
+    color: #fff;
 }
 
 .btn-print {
@@ -87,7 +91,7 @@
 /* Optional: Style the button icon */
 .btn-no-bg .fa-trash {
     color: #dc3545; /* Font Awesome color for danger (red) */
-    font-size: 1.25rem; /* Adjust icon size if needed */
+    font-size: 1rem; /* Adjust icon size if needed */
 }
 
 /* Optional: Add a hover effect if desired */
@@ -99,39 +103,77 @@
 .table {
     font-size: 0.875rem; /* Menyesuaikan ukuran font tabel */
 }
-/* Ensure the table has no padding or margin */
+/* Pastikan tabel tidak memiliki padding atau margin */
 #transactionTable {
-    width: 100%; /* Make sure table takes up full width */
-    border-collapse: collapse; /* Remove spacing between borders */
-    border: none; /* Remove any default border */
+    width: 100%; /* Tabel menempati seluruh lebar */
+    border-collapse: collapse; /* Menghilangkan jarak antar border */
+    border-spacing: 0; /* Pastikan tidak ada jarak antar sel */
+    border: none; /* Menghilangkan border default */
 }
 
-/* Remove padding and margin from table cells and rows */
+/* Hilangkan padding dan margin dari sel tabel dan baris */
 #transactionTable th, #transactionTable td {
-    padding: 0; /* Remove padding */
-    margin: 0;  /* Remove margin */
-    border: none; /* Remove borders */
-    text-align: left; /* Align text to the left */
+    padding: 0; /* Hilangkan padding */
+    margin: 0;  /* Hilangkan margin */
+    border: none; /* Menghilangkan border */
+    text-align: left; /* Rata kiri untuk teks */
+    vertical-align: middle; /* Konten di tengah secara vertikal */
 }
 
-/* Remove padding and margin from table headers */
+/* Atur tampilan header tabel */
 #transactionTable thead th {
-    padding: 0; /* Remove padding */
-    margin: 0;  /* Remove margin */
-    border-bottom: none; /* Remove bottom border from headers if needed */
+    padding: 0; /* Hilangkan padding */
+    margin: 0;  /* Hilangkan margin */
+    border-bottom: none; /* Hilangkan border bawah header jika perlu */
+    font-weight: bold; /* Buat header tebal (opsional) */
+    vertical-align: middle; /* Pastikan header vertikal di tengah */
+    text-align: left; /* Rata kiri untuk header */
 }
 
-/* Remove any extra spacing around the table */
+/* Hilangkan padding dan margin dari wrapper tabel */
 #transactionTable_wrapper {
-    margin: 0; /* Remove wrapper margin */
-    padding: 0; /* Remove wrapper padding */
+    margin: 0; /* Hilangkan margin wrapper */
+    padding: 0; /* Hilangkan padding wrapper */
 }
 
-/* Ensure headers have a consistent appearance */
-#transactionTable thead th {
-    font-weight: bold; /* Optional: make headers bold */
+/* Hilangkan spasi di sekitar teks dalam sel */
+#transactionTable p.itemtext {
+    margin: 0; /* Hilangkan margin pada teks dalam tabel */
+    padding: 0; /* Hilangkan padding pada teks dalam tabel */
+    font-size: 0.875rem; /* Atur ukuran font agar lebih kecil */
 }
 
+/* Atur tampilan ikon */
+#transactionTable .fas {
+    font-size: 0.8rem; /* Ukuran ikon lebih kecil */
+}
+
+/* Atur tombol hapus lebih kecil dan rapat */
+#transactionTable .btn-no-bg {
+    padding: 0; /* Hilangkan padding */
+    margin: 0; /* Hilangkan margin */
+    line-height: 1; /* Line-height lebih rendah untuk tombol */
+    cursor: pointer; /* Tampilkan pointer pada hover */
+}
+
+/* Pastikan baris tabel rapat */
+#transactionTable tr.service {
+    line-height: 1.1; /* Line-height lebih rendah untuk baris */
+    margin: 0; /* Hilangkan margin */
+    padding: 0; /* Hilangkan padding */
+}
+
+/* Pastikan tabel di footer juga tidak memiliki jarak */
+#transactionTable tfoot td {
+    padding: 0; /* Hilangkan padding di footer */
+    margin: 0; /* Hilangkan margin di footer */
+}
+.custom-title {
+    font-size: 1rem; /* Atur ukuran font sesuai kebutuhan */
+}
+.custom-label {
+    font-size: 0.5rem; /* Atur ukuran font sesuai kebutuhan */
+}
 .total {
     margin-top: 20px;
     font-weight: bold;
@@ -233,33 +275,37 @@ label {
     }
 }
 
-/* Ensure button styling remains consistent */
-.modal-sm .btn-no-bg {
-    background: none; /* Remove background */
-    border: none; /* Remove border */
-    cursor: pointer; /* Show pointer cursor on hover */
+.modal-sm .btn-no-bg span {
+    margin-left: 5px; /* Space between icon and text */
+    font-size: 1rem;  /* Adjust font size */
+    color: #007bff;   /* Text color matching the icon */
 }
 
-/* Ensure icon is centered and styled */
-.modal-sm .plus-icon {
-    font-size: 1rem; /* Adjust icon size */
+/* Ensure proper alignment of icon and text */
+.modal-sm .btn-no-bg {
+    display: inline-flex; /* Ensure icon and text are aligned */
+    align-items: center;  /* Vertically align text and icon */
+}
+/* CSS untuk menyembunyikan elemen dalam modal */
+.modal-body .hidden-in-modal {
+    display: none; /* Atau gunakan visibility: hidden; jika Anda ingin elemen tetap mengambil ruang */
 }
 
 /* Print Styles */
 @media print {
     @page {
         size: 58mm auto;
-        margin: 0;
+        margin: 0; /* Menghilangkan margin atas dan bawah */
     }
     
     body * {
         visibility: hidden;
     }
-    
+
     #transactionTable, #transactionTable * {
         visibility: visible;
     }
-    
+
     .print-header {
         position: absolute;
         top: 0;
@@ -267,41 +313,47 @@ label {
         width: 58mm;
         text-align: center;
         font-size: 14px;
-        margin-bottom: 10px;
+        margin: 0; /* Menghilangkan margin bawah */
     }
-    
+
     .print-header img {
         width: 50px;
         height: auto;
     }
-    
+
     #transactionTable {
         position: absolute;
         left: 0;
-        top: 60px;
+        top: 0; /* Mengatur agar tabel langsung tampil di bagian atas */
         width: 58mm;
         font-size: 12px;
         line-height: 1.2;
     }
-    
+
     #transactionTable th, #transactionTable td {
         padding: 5px;
         border: 1px solid #000;
     }
-    
+
     #grandTotalDisplay {
         font-size: 12px;
-        text-align: right;
-        margin-top: 10px;
+        text-align: left;
+        margin: 0; /* Menghilangkan margin atas dan bawah */
     }
-    
+
     .btn-print {
         display: none;
     }
-    
+
     #transactionTable th:nth-child(6), #transactionTable td:nth-child(6) {
         display: none;
     }
+    .itemtext {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+            }
 }
 
 /* General Styles */
@@ -467,7 +519,7 @@ body {
                         <input type="text" id="item" class="form-control" placeholder="-" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="quantity">Jumlah:</label>
+                        <label for="quantity">Quantity:</label>
                         <input type="number" id="quantity" class="form-control" placeholder="Masukkan jumlah" min="1" value="1">
                     </div>
                     <div class="form-group">
@@ -483,17 +535,21 @@ body {
                         <label for="isi">Isi:</label>
                         <input type="number" id="isi" class="form-control" placeholder="-" min="0">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group hidden-in-modal">
                         <label for="price">Harga:</label>
                         <input type="number" id="price" class="form-control" placeholder="-" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="jumlah">Jumlah:</label>
+                        <input type="number" id="jumlah" class="form-control" placeholder="-" min="0" readonly>
                     </div>
                     <div class="form-group">
                         <label for="total">Total:</label>
                         <input type="number" id="total" class="form-control" placeholder="-" min="0" readonly>
                     </div>
                     <div class="form-group d-flex justify-content-center align-items-center">
-                        <button onclick="addTransaction()" class="btn-no-bg">
-                            <i class="fas fa-plus plus-icon"></i> <!-- Font Awesome Plus Icon -->
+                        <button class="btn btn-print" onclick="addTransaction()">
+                            <i class="fas fa-plus plus-icon" style="color: blue;"></i> Tambah
                         </button>
                     </div>
                 </div>
@@ -504,10 +560,10 @@ body {
 <div class="container mt-4">
     <div class="row">
         <!-- Kotak di sebelah kiri -->
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
-                    <h2>Daftar Transaksi</h2>
+                    <h2 class="custom-title">Daftar Transaksi</h2>
                     <table id="transactionTable" class="table table-bordered">
                         <thead class="d-none">
                             <tr>
@@ -516,7 +572,7 @@ body {
                                 <th>Jumlah</th>
                                 <th>Jenis</th>
                                 <th class="d-none">Harga (Rp)</th>
-                                <th>Harga (Rp)</th>
+                                <th>Total (Rp)</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -526,17 +582,17 @@ body {
                     <div class="total-section">
                         <!-- Total Keseluruhan -->
                         <div class="form-group">
-                            <label for="updateGrandTotal">Total:</label>
+                            <label for="updateGrandTotal" class="custom-label">Total:</label>
                             <input type="text" id="updateGrandTotal" class="form-control" readonly value="Rp 0">
                         </div>
                         <!-- Input field for Bayar -->
                         <div class="form-group">
-                            <label for="paymentAmount">Bayar:</label>
+                            <label for="paymentAmount" class="custom-label">Bayar:</label>
                             <input type="text" id="paymentAmount" class="form-control" oninput="calculateChange()" placeholder="Masukkan jumlah pembayaran">
                         </div>
                         <!-- Input field for Kembali -->
                         <div class="form-group">
-                            <label for="changeAmount">Kembali:</label>
+                            <label for="changeAmount" class="custom-label">Kembali:</label>
                             <input type="text" id="changeAmount" class="form-control" readonly>
                         </div>
 
@@ -668,27 +724,45 @@ function getIsiIndex(priceType, dataRow) {
         default: return 0;             // Nilai default jika jenis harga tidak cocok
     }
 }
+// Menetapkan event listeners ketika dokumen siap
+document.addEventListener('DOMContentLoaded', () => {
+    // Ambil elemen input yang relevan
+    const quantityInput = document.getElementById('quantity');
+    const priceTypeSelect = document.getElementById('priceType');
+
+    // Pasang event listener untuk mengupdate harga ketika quantity atau priceType berubah
+    quantityInput.addEventListener('input', updatePrice);
+    priceTypeSelect.addEventListener('change', updatePrice);
+
+    // Jika ada elemen lainnya yang memerlukan pembaruan harga saat value-nya berubah
+    const otherInputs = [/* Daftar elemen lainnya jika diperlukan */];
+    otherInputs.forEach(input => {
+        input.addEventListener('input', updatePrice);
+    });
+});
 
 function updatePrice() {
-    // Retrieve the selected price type, default to 'MM' if not set or invalid
+    // Retrieve the selected price type, default to 'mm' if not set or invalid
     const priceType = document.getElementById('priceType').value || 'mm';
     const quantity = parseFloat(document.getElementById('quantity').value) || 1;
     const priceIndex = getPriceIndex(priceType);
     
     // Retrieve the data row, replace with the actual data source
-    const dataRow = selectedItem || []; // Ganti dengan baris data yang sesuai
+    const dataRow = selectedItem || []; // Replace with the actual data row
     const price = parseFloat(dataRow[priceIndex]) || 0;
     const isi = getIsiIndex(priceType, dataRow) || 0;
     
-    // Update price and isi fields in the form
-    document.getElementById('price').value = price;
-    document.getElementById('isi').value = isi;
-
-    // Calculate total
-    const total = (price * quantity) || 0;
+    // Calculate jumlah (price x isi)
+    const jumlah = price * isi;
     
-    // Update total field in the form
-    document.getElementById('total').value = total;
+    // Calculate total (jumlah x quantity)
+    const total = jumlah * quantity;
+    
+    // Update price, isi, jumlah, and total fields in the form
+    document.getElementById('price').value = Math.round(price); // Remove decimals
+    document.getElementById('isi').value = Math.round(isi); // Remove decimals
+    document.getElementById('jumlah').value = Math.round(jumlah); // Remove decimals
+    document.getElementById('total').value = Math.round(total); // Remove decimals
 }
 
 // Fungsi untuk mendapatkan indeks kolom harga berdasarkan jenis harga
@@ -703,30 +777,33 @@ function getPriceIndex(priceType) {
 }
 
 function addTransaction() {
-    transactionCount++; // Tambah nomor urut setiap kali fungsi dipanggil
+    // Ambil nilai dari form
     const itemName = document.getElementById('item').value;
-    const quantity = parseInt(document.getElementById('quantity').value);
-    const priceType = document.getElementById('priceType').value;
-    const pricePerUnit = parseFloat(document.getElementById('total').value);
-    const total = Math.round(quantity * pricePerUnit); // Membulatkan total ke bilangan bulat
+    const quantity = parseInt(document.getElementById('quantity').value) || 1; // Default to 1 if quantity is not set
+    const priceType = document.getElementById('priceType').value || 'mm'; // Default to 'mm' if not set
+    const pricePerUnit = parseFloat(document.getElementById('jumlah').value) || 0; // Update this to use 'price' field
+    const total = parseFloat(document.getElementById('total').value) || 0; // Use 'total' field directly
 
+    // Validasi input
     if (itemName && quantity > 0 && pricePerUnit > 0) {
-                // Add transaction data to global array
-                transactions.push({
-                    itemName: itemName,
-                    quantity: quantity,
-                    priceType: priceType,
-                    pricePerUnit: pricePerUnit,
-                    total: total
-                });
+        // Tambahkan data transaksi ke array global
+        transactions.push({
+            itemName: itemName,
+            quantity: quantity,
+            priceType: priceType,
+            pricePerUnit: pricePerUnit,
+            total: total
+        });
+
+        // Tambahkan baris ke tabel
         const tbody = document.querySelector('#transactionTable tbody');
+        
         // Baris untuk Nomor Urut dan Nama Barang
         let tr = document.createElement('tr');
         tr.classList.add('service');
-        tr.classList.add('transaction-header');
         tr.innerHTML = `
             <td class="tableitem">
-                <div class="combined-content">
+                <div class="combined-content" colspan="4">
                     <p class="itemtext">${itemName}</p>
                 </div>
             </td>
@@ -736,14 +813,12 @@ function addTransaction() {
         // Baris untuk Jumlah, Jenis, Harga, dan Total
         tr = document.createElement('tr');
         tr.classList.add('service');
-        tr.classList.add('transaction-header');
         tr.innerHTML = `
-            <td class="tableitem" colspan="4">
+            <td class="tableitem">
                 <div class="combined-content">
-                    <p class="itemtext">${quantity} ${priceType}</p>
+                    <p class="itemtext">${priceType} ${quantity} x ${pricePerUnit.toFixed(0)} =</p>
                 </div>
-            </td>
-            <td class="tableitem hide-column"><p class="itemtext">${pricePerUnit.toFixed(0)}</p></td>                              
+            </td>                             
             <td class="tableitem"><p class="itemtext">${total.toFixed(0)}</p></td>
             <td><button class="btn-no-bg" onclick="removeRow(this)">
                 <i class="fas fa-trash"></i> <!-- Ikon hapus -->
@@ -751,21 +826,24 @@ function addTransaction() {
         `;
         tbody.appendChild(tr);
 
+        // Update grand total dan reset form
         updateGrandTotal();
         resetForm();
+        // Tutup modal setelah transaksi ditambahkan
+        const myModalEl = document.getElementById('itemModal');
+        // Jika Bootstrap 4 atau lebih lama
+        $(myModalEl).modal('hide');
     } else {
         alert('Silakan lengkapi informasi transaksi.');
     }
 }
-window.onload = function() {
-    transactionCount = 0; // Reset nomor urut saat halaman dimuat
-}
+
 function updateGrandTotal() {
     let total = 0;
     
     // Loop through each row in the table and calculate the total
     document.querySelectorAll('#transactionTable tbody tr').forEach(row => {
-        const totalCell = row.querySelector('td:nth-child(3)'); // Adjusted to get the correct 'Total' column
+        const totalCell = row.querySelector('td:nth-child(2)'); // Adjusted to get the correct 'Total' column
         if (totalCell) {
             const value = parseFloat(totalCell.textContent.replace(/[^\d.-]/g, '')); // Remove non-numeric characters
             total += !isNaN(value) ? value : 0;
@@ -776,14 +854,17 @@ function updateGrandTotal() {
     document.getElementById('updateGrandTotal').value = `Rp ${total.toLocaleString('id-ID', {maximumFractionDigits: 0})}`;
 }
 function removeRow(button) {
-            // Remove row from table
-            const row = button.closest('tr');
-            row.parentNode.removeChild(row);
+            // Get the row that contains the delete button
+            const rowToRemove = button.closest('tr');
+            const previousRow = rowToRemove.previousElementSibling;
 
-            // Optionally, remove from transactions array as well
-            // This would require tracking rows and their data
+            // Remove both rows
+            if (previousRow && rowToRemove) {
+                previousRow.remove();
+                rowToRemove.remove();
+                updateGrandTotal();
+            }
         }
-
         // Fungsi untuk menghitung kembali otomatis
 document.getElementById('paymentAmount').addEventListener('input', function(e) {
     // Ambil nilai yang diinput, hapus simbol non-angka
@@ -837,7 +918,15 @@ function resetForm() {
             
         // Call getAllBarang when the document loads
         document.addEventListener('DOMContentLoaded', getAllBarang);
-        
+// Function to clear the transaction list
+function clearTransactionList() {
+    // Clear the transactions array
+    transactions = [];
+
+    // Clear the table body
+    const tbody = document.querySelector('#transactionTable tbody');
+    tbody.innerHTML = '';
+}        
         function printReceipt() {
     // Pastikan data transaksi ada
     if (!transactions || transactions.length === 0) {
@@ -845,29 +934,31 @@ function resetForm() {
         return;
     }
 
-    // Generate the table rows based on the stored transaction data
-    let rows = '';
-    transactions.forEach(data => {
-        rows += `
+// Generate the table rows based on the stored transaction data
+let rows = '';
+transactions.forEach((data, index) => {
+    rows += `
+        <tr class="service">
+            <td class="tableitem">
+                <p class="itemtext">${index + 1}. ${data.itemName}</p> <!-- Nomor urut otomatis -->
+            </td>
+        </tr>
             <tr class="service">
                 <td class="tableitem">
                     <div class="combined-content">
-                        <p class="itemtext">${data.itemName}</p>
+                        <p class="itemtext">${data.priceType} ${data.quantity}        x ${data.pricePerUnit.toFixed(0)}</p>
                     </div>
                 </td>
-            </tr>
-            <tr class="service">
-                <td class="tableitem" colspan="4">
-                    <div class="combined-content">
-                        <p class="itemtext">${data.quantity} ${data.priceType}</p>
-                    </div>
-                </td>
-                <td class="tableitem hide-column"><p class="itemtext">${data.pricePerUnit.toFixed(0)}</p></td>
-                <td class="tableitem"><p class="itemtext">${data.total.toFixed(0)}</p></td>
+                <td class="tableitem"><p class="itemtext">=${data.total.toFixed(0)}</p></td>
             </tr>
         `;
     });
-
+    // Insert the generated rows into the table inside the <div>
+    const tableHTML = `
+        <table>
+            ${rows}
+        </table>
+    `;
     // Hitung nilai total, bayar, dan kembalian
     const transactionSummary = calculateChange();
 
@@ -881,7 +972,7 @@ function resetForm() {
             <html lang="en">
             <head>
                 <meta charset="UTF-8">
-                <title>Receipt</title>
+                <title>Nota</title>
                 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
                 <style>
                             /* Add styles for printing */
@@ -930,10 +1021,21 @@ function resetForm() {
             }
             #invoice-POS #top, #invoice-POS #mid, #invoice-POS #bot {
             /* Targets all id with 'col-' */
-            border-bottom: 1px solid #EEE;
+            position: relative;
+            border-bottom: 1px dotted hsl(0, 47%, 46%);
+            }
+            #invoice-POS #top::after,
+            #invoice-POS #mid::after,
+            #invoice-POS #bot::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px; /* adjust distance between lines */
+            width: 100%;
+            border-bottom: 1px dotted hsl(0, 47%, 46%);
             }
             #invoice-POS #top {
-            min-height: 100px;
+            min-height: 90px;
             }
             #invoice-POS #mid {
             min-height: 0px;
@@ -942,24 +1044,12 @@ function resetForm() {
             min-height: 50px;
             margin: 0;
             }
-            #invoice-POS #top .logo {
-            height: 60px;
-            width: 60px;
-            background: url(https://github.com/MerpatiQuu/MTsAU/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true) no-repeat;
-            background-size: 60px 60px;
-            filter: grayscale(100%);
+            #invoice-POS #top .logo-img {
+            height: 38px; /* Adjust height to fit within POS format */
+            width: auto; /* Keep aspect ratio */
+            display: block; /* Remove extra space below the image */
+            margin: 0 auto; /* Center align the image */
             }
-
-            #invoice-POS .clientlogo {
-            float: left;
-            height: 60px;
-            width: 60px;
-            background: url(https://github.com/MerpatiQuu/MTsAU/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true) no-repeat;
-            background-size: 60px 60px;
-            border-radius: 50px;
-            filter: grayscale(100%);
-            }
-
             #invoice-POS .info {
             display: block;
             margin-left: 0;
@@ -971,16 +1061,37 @@ function resetForm() {
             text-align: right;
             }
             #invoice-POS table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 0;
+            width: 110%;
+            margin-top: 5px;
             }
             #invoice-POS .tabletitle {
-            font-size: .5em;
-            margin: 0;
+                font-size: .5em;
+                margin: 0;
+                white-space: nowrap; /* Prevents wrapping */
+            }
+            #invoice-POS .tabletitle td h2 {
+                white-space: nowrap; /* Prevents wrapping for H2 */
             }
             #invoice-POS .service {
-            border-bottom: 1px solid #EEE;
+            border-bottom: 0px solid #EEE;
+            }
+                .tableitem p.itemtext {
+                margin: 0;
+                padding: 0px 0; /* Atur padding sesuai kebutuhan */
+                line-height: 1.2;
+            }
+            
+            table td {
+                padding: 0; /* Menghapus padding pada td jika diperlukan */
+            }
+            
+            table {
+                width: 100%; /* Atur lebar tabel sesuai kebutuhan */
+            }
+            
+            /* Untuk visualisasi */
+            table, td {
+                border: 0px solid #ddd; /* Contoh border */
             }
             #invoice-POS .item {
             width: 24mm;
@@ -995,7 +1106,7 @@ function resetForm() {
             h2 {margin: 0.2rem;}
             h6 {margin: 0;}
             h5 {margin: 0;
-            font-size: x-small;
+            font-size: xx-small;
             font-family: 'Poppins', sans-serif;}
             .hide-column {
                 display: none !important;
@@ -1050,7 +1161,7 @@ function resetForm() {
             /* Optional: Limit paper size if required */
             @page {
                 size: auto; /* Automatically adjust to content */
-                margin: 10mm; /* Set page margins */
+                margin: 0; /* Set page margins */
             }
 
             /* Optional: Prevent empty pages if content is smaller */
@@ -1064,6 +1175,7 @@ function resetForm() {
             max-width: 100%;
             }
         }
+
     </style>
 </head>
 <body translate="no">
@@ -1072,11 +1184,11 @@ function resetForm() {
 
     <center id="top">
       <div class="logo"></div>
-      <div class="info"> 
-        <h2>Toko MerpatiQuu</h2>
-        <h6>Beddian-Jambesari Ds-Bondowoso</h6>
-        <h6>-</h6>
-        <h6>082257730020</h6>
+      <h2>Toko</h2>
+      <img src="https://github.com/MerpatiQuu/M/blob/main/Preview%202.png?raw=true" alt="Logo" class="logo-img">
+      <div class="info">
+        <h5>Beddian-Jambesari Ds-Bondowoso</h5>
+        <h6>No.HP 082257730020</h6>
       </div><!--End Info-->
     </center><!--End InvoiceTop-->
 
@@ -1094,30 +1206,24 @@ function resetForm() {
                 <table>
                     ${rows}
                     <tr>
-                            <td colspan="5" style="border-top: 2px solid #000; padding: 0;"></td>
-                        </tr>
-                <tr class="tabletitle">
-                    <td></td>
-                    <td class="Rate" style="text-align: left;"><h2>Total</h2></td>
-                    <td class="total"><h2>${transactionSummary.grandTotal}</h2></td> <!-- Dynamic Total -->
-                </tr>
-                <tr class="tabletitle">
-                    <td></td>
-                    <td class="Rate" style="text-align: left;"><h2>Bayar</h2></td>
-                    <td class="payment"><h2>${transactionSummary.paymentAmount}</h2></td> <!-- Dynamic Payment -->
-                </tr>
-                <tr class="tabletitle">
-                    <td></td>
-                    <td class="Rate" style="text-align: left;"><h2>Kembali</h2></td>
-                    <td class="change"><h2>${transactionSummary.changeAmount}</h2></td> <!-- Dynamic Change -->
-                </tr>
-            </table>                    </div><!--End Table-->
+                        <td colspan="2" style="border-top: 2px solid #000; padding: 0;"></td>
+                    </tr>
+                    <tr class="tabletitle">
+                        <td class="Rate" style="text-align: left; white-space: nowrap;"><h2>Total: ${transactionSummary.grandTotal}</h2></td>
+                    </tr>
+                    <tr class="tabletitle">
+                        <td class="Rate" style="text-align: left; white-space: nowrap;"><h2>Bayar: ${transactionSummary.paymentAmount}</h2></td>
+                    </tr>
+                    <tr class="tabletitle">
+                        <td class="Rate" style="text-align: left; white-space: nowrap;"><h2>Kembali: ${transactionSummary.changeAmount}</h2></td>
+                    </tr>
+            </table>                    
+            </div><!--End Table-->
             </div>
-
             <div id="legalcopy">
-                <h5 class="legal" style="text-align: center;"><strong>Harga Selaras Belanja Puas</strong></h5>
-                <h6 class="legal" style="text-align: center;"><strong>-</strong></h6>
+                <h6 class="legal" style="text-align: center;"><strong>Harga Selaras Belanja Puas</strong></h6>
                 <h6 class="legal" style="text-align: center;"><strong>Mator Sekalangkong</strong></h6>
+                <h6 class="legal" style="text-align: center;"><strong>-</strong></h6>
             </div>
         </div>
     </div>
@@ -1126,16 +1232,16 @@ function resetForm() {
         <button class="print-btn" onclick="window.print()">Print</button>
         <button onclick="window.close()">Close</button>
     </div>
-
 </body>
 </html>
 `);
             printWindow.document.close();
             printWindow.print();
+                // Clear the transaction list after printing
+    clearTransactionList();
             // Clear the transactions array if needed
             transactions = [];
         }
-
     </script>
 
 </body>
