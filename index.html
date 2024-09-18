@@ -170,6 +170,7 @@
 }
 .custom-title {
     font-size: 1rem; /* Atur ukuran font sesuai kebutuhan */
+    margin: 0;
 }
 .custom-label {
     font-size: 0.5rem; /* Atur ukuran font sesuai kebutuhan */
@@ -564,6 +565,22 @@ body {
             <div class="card">
                 <div class="card-body">
                     <h2 class="custom-title">Daftar Transaksi</h2>
+                                <!-- Dropdown menu -->
+            <div class="form-group">
+                <label for="nameDropdown" style="margin-bottom: 0; font-size: 10px;">Kasir:</label>
+                <select id="nameDropdown" class="form-control" style="font-size: 9px; margin-top: 0; margin-bottom: 0;">
+                    <option value="Taufiq">Taufiq</option>
+                    <option value="Wafir">Wafir</option>
+                    <option value="Wasil">Wasil</option>
+                    <option value="Miftah">Miftah</option>
+                    <option value="Farhan">Farhan</option>
+                    <option value="Ervan">Ervan</option>
+                    <option value="Ghazi">Ghazi</option>
+                    <option value="Lutfi">Lutfi</option>
+                    <option value="Qosim">Qosim</option>
+                    <option value="Basri">Basri</option>
+                </select>
+            </div>
                     <table id="transactionTable" class="table table-bordered">
                         <thead class="d-none">
                             <tr>
@@ -611,6 +628,7 @@ body {
                     <label for="searchInput">Cari:</label>
                     <input type="text" id="searchInput" class="form-control" placeholder="Cari berdasarkan abjad...">
                 </div>
+                <input type="file" id="inputExcel" accept=".xlsx, .xls" />
                 <table id="barangTable" class="table table-bordered">
                     <thead>
                         <tr>
@@ -627,8 +645,8 @@ body {
                             <th>Hrg Member</th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
-                </table>
+                    <tbody id="bodyTable"></tbody>
+                  </table>
             </div>
         </div>
     </div>
@@ -641,80 +659,156 @@ body {
         <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
-        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
         <script>
-const webAppUrl = 'https://script.google.com/macros/s/AKfycbxvt3hz83AUwz_KfXYi6DGmnSzGL-_j4hBuGROKbQgtCgEPyCo_82QxMz4IeaaoEHVL/exec'; // Replace with your Google Apps Script URL
 
 let selectedItem = null;
 let transactions = [];
+let importedData = []; // Menyimpan data Excel yang diimpor
 
-// Fungsi untuk mengambil semua barang dari Google Sheets
-function getAllBarang() {
-    fetch(`${webAppUrl}?action=getAllBarang`)
-        .then(response => response.json())
-        .then(data => {
-            const tbody = document.querySelector('#barangTable tbody');
-            tbody.innerHTML = ''; // Bersihkan baris sebelumnya
+// Event listener untuk perubahan file input
+document.getElementById('inputExcel').addEventListener('change', handleFileSelect, false);
 
-            data.forEach(row => {
-                const tr = document.createElement('tr');
-                row.forEach(cell => {
-                    const td = document.createElement('td');
-                    td.textContent = cell;
-                    tr.appendChild(td);
-                });
-                // Tambahkan event listener untuk memilih baris saat diklik
-                tr.onclick = () => {
-                    selectedItem = row;
-                    document.getElementById('item').value = selectedItem[1]; // Misalkan nama item ada di kolom ke-2
-                    document.getElementById('quantity').value = 1; // Kuantitas default
-                    updatePrice(); // Memperbarui harga berdasarkan jenis harga yang dipilih
+function handleFileSelect(event) {
+    var file = event.target.files[0];
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+        var data = new Uint8Array(e.target.result);
+        var workbook = XLSX.read(data, { type: 'array' });
+        
+        // Ambil lembar pertama dari workbook
+        var firstSheetName = workbook.SheetNames[0];
+        var worksheet = workbook.Sheets[firstSheetName];
+        
+        // Konversi lembar menjadi format JSON
+        importedData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+        // Simpan data ke localStorage
+        localStorage.setItem('importedData', JSON.stringify(importedData));
                 
-                    // Buka modal
-                    $('#itemModal').modal('show');
-                };
-                tbody.appendChild(tr);
-            });
+        // Render tabel dengan data
+        renderTable(importedData);
+    };
 
-            // Tampilkan tabel dan bagian pencarian yang tersembunyi
-            document.getElementById('barangSection').style.display = 'block';
-
-            var table = $('#barangTable').DataTable({
-            destroy: true,
-            paging: false,
-            info: false,
-            lengthChange: false,
-            searching: false, // Nonaktifkan pencarian bawaan DataTables
-            columnDefs: [
-                {
-                    targets: 0,
-                    visible: false
-                }
-            ]
-        });
-
-        $('#searchInput').on('keyup', function() {
-    var searchTerm = this.value.toLowerCase(); // Dapatkan input pencarian
-    table.rows().every(function() {
-        var data = this.data(); // Ambil data dari baris
-        var rowString = ''; // Gabungkan teks dari kolom yang akan dicari
-
-        // Gabungkan kolom yang ingin dicari
-        for (var i = 1; i < data.length; i++) {
-            rowString += data[i].toLowerCase() + ' ';
-        }
-
-        // Jika baris cocok dengan pencarian, tampilkan baris, jika tidak, sembunyikan
-        if (rowString.indexOf(searchTerm) !== -1) {
-            $(this.node()).show(); // Tampilkan baris
-        } else {
-            $(this.node()).hide(); // Sembunyikan baris
-        }
-    });
-});
-        });
+    reader.readAsArrayBuffer(file);
+}
+document.addEventListener('DOMContentLoaded', () => {
+    const savedData = localStorage.getItem('importedData');
+    if (savedData) {
+        importedData = JSON.parse(savedData);
+        renderTable(importedData);
+    } else {
+        // Jika tidak ada data, panggil fungsi yang diperlukan (misalnya getAllBarang)
+        getAllBarang();
     }
+});
+function handleFileSelect(event) {
+    var file = event.target.files[0];
+    var reader = new FileReader();
 
+    reader.onload = function(e) {
+        var data = new Uint8Array(e.target.result);
+        var workbook = XLSX.read(data, { type: 'array' });
+        
+        var firstSheetName = workbook.SheetNames[0];
+        var worksheet = workbook.Sheets[firstSheetName];
+        
+        // Konversi lembar menjadi format JSON
+        importedData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+        
+        // Hapus data lama dari localStorage
+        localStorage.removeItem('importedData');
+        
+        // Simpan data yang baru ke localStorage
+        localStorage.setItem('importedData', JSON.stringify(importedData));
+        
+        // Render tabel dengan data
+        renderTable(importedData);
+    };
+
+    reader.readAsArrayBuffer(file);
+}
+
+function renderTable(data) {
+    var tableBody = document.getElementById('bodyTable');
+
+    // Hapus konten tabel sebelumnya
+    tableBody.innerHTML = '';
+
+    // Menentukan urutan header sesuai tabel HTML
+    const headerOrder = ['ID', 'Nama', 'Kategori', 'Pcs', 'Isi Pac', 'Isi Dos', 'Kulak', 'Hrg Pcs', 'Hrg Pac', 'Hrg Dos', 'Hrg Member'];
+
+    // Isi tabel body dengan data
+    data.forEach(row => {
+        var tr = document.createElement('tr');
+        headerOrder.forEach(header => {
+            var td = document.createElement('td');
+            const index = headerOrder.indexOf(header);
+            if (index < row.length) {
+                td.textContent = row[index];
+            } else {
+                td.textContent = '';
+            }
+            tr.appendChild(td);
+        });
+        // Tambahkan event listener untuk memilih baris saat diklik
+        tr.onclick = () => {
+            selectedItem = row;
+            document.getElementById('item').value = selectedItem[1]; // Asumsikan nama item ada di kolom 2
+            document.getElementById('quantity').value = 1; // Kuantitas default
+            updatePrice(); // Update harga berdasarkan jenis yang dipilih
+            
+            // Buka modal
+            $('#itemModal').modal('show');
+        };
+        tableBody.appendChild(tr);
+    });
+
+    // Tampilkan tabel dan bagian pencarian
+    document.getElementById('barangSection').style.display = 'block';
+
+    var table = $('#barangTable').DataTable({
+        destroy: true,
+        paging: false,
+        info: false,
+        lengthChange: false,
+        searching: false, // Nonaktifkan pencarian default DataTables
+        columnDefs: [
+            {
+                targets: 0,
+                visible: false
+            }
+        ]
+    });
+
+    $('#searchInput').on('keyup', function() {
+        var searchTerm = this.value.toLowerCase(); // Ambil input pencarian
+        table.rows().every(function() {
+            var data = this.data(); // Ambil data dari baris
+            var rowString = ''; // Gabungkan teks dari kolom untuk pencarian
+
+            // Gabungkan kolom untuk pencarian
+            for (var i = 1; i < data.length; i++) {
+                rowString += data[i].toLowerCase() + ' ';
+            }
+
+            // Tampilkan atau sembunyikan baris berdasarkan istilah pencarian
+            if (rowString.indexOf(searchTerm) !== -1) {
+                $(this.node()).show(); // Tampilkan baris
+            } else {
+                $(this.node()).hide(); // Sembunyikan baris
+            }
+        });
+    });
+}
+function getAllBarang() {
+    // Logic to initialize or fetch data
+    // Example: If you need to fetch data from a server or local source
+    console.log('Fetching or initializing data...');
+    
+    // This is just an example; replace it with actual logic
+    // e.g., fetching data from a server or setting default values
+}
 function getIsiIndex(priceType, dataRow) {
     switch (priceType) {
         case 'pcs': return dataRow[3];  // Ambil nilai dari kolom 'Isi Pcs'
@@ -726,6 +820,7 @@ function getIsiIndex(priceType, dataRow) {
 }
 // Menetapkan event listeners ketika dokumen siap
 document.addEventListener('DOMContentLoaded', () => {
+    getAllBarang();
     // Ambil elemen input yang relevan
     const quantityInput = document.getElementById('quantity');
     const priceTypeSelect = document.getElementById('priceType');
@@ -797,7 +892,7 @@ function addTransaction() {
 
         // Tambahkan baris ke tabel
         const tbody = document.querySelector('#transactionTable tbody');
-        
+
         // Baris untuk Nomor Urut dan Nama Barang
         let tr = document.createElement('tr');
         tr.classList.add('service');
@@ -837,7 +932,25 @@ function addTransaction() {
         alert('Silakan lengkapi informasi transaksi.');
     }
 }
+// Fungsi untuk mendapatkan tanggal saat ini dalam format "dddd, mmmm dd, yyyy"
+function getCurrentDate() {
+    const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+    const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
+    const now = new Date();
+    const dayName = days[now.getDay()]; // Nama hari
+    const day = now.getDate(); // Tanggal
+    const monthName = months[now.getMonth()]; // Nama bulan
+    const year = now.getFullYear(); // Tahun
+
+    return `${dayName}, ${day} ${monthName}, ${year}`;
+}
+
+// Mendapatkan tanggal saat ini
+const currentDate = getCurrentDate(); 
+
+// Menampilkan tanggal ke konsol
+console.log(currentDate);
 function updateGrandTotal() {
     let total = 0;
     
@@ -934,12 +1047,15 @@ function clearTransactionList() {
         return;
     }
 
+    // Fetch the selected cashier's name
+    const cashierDropdown = document.getElementById('nameDropdown');
+    const selectedCashier = cashierDropdown ? cashierDropdown.value : 'Unknown';
 // Generate the table rows based on the stored transaction data
 let rows = '';
 transactions.forEach((data, index) => {
     rows += `
         <tr class="service">
-            <td class="tableitem">
+            <td class="tableitem" colspan="2">
                 <p class="itemtext">${index + 1}. ${data.itemName}</p> <!-- Nomor urut otomatis -->
             </td>
         </tr>
@@ -961,6 +1077,10 @@ transactions.forEach((data, index) => {
     `;
     // Hitung nilai total, bayar, dan kembalian
     const transactionSummary = calculateChange();
+        // Calculate the total number of items
+        const itemCount = transactions.length;
+    // Ambil tanggal saat ini menggunakan fungsi getCurrentDate()
+    const currentDate = getCurrentDate();
 
     // Open a new window for printing
     const printWindow = window.open('', '_blank');
@@ -1013,10 +1133,11 @@ transactions.forEach((data, index) => {
             line-height: 2em;
             }
             #invoice-POS p {
-            font-size: .7em;
+            font-size: .5em;
             color: #000000;
             line-height: 1.2em;
-            text-align: center;
+            text-align: left;
+            margin-top: 0;
             margin-bottom: 0;
             }
             #invoice-POS #top, #invoice-POS #mid, #invoice-POS #bot {
@@ -1058,11 +1179,14 @@ transactions.forEach((data, index) => {
             float: right;
             }
             #invoice-POS .title p {
+
             text-align: right;
             }
             #invoice-POS table {
-            width: 110%;
+            width: 100%;
             margin-top: 5px;
+            font-size: 25px
+            font-weight: bold;
             }
             #invoice-POS .tabletitle {
                 font-size: .5em;
@@ -1096,10 +1220,13 @@ transactions.forEach((data, index) => {
             #invoice-POS .item {
             width: 24mm;
             }
-            #invoice-POS .itemtext {
-            font-size: .5em;
-            text-align: left;
-            }
+#invoice-POS .itemtext {
+    font-size: .7em;
+    text-align: left;
+    overflow: hidden;    /* Sembunyikan teks yang melampaui lebar elemen */
+    text-overflow: ellipsis; /* Gantikan teks yang terpotong dengan "..." */
+}
+
             #invoice-POS #legalcopy {
             margin-top: 5mm;
             }
@@ -1169,10 +1296,10 @@ transactions.forEach((data, index) => {
                 height: auto; /* Adjust the height to the content */
             }
             .itemtext {
-            white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             max-width: 100%;
+            font-size: .7em;
             }
         }
 
@@ -1194,12 +1321,20 @@ transactions.forEach((data, index) => {
 
     <div id="mid">
       <div class="info">
-        <h6></h6>
-        <p> 
-            Detail Belanjaan Anda
-        </p>
-      </div>
-    </div><!--End Invoice Mid-->
+    <table>
+        <tr>
+            <td>
+                <p>Tgl: ${currentDate}</p> <!-- Tanggal saat ini -->
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Kasir: ${selectedCashier}</p>
+            </td>
+        </tr>
+    </table>
+    </div>
+</div><!--End Invoice Mid-->
 
         <div id="bot">
             <div id="table">
@@ -1217,6 +1352,9 @@ transactions.forEach((data, index) => {
                     <tr class="tabletitle">
                         <td class="Rate" style="text-align: left; white-space: nowrap;"><h2>Kembali: ${transactionSummary.changeAmount}</h2></td>
                     </tr>
+                    <tr class="tabletitle">
+                            <td class="Rate" style="text-align: left; white-space: nowrap;"><h2>Jumlah Item: ${itemCount}</h2></td>
+                        </tr>
             </table>                    
             </div><!--End Table-->
             </div>
@@ -1243,6 +1381,5 @@ transactions.forEach((data, index) => {
             transactions = [];
         }
     </script>
-
-</body>
-</html>
+        </body>
+        </html>
