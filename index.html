@@ -492,6 +492,35 @@ body {
   -o-animation-timing-function: linear;
   animation-timing-function: linear;
 }
+.card-body {
+            display: flex;
+            flex-direction: column; /* Default to column for vertical stacking */
+        }
+        .header-row {
+            display: flex;
+            align-items: center; /* Vertikal alignment */
+            justify-content: space-between; /* Spasi antara elemen */
+            margin-bottom: 15px; /* Jarak bawah untuk pemisah dari elemen lainnya */
+        }
+.btn-refresh {
+            display: inline-flex;
+            align-items: center;
+            background-color: #c5e8fa;
+            color: rgb(14, 0, 0);
+            border: none;
+            border-radius: 4px;
+            padding: 2px 10px;
+            font-size: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .btn-refresh:hover {
+            background-color: #3796fc;
+        }
+        .btn-refresh i {
+            margin: 0;
+        }
     </style>
 </head>
 <body>
@@ -564,6 +593,10 @@ body {
         <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
+                               <!-- Tombol Refresh -->
+    <button class="btn-refresh" onclick="refreshPage()">
+        <i class="fas fa-sync-alt"></i> Refresh
+    </button>
                     <h2 class="custom-title">Daftar Transaksi</h2>
                                 <!-- Dropdown menu -->
             <div class="form-group">
@@ -1021,7 +1054,10 @@ function calculateChange() {
         changeAmount: formattedChange
     };
 }
-
+function refreshPage() {
+            // Refresh halaman
+            location.reload();
+        }
 function resetForm() {
                 document.getElementById('item').value = '';
                 document.getElementById('quantity').value = '';
