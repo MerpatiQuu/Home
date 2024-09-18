@@ -500,26 +500,49 @@ body {
             display: flex;
             align-items: center; /* Vertikal alignment */
             justify-content: space-between; /* Spasi antara elemen */
-            margin-bottom: 15px; /* Jarak bawah untuk pemisah dari elemen lainnya */
+            margin-bottom: 0px; /* Jarak bawah untuk pemisah dari elemen lainnya */
         }
 .btn-refresh {
-            display: inline-flex;
             align-items: center;
-            background-color: #c5e8fa;
+            background-color: #0a83fc;
             color: rgb(14, 0, 0);
-            border: none;
+            border: 1px solid #007bff;
             border-radius: 4px;
             padding: 2px 10px;
             font-size: 10px;
             font-weight: bold;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            background-color: transparent;
         }
         .btn-refresh:hover {
             background-color: #3796fc;
+            color: #000;
         }
         .btn-refresh i {
             margin: 0;
+        }
+        .btn-import {
+            align-items: center;
+            background-color: #13fe13;
+            color: rgb(16, 16, 16);
+            border: 1px solid #2cfd41;
+            border-radius: 4px;
+            padding: 3px;
+            font-size: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin: 0px 0; /* Jarak vertikal dari elemen lain */
+            background-color: transparent;
+        }
+        .btn-import:hover {
+            background-color: #e5f50b;
+        }
+        .btn-import i {
+            margin: 0; /* Jarak antara ikon dan tepi tombol */
+        }
+        #inputExcel {
+            display: none; /* Menyembunyikan elemen input asli */
         }
     </style>
 </head>
@@ -595,7 +618,7 @@ body {
                 <div class="card-body">
                                <!-- Tombol Refresh -->
     <button class="btn-refresh" onclick="refreshPage()">
-        <i class="fas fa-sync-alt"></i> Refresh
+        <i class="fas fa-sync-alt" style="color: rgb(255, 0, 0);"></i> Refresh
     </button>
                     <h2 class="custom-title">Daftar Transaksi</h2>
                                 <!-- Dropdown menu -->
@@ -657,11 +680,14 @@ body {
         <!-- Kotak di sebelah kanan -->
         <div class="col-md-6">
             <div id="barangSection">
+                <label for="inputExcel" class="btn-import">
+                    <i class="fas fa-file-excel" style="color: rgb(73, 249, 33);"></i> Import
+                </label>
+                <input type="file" id="inputExcel" accept=".xlsx, .xls" />
                 <div id="searchContainer" class="mb-2">
                     <label for="searchInput">Cari:</label>
                     <input type="text" id="searchInput" class="form-control" placeholder="Cari berdasarkan abjad...">
                 </div>
-                <input type="file" id="inputExcel" accept=".xlsx, .xls" />
                 <table id="barangTable" class="table table-bordered">
                     <thead>
                         <tr>
