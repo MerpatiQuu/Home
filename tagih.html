@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" type="image/x-icon" />
+    <meta property="og:image" content="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <title>Tagihan</title>
+    <style>
+/* Global Styles */
+body {
+    padding: 15px;
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa; /* Light gray background */
+}
+header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background-color: #007bff;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between; /* Space between logo and menu */
+      padding: 0 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      z-index: 1000; /* Ensure it's above the sidebar and content */
+    }
+
+    /* Updated span styling for header title */
+    .header-title {
+      font-size: 24px; /* Keep the same size as h1 */
+      font-weight: bold; /* Optional: Keep the same boldness as h1 */
+      color: white; /* Match the color for the header */
+      margin-left: 2px; /* Add space from the menu icon */
+      display: inline-block; /* Keep it inline but treat it like a block-level element */
+    }
+
+    /* Sidebar Menu */
+    .sidebar {
+      height: 100%;
+      width: 250px;
+      position: fixed;
+      top: 30px; /* Disesuaikan agar berada di bawah header */
+      left: -250px;
+      background-color: #ffffff;
+      transition: 0.3s;
+      padding-top: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      z-index: 900;
+    }
+
+    .sidebar.active {
+      left: 0;
+    }
+
+    .sidebar ul {
+      padding: 0;
+      list-style-type: none;
+    }
+
+    .sidebar ul li {
+      padding: 5px 20px;
+      text-align: left;
+    }
+
+    .sidebar ul li a {
+      text-decoration: none;
+      font-size: 16px;
+      color: #333;
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+    }
+
+    .sidebar ul li a:hover {
+      color: #007bff;
+    }
+
+    .sidebar ul li i {
+      margin-right: 10px;
+      margin-left: 4px;
+      font-size: 20px;
+    }
+
+    /* Main content */
+    main {
+      margin-left: 0;
+      margin-top: 40px; /* Start below the header */
+      padding: 20px;
+      transition: margin-left 0.3s;
+    }
+
+    main.active {
+      margin-left: 250px; /* Push content when sidebar is visible */
+    }
+
+    /* Menu Icon in Header */
+    .menu-icon {
+      font-size: 1.75rem;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    .menu-icon img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    /* Adjust for mobile responsiveness */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 150px;
+      }
+
+      .sidebar.active {
+        left: 0;
+      }
+
+      main.active {
+        margin-left: 150px;
+      }
+    }
+
+/* Table Styles */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.table th,
+.table td {
+    padding: 8px 12px; /* Reduced padding for compactness */
+    border: 1px solid #dee2e6; /* Light border color */
+    text-align: left;
+}
+
+.table th {
+    background-color: #007bff; /* Header background color */
+    color: white; /* Header text color */
+}
+
+.table tr:nth-child(even) {
+    background-color: #f2f2f2; /* Alternate row color */
+}
+
+/* Button Styles */
+.btn-custom {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 15px; /* Compact button padding */
+    border: none;
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-custom:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+.btn-group {
+    display: flex; /* Menjadikan elemen dalam grup menjadi satu baris */
+    gap: 5px; /* Jarak antara tombol */
+}
+
+.btn {
+    display: flex; /* Memastikan tombol tetap rapi */
+    align-items: center; /* Menjaga ikon dan teks tetap pada tengah */
+    justify-content: center; /* Menjaga ikon tetap di tengah */
+}
+
+/* Modal Styles */
+.modal-header {
+    background-color: #007bff;
+    color: white;
+}
+
+.modal-body {
+    padding: 20px; /* Padding inside modal body */
+}
+
+.modal-footer {
+    padding: 10px;
+    border-top: 1px solid #dee2e6;
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 15px; /* Reduced margin for compactness */
+}
+
+.form-control {
+    padding: 10px; /* Compact input field padding */
+    border: 1px solid #ced4da; /* Light border for input */
+    border-radius: 4px; /* Rounded corners for input */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    body {
+        padding: 10px; /* Less padding on smaller screens */
+    }
+    
+    .table th,
+    .table td {
+        padding: 6px 10px; /* Further reduced padding on small screens */
+    }
+
+    .btn-custom {
+        width: 100%; /* Full width buttons on small screens */
+    }
+}
+.hidden-column {
+    display: none; /* Menyembunyikan kolom */
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="menu-icon" onclick="toggleSidebar()">
+          <i class="bi bi-list"></i>
+          <img src="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" alt="Menu Logo">
+          <span class="header-title">Tagihan</span>
+        </div>
+      </header>  
+    
+      <!-- Sidebar Menu -->
+      <div class="sidebar" id="sidebarMenu">
+        <ul>
+          <li><a href="index.html" onclick="closeSidebar()"><i class="bi bi-house-door"></i> Home</a></li>
+          <li><a href="input.html" onclick="closeSidebar()"><i class="bi bi-plus-circle"></i> Input</a></li> <!-- Updated icon for Input -->
+          <li><a href="lapor.html" onclick="closeSidebar()"><i class="bi bi-bar-chart"></i> Pendapatan</a></li> <!-- Updated icon for Pendapatan -->
+          <li><a href="tagih.html" onclick="closeSidebar()"><i class="bi bi-bell"></i> Tagihan</a></li> <!-- Updated icon for Tagihan -->
+          <li><a href="pelanggan.html" onclick="closeSidebar()"><i class="bi bi-file-earmark-person"></i> Pelanggan</a></li> <!-- Updated icon for Hutang -->
+          <li><a href="inventa.html" onclick="closeSidebar()"><i class="bi bi-file-earmark-text"></i> Inventaris</a></li>      
+        </ul>
+      </div>
+      <main id="mainContent">    
+    <div class="container">
+
+        <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#dataModal">
+            <i class="fas fa-plus"></i> Tambah Tagihan
+        </button>
+        
+        <table class="table table-bordered" id="dataTable">
+            <thead>
+                <tr>
+                    <th class="hidden-column">ID</th>
+                    <th>Tanggal</th>
+                    <th>Nama</th>
+                    <th>Tempo</th>
+                    <th>Tagihan</th>
+                    <th>Bayar</th>
+                    <th>Sisa</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be populated here -->
+            </tbody>
+        </table>
+    </div>
+</main>
+    <!-- Modal for Add/Update -->
+<!-- Modal untuk Menambah Data Tagihan -->
+<div class="modal fade" id="addDataModal" tabindex="-1" role="dialog" aria-labelledby="addDataModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addDataModalLabel">Tambah Tagihan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addForm">
+                    <div class="form-group">
+                        <label for="addID">ID</label>
+                        <input type="text" class="form-control" id="addID" name="ID" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="addTanggal">Tanggal</label>
+                        <input type="date" class="form-control" id="addTanggal" name="Tanggal" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="addNama">Nama</label>
+                        <input type="text" class="form-control" id="addNama" name="Nama" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="addTempo">Tempo</label>
+                        <input type="date" class="form-control" id="addTempo" name="Tempo">
+                    </div>
+                    <div class="form-group">
+                        <label for="addTagihan">Tagihan</label>
+                        <input type="number" class="form-control" id="addTagihan" name="Tagihan" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="addBayar">Bayar</label>
+                        <input type="number" class="form-control" id="addBayar" name="Bayar">
+                    </div>
+                    <button type="button" class="btn btn-primary" id="addSaveButton">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal untuk Memperbarui Data Tagihan -->
+<div class="modal fade" id="updateDataModal" tabindex="-1" role="dialog" aria-labelledby="updateDataModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateDataModalLabel">Update Tagihan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="updateForm">
+                    <input type="hidden" name="action" value="Update">
+                    <div class="form-group">
+                        <label for="updateID">ID</label>
+                        <input type="text" class="form-control" id="updateID" name="ID" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="updateTanggal">Tanggal</label>
+                        <input type="text" class="form-control" id="updateTanggal" name="Tanggal">
+                    </div>
+                    <div class="form-group">
+                        <label for="updateNama">Nama</label>
+                        <input type="text" class="form-control" id="updateNama" name="Nama" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="updateTempo">Tempo</label>
+                        <input type="text" class="form-control" id="updateTempo" name="Tempo">
+                    </div>
+                    <div class="form-group">
+                        <label for="updateTagihan">Tagihan</label>
+                        <input type="number" class="form-control" id="updateTagihan" name="Tagihan" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="updateBayar">Bayar</label>
+                        <input type="number" class="form-control" id="updateBayar" name="Bayar" required>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="updateSaveButton">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+      
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+$(document).ready(function() {
+    // Fetch and display data immediately after the page is loaded
+    fetchData();
+
+    // Function to fetch and display data
+    function fetchData() {
+        $.getJSON('https://script.google.com/macros/s/AKfycbxAQlhppgKwFVRLFawyBw1zT30XIjmM4o6OI3WxbxQYP0x_EOI1Lgovdp3DDRzSyC-HcA/exec?action=FetchData', function(data) {
+            const tableBody = $('#dataTable tbody');
+            tableBody.empty();
+            data.forEach(function(row) {
+                // Format Tanggal
+                const formattedTanggal = row.Tanggal ? new Date(row.Tanggal).toLocaleDateString('id-ID') : '';
+                const formattedTgl = row.Tempo ? new Date(row.Tempo).toLocaleDateString('id-ID') : '';
+
+                // Format Currency
+                const formattedTagihan = row.Tagihan ? parseInt(row.Tagihan).toLocaleString('id-ID', { minimumFractionDigits: 0 }) : '';
+                const formattedBayar = row.Bayar ? parseInt(row.Bayar).toLocaleString('id-ID', { minimumFractionDigits: 0 }) : '';
+                const formattedSisa = row.Sisa ? parseInt(row.Sisa).toLocaleString('id-ID', { minimumFractionDigits: 0 }) : '';
+
+                // Append to table
+                tableBody.append(`
+                    <tr>
+                        <td class="hidden-column">${row.ID}</td>
+                        <td>${formattedTanggal}</td>
+                        <td>${row.Nama}</td>
+                        <td>${formattedTgl}</td>
+                        <td>${formattedTagihan}</td>
+                        <td>${formattedBayar}</td>
+                        <td>${formattedSisa}</td>
+                        <td>
+    <div class="btn-group">
+        <button class="btn btn-warning btn-sm edit" data-id="${row.ID}">
+            <i class="fas fa-edit"></i> <!-- Ikon edit -->
+        </button>
+        <button class="btn btn-danger btn-sm delete" data-id="${row.ID}">
+            <i class="fas fa-trash-alt"></i> <!-- Ikon hapus -->
+        </button>
+    </div>
+</td>
+                    </tr>
+                `);
+            });
+        });
+    }
+
+    // Form submission for adding data
+    $('#addSaveButton').on('click', function(event) {
+        event.preventDefault();
+        
+        // Add the action parameter to the serialized data
+        const formData = $('#addForm').serialize() + '&action=Add'; // Add action parameter
+
+        $.post('https://script.google.com/macros/s/AKfycbxAQlhppgKwFVRLFawyBw1zT30XIjmM4o6OI3WxbxQYP0x_EOI1Lgovdp3DDRzSyC-HcA/exec', formData, function(response) {
+            alert(response.success || response.error);
+            $('#addDataModal').modal('hide');
+            fetchData(); // Refresh the table data
+        }, 'json');
+    });
+
+    // Form submission for updating data
+    $('#updateSaveButton').on('click', function(event) {
+        event.preventDefault();
+        $.post('https://script.google.com/macros/s/AKfycbxAQlhppgKwFVRLFawyBw1zT30XIjmM4o6OI3WxbxQYP0x_EOI1Lgovdp3DDRzSyC-HcA/exec', $('#updateForm').serialize(), function(response) {
+            alert(response.success || response.error);
+            $('#updateDataModal').modal('hide');
+            fetchData(); // Refresh the table data
+        }, 'json');
+    });
+
+    // Edit button handler
+    $(document).on('click', '.edit', function() {
+        const row = $(this).closest('tr');
+        const id = row.find('td:eq(0)').text();
+        const tanggal = row.find('td:eq(1)').text();
+        const nama = row.find('td:eq(2)').text();
+        const tempo = row.find('td:eq(3)').text();
+        const tagihan = row.find('td:eq(4)').text().replace(/\./g, '');
+        const bayar = row.find('td:eq(5)').text().replace(/\./g, '');
+
+        $('#updateID').val(id);
+        $('#updateTanggal').val(tanggal.split('/').reverse().join('-'));
+        $('#updateNama').val(nama);
+        $('#updateTempo').val(tempo.split('/').reverse().join('-'));
+        $('#updateTagihan').val(tagihan);
+        $('#updateBayar').val(bayar);
+
+        $('#updateDataModal').modal('show');
+    });
+
+    // Delete button handler
+    $(document).on('click', '.delete', function() {
+        const id = $(this).data('id');
+        if (confirm('Are you sure you want to delete this row?')) {
+            $.post('https://script.google.com/macros/s/AKfycbxAQlhppgKwFVRLFawyBw1zT30XIjmM4o6OI3WxbxQYP0x_EOI1Lgovdp3DDRzSyC-HcA/exec', { action: 'Delete', id: id }, function(response) {
+                alert(response.success || response.error);
+                fetchData(); // Refresh the table data
+            }, 'json');
+        }
+    });
+
+    // Show add modal and clear form when "Add Data" button is clicked
+    $('.btn[data-toggle="modal"]').on('click', function() {
+        $('#addForm')[0].reset(); // Reset form fields
+        $('#addDataModal').modal('show');
+        getLastID(); // Ambil ID terakhir
+        setCurrentDate(); // Set tanggal saat ini
+    });
+});
+
+async function getLastID() {
+    // Ambil semua baris di tabel
+    const rows = document.querySelectorAll('#dataTable tbody tr');
+    let lastID = 0;
+
+    // Loop untuk menemukan ID terakhir
+    rows.forEach(row => {
+        const idCell = row.cells[0].textContent; // Misalkan ID berada di kolom pertama
+        const idNumber = parseInt(idCell, 10); // Konversi ke angka
+        if (!isNaN(idNumber) && idNumber > lastID) {
+            lastID = idNumber; // Update lastID jika lebih besar
+        }
+    });
+
+    // Set ID baru
+    document.getElementById('addID').value = lastID + 1;
+}
+
+// Fungsi untuk mengatur tanggal sekarang
+function setCurrentDate() {
+    const today = new Date().toISOString().split('T')[0]; // Format YYYY-MM-DD
+    document.getElementById('addTanggal').value = today; // Mengatur tanggal
+}
+function toggleSidebar() {
+      const sidebar = document.getElementById('sidebarMenu');
+      const mainContent = document.getElementById('mainContent');
+      sidebar.classList.toggle('active');
+      mainContent.classList.toggle('active');
+    }
+
+    function closeSidebar() {
+      const sidebar = document.getElementById('sidebarMenu');
+      const mainContent = document.getElementById('mainContent');
+      sidebar.classList.remove('active'); // Remove the active class to close sidebar
+      mainContent.classList.remove('active'); // Adjust main content margin if necessary
+    }
+    </script>
+</body>
+</html>

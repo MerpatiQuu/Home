@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Histori Transaksi</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="icon" href="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" type="image/x-icon" />
+  <meta property="og:image" content="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" />
+  <style>
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f2f5; /* Warna latar belakang abu-abu muda */
+  color: #333; /* Warna teks abu-abu gelap untuk keterbacaan yang baik */
+  margin: 0;
+  padding: 0;
+}
+
+.menu-icon {
+  display: flex; /* Menyusun item secara horizontal */
+  align-items: center; /* Menyusun item secara vertikal */
+  gap: 10px; /* Spasi antara logo dan teks */
+  cursor: pointer; /* Kursor pointer saat hover */
+  padding: 10px 20px; /* Padding di sekitar ikon menu */
+  background-color: #ffffff; /* Latar belakang putih */
+  border-radius: 5px; /* Radius sudut untuk efek melengkung */
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s; /* Transisi halus untuk efek hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Efek bayangan halus */
+}
+
+.menu-icon:hover {
+  background-color: #e0e0e0; /* Latar belakang abu-abu saat hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Bayangan yang lebih besar saat hover */
+}
+
+.menu-icon .menu-icon-toggle {
+  font-size: 1.5rem; /* Ukuran ikon yang lebih besar */
+  color: #007bff; /* Warna biru untuk ikon */
+}
+
+.menu-icon img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* Membuat logo bulat */
+  margin-right: 10px; /* Spasi antara logo dan teks menu */
+}
+
+.menu-content {
+  display: none;
+  margin-top: 10px;
+  background-color: #ffffff; /* Latar belakang putih untuk menu */
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.menu-content ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  color: #000; /* Warna teks hitam */
+}
+
+.menu-item i {
+  margin-right: 10px; /* Spasi antara ikon dan teks menu */
+  font-size: 24px;
+}
+
+.menu-item a {
+  text-decoration: none;
+  color: #333; /* Warna teks gelap */
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.menu-item a:hover {
+  color: #007bff; /* Warna biru saat hover */
+}
+
+.menu-text {
+  font-size: 1.25rem; /* Ukuran font yang lebih besar */
+  font-weight: 700; /* Teks tebal */
+  color: #333; /* Warna teks gelap */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Bayangan teks halus */
+  letter-spacing: 1px; /* Jarak antar huruf */
+  transition: color 0.3s; /* Transisi warna yang halus saat hover */
+}
+
+.menu-icon:hover .menu-text {
+  color: #007bff; /* Mengubah warna teks saat hover */
+}
+
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  font-weight: bold;
+  color: #333; /* Warna teks gelap */
+}
+
+.table-container {
+  margin: 40px auto;
+  max-width: 90%;
+  background-color: #ffffff; /* Latar belakang putih untuk tabel */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Efek bayangan halus */
+  border-radius: 10px;
+  padding: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: #007bff; /* Latar belakang biru untuk header tabel */
+  color: white;
+  padding: 10px;
+  text-align: center;
+  font-size: 16px;
+}
+
+td {
+  padding: 10px;
+  text-align: left;
+  font-size: 14px;
+  color: #333; /* Warna teks gelap untuk tabel */
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9; /* Latar belakang abu-abu muda untuk baris genap */
+}
+
+tr:hover {
+  background-color: #e0e0e0; /* Latar belakang abu-abu saat hover */
+}
+
+.table-item-details {
+  text-align: left;
+  padding: 10px;
+  font-size: x-small;
+}
+h2 {font-size: x-small;}
+
+
+.btn {
+  font-size: 14px;
+  padding: 8px 12px; /* Padding yang sedikit lebih besar untuk tombol */
+  border-radius: 5px; /* Radius sudut untuk tombol */
+  border: none; /* Menghapus batas default */
+  cursor: pointer; /* Pointer cursor saat hover */
+  transition: background-color 0.3s; /* Transisi halus untuk warna latar belakang */
+}
+
+.btn-edit {
+  background-color: #007bff; /* Latar belakang biru untuk tombol edit */
+  color: white;
+}
+
+.btn-edit:hover {
+  background-color: #0056b3; /* Warna biru yang lebih gelap saat hover */
+}
+
+.btn-delete {
+  background-color: #dc3545; /* Latar belakang merah untuk tombol delete */
+  color: white;
+}
+
+.btn-delete:hover {
+  background-color: #c82333; /* Warna merah yang lebih gelap saat hover */
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Menu Icon with Logo -->
+  <div class="menu-icon" onclick="toggleMenu()">
+    <i class="bi bi-list"></i>
+    <img src="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" alt="Menu Logo">
+    <span class="menu-text">Toko MerpatiQuu</span>
+  </div>
+
+  <!-- Hidden Menu Content -->
+  <div class="menu-content" id="menuContent">
+    <ul>
+      <!-- Row 1: Home, Kasir, Gudang -->
+      <div class="menu-row">
+        <li class="menu-item home"><i class="bi bi-house-door"></i><a href="index.html">Home</a></li>
+        <li class="menu-item kasir"><i class="bi bi-cash"></i><a href="trx.html">Kasir</a></li>
+        <li class="menu-item gudang"><i class="bi bi-box"></i><a href="https://docs.google.com/spreadsheets/d/1jXhP5804xTNqvVObvtZiU5GqUAalcNqs2L6JJfWd-J0/edit?gid=1850812155#gid=1850812155">Gudang</a></li>
+      </div>
+      
+      <!-- Row 2: Pengumuman, Absen, Laporan -->
+      <div class="menu-row">
+        <li class="menu-item pengumuman"><i class="bi bi-megaphone"></i><a href="pengumuman.html">Pengumuman</a></li>
+        <li class="menu-item absen"><i class="bi bi-person-check"></i><a href="absen.html">Absen</a></li>
+        <li class="menu-item laporan"><i class="bi bi-file-earmark-text"></i><a href="lapor.html">Laporan</a></li>
+      </div>
+    </ul>
+  </div>
+  <h1>Histori Transaksi</h1>
+  <table id="historyTable" border="1">
+      <thead>
+          <tr>
+              <th>Trx Kode</th>
+              <th>Tgl</th>
+              <th>Kasir</th>
+              <th>Item</th>
+              <th>Aksi</th>
+          </tr>
+      </thead>
+      <tbody></tbody>
+  </table>
+
+  <!-- Bootstrap JS and Popper.js -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    function toggleMenu() {
+      var menu = document.getElementById("menuContent");
+      if (menu.style.display === "block") {
+        menu.style.display = "none";
+      } else {
+        menu.style.display = "block";
+      }
+    }
+    function loadTransactionHistory() {
+    const history = JSON.parse(localStorage.getItem('transactionHistory')) || [];
+    const tableBody = document.getElementById('historyTable').querySelector('tbody');
+
+    tableBody.innerHTML = ''; // Clear existing table rows
+
+    history.forEach((transaction) => {
+        let itemDetails = '';
+
+        // Generate item details rows
+        transaction.items.forEach((item, itemIndex) => {
+            itemDetails += `
+                <tr class="service">
+                    <td class="tableitem" colspan="2">
+                        <p class="itemtext">${itemIndex + 1}. ${item.itemName}</p> <!-- Nomor urut otomatis -->
+                    </td>
+                </tr>
+                <tr class="service">
+                    <td class="tableitem">
+                        <div class="combined-content">
+                            <p class="itemtext">${item.priceType} ${item.quantity} x ${item.pricePerUnit.toFixed(0)}</p>
+                        </div>
+                    </td>
+                    <td class="tableitem"><p class="itemtext">=${item.total.toFixed(0)}</p></td>
+                </tr>
+            `;
+        });
+
+        // Generate summary and item count rows with checks
+        const summaryAndCount = `
+            ${transaction.summary && transaction.summary.grandTotal !== undefined ? 
+                `<tr class="service">
+                    <td class="tableitem" colspan="2" style="text-align: left; white-space: nowrap;"><h2>Total: ${transaction.summary.grandTotal}</h2></td>
+                </tr>` : ''
+            }
+            ${transaction.summary && transaction.summary.paymentAmount !== undefined ? 
+                `<tr class="service">
+                    <td class="tableitem" colspan="2" style="text-align: left; white-space: nowrap;"><h2>Bayar: ${transaction.summary.paymentAmount}</h2></td>
+                </tr>` : ''
+            }
+            ${transaction.summary && transaction.summary.changeAmount !== undefined ? 
+                `<tr class="service">
+                    <td class="tableitem" colspan="2" style="text-align: left; white-space: nowrap;"><h2>Kembali: ${transaction.summary.changeAmount}</h2></td>
+                </tr>` : ''
+            }
+            ${transaction.itemCount !== undefined ? 
+                `<tr class="service">
+                    <td class="tableitem" colspan="2" style="text-align: left; white-space: nowrap;"><h2>Jumlah Item: ${transaction.itemCount}</h2></td>
+                </tr>` : ''
+            }
+        `;
+
+        // Create row with transaction details
+        const row = `
+            <tr>
+                <td>${transaction.code}</td>
+                <td>${transaction.date}</td>
+                <td>${transaction.cashier}</td>
+                <td>
+                    <table style="font-size: 10px;">${itemDetails} ${summaryAndCount}</table>
+                </td>
+                <td>
+                    <button onclick="editTransaction('${transaction.code}')">Edit</button>
+                    <button onclick="deleteTransaction('${transaction.code}')">Delete</button>
+                </td>
+            </tr>
+        `;
+
+        // Append row to table body
+        tableBody.innerHTML += row;
+    });
+}
+
+    function editTransaction(code) {
+        alert(`Edit transaction: ${code}`);
+        // Implement editing logic here
+    }
+
+    function deleteTransaction(code) {
+        let history = JSON.parse(localStorage.getItem('transactionHistory')) || [];
+        history = history.filter((t) => t.code !== code);
+        localStorage.setItem('transactionHistory', JSON.stringify(history));
+        location.reload(); // Reload the page to update the history
+    }
+
+    // Load history when page is ready
+    window.onload = loadTransactionHistory;
+      </script>
+
+</body>
+</html>

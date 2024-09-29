@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Laporan</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="icon" href="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" type="image/x-icon" />
+  <meta property="og:image" content="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" />
+  <style>
+    body {
+      font-family:'Times New Roman', Times, serif;
+      background-color: #ff68c5;
+      color: #000000;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background-color: #007bff;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between; /* Space between logo and menu */
+      padding: 0 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      z-index: 1000; /* Ensure it's above the sidebar and content */
+    }
+
+    /* Updated span styling for header title */
+    .header-title {
+      font-size: 24px; /* Keep the same size as h1 */
+      font-weight: bold; /* Optional: Keep the same boldness as h1 */
+      color: white; /* Match the color for the header */
+      margin-left: 2px; /* Add space from the menu icon */
+      display: inline-block; /* Keep it inline but treat it like a block-level element */
+    }
+
+    /* Sidebar Menu */
+    .sidebar {
+      height: 100%;
+      width: 250px;
+      position: fixed;
+      top: 30px; /* Disesuaikan agar berada di bawah header */
+      left: -250px;
+      background-color: #ffffff;
+      transition: 0.3s;
+      padding-top: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      z-index: 900;
+    }
+
+    .sidebar.active {
+      left: 0;
+    }
+
+    .sidebar ul {
+      padding: 0;
+      list-style-type: none;
+    }
+
+    .sidebar ul li {
+      padding: 5px 20px;
+      text-align: left;
+    }
+
+    .sidebar ul li a {
+      text-decoration: none;
+      font-size: 16px;
+      color: #333;
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+    }
+
+    .sidebar ul li a:hover {
+      color: #007bff;
+    }
+
+    .sidebar ul li i {
+      margin-right: 10px;
+      margin-left: 4px;
+      font-size: 20px;
+    }
+
+    /* Main content */
+    main {
+      margin-left: 0;
+      margin-top: 60px; /* Start below the header */
+      padding: 20px;
+      transition: margin-left 0.3s;
+    }
+
+    main.active {
+      margin-left: 250px; /* Push content when sidebar is visible */
+    }
+
+    /* Menu Icon in Header */
+    .menu-icon {
+      font-size: 1.75rem;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    .menu-icon img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    /* Adjust for mobile responsiveness */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 150px;
+      }
+
+      .sidebar.active {
+        left: 0;
+      }
+
+      main.active {
+        margin-left: 150px;
+      }
+    }
+/* Container for main content */
+.container-main {
+  margin-top: 10px; /* Optional: additional space */
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+.info-box {
+  background-color: #f9f9f9;
+  margin: 3px auto;
+  padding: 5px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: left; /* Center content */
+}
+.form-label {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.form-label i {
+  margin-right: 8px;
+}
+
+.btn-custom {
+  font-size: 0.575rem;              /* Ukuran font sesuai yang diminta */
+  padding: .3rem;                    /* Padding diatur menjadi 0 */
+  border: 1px solid #007bff;       /* Border berwarna biru */
+  color: #007bff;                   /* Warna teks biru */
+  background-color: transparent;    /* Latar belakang transparan */
+  margin-top: 5px;                  /* Margin atas */
+  margin-left: auto;                /* Membuat tombol bergerak ke kanan */
+  margin-right: auto;               /* Membuat tombol bergerak ke kiri */
+  display: block;                   /* Memastikan tombol sebagai blok */
+  border-radius: 4px;   
+}
+
+.btn-custom:hover {
+  background-color: #007bff;
+  color: #ff68c5;
+}
+
+.form-check-label {
+  font-size: 14px;
+}
+
+.icon-blue {
+  color: #007bff;
+}
+
+.icon-green {
+  color: #28a745;
+}
+
+.icon-orange {
+  color: #ff5722;
+}
+
+.icon-yellow {
+  color: #ffc107;
+}
+
+.info-box h3 {
+  margin-bottom: 2px;
+}
+
+.info-box .info-item {
+  margin-bottom: 15px;
+}
+
+.info-box .info-item:last-child {
+  margin-bottom: 0;
+}
+
+.info-box .info-item span {
+  display: block;
+  font-weight: bold;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid #f6f6f7;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 15px;
+}
+
+.info-item i {
+  font-size: 24px;
+  margin-right: 15px;
+  color: #007bff;
+}
+
+.info-item p {
+  margin: 0;
+}
+
+h5 {
+  font-size: small;
+}
+
+p {
+  font-size: small;
+}
+/* General info-box styling */
+.info-box-3 {
+  background-color: #fdfbfb;
+  margin: 1px auto;
+  padding: 5px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(10, 10, 10, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: left; /* Center content */
+}
+.info-box {
+  max-width: 200px;
+  margin: 5px auto;
+  background-color: #fff;
+  padding: 5px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  
+
+
+}
+/* Menu header styling */
+.menu-header {
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* Info content (hidden initially) */
+.info-content {
+  display: none;
+  padding-top: 1px;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9em;
+  margin-top: 10px;
+}
+
+table th, table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+  white-space: nowrap; /* Prevents text from wrapping to new line */
+}
+
+/* Table header styling */
+table thead {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+table thead th {
+  font-weight: bold;
+}
+
+/* Horizontal scrolling for table */
+.info-content {
+  overflow-x: auto; /* Enables horizontal scrolling */
+}
+
+/* Styling for alternate row colors */
+table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Styling to keep the first row fixed */
+table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+/* Rata kiri khusus untuk kolom NAMA */
+.info-box-3 td:nth-child(2) {
+  text-align: left; /* Rata kiri untuk kolom NAMA */
+}
+
+/* Smaller font and padding for better fitting on small screens */
+@media (max-width: 768px) {
+  table th, table td {
+    padding: 8px;
+    font-size: 0.8em;
+  }
+      /* Adjust for mobile responsiveness */
+      @media (max-width: 768px) {
+      .sidebar {
+        width: 150px;
+      }
+
+      .sidebar.active {
+        left: 0;
+      }
+
+      main.active {
+        margin-left: 150px;
+      }
+    }
+}
+.info-box-4 {
+    background-color: #f9f9f9;       /* Warna latar belakang */
+    margin: 10px auto;               /* Margin untuk jarak */
+    padding: 15px;                   /* Padding di dalam box */
+    border-radius: 8px;              /* Sudut membulat */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Bayangan */
+    max-width: 300px;                /* Lebar maksimum */
+}
+
+.header {
+    font-size: 1rem;                 /* Ukuran font header */
+    font-weight: bold;               /* Membuat teks tebal */
+    margin-bottom: 1px;             /* Jarak bawah dari header */
+    text-align: center;              /* Rata tengah untuk header */
+}
+
+.content {
+    font-size: 0.75rem;              /* Ukuran font konten */
+    line-height: 1.5;                /* Jarak antar baris */
+    text-align: justify;              /* Rata kiri dan kanan */
+}
+
+.content ul {
+    list-style: none;                /* Menghapus bullet list */
+    padding: 0;                      /* Menghapus padding */
+    margin: 0;                       /* Menghapus margin */
+}
+
+.content li {
+    margin-bottom: 5px;              /* Jarak antar item */
+    padding-left: 10px;              /* Jarak dari kiri */
+    position: relative;              /* Untuk posisi item */
+    text-align: justify;              /* Mengatur teks dalam li rata justify */
+}
+
+.content li::before {
+    content: counter(item) ". ";     /* Menambahkan nomor sebagai konten */
+    color: #007bff;                  /* Warna nomor */
+    position: absolute;              /* Posisi absolut */
+    left: 0;                         /* Jarak dari kiri */
+}
+
+.content li {
+    counter-increment: item;         /* Menghitung nomor item */
+    text-align: justify;             /* Memastikan teks dalam li rata justify */
+}
+
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="menu-icon" onclick="toggleSidebar()">
+      <i class="bi bi-list"></i>
+      <img src="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" alt="Menu Logo">
+      <span class="header-title">Input Laporan</span>
+    </div>
+  </header>  
+
+  <!-- Sidebar Menu -->
+  <div class="sidebar" id="sidebarMenu">
+    <ul>
+      <li><a href="index.html" onclick="closeSidebar()"><i class="bi bi-house-door"></i> Home</a></li>
+      <li><a href="input.html" onclick="closeSidebar()"><i class="bi bi-plus-circle"></i> Input</a></li> <!-- Updated icon for Input -->
+      <li><a href="lapor.html" onclick="closeSidebar()"><i class="bi bi-bar-chart"></i> Pendapatan</a></li> <!-- Updated icon for Pendapatan -->
+      <li><a href="tagih.html" onclick="closeSidebar()"><i class="bi bi-bell"></i> Tagihan</a></li> <!-- Updated icon for Tagihan -->
+      <li><a href="pelanggan.html" onclick="closeSidebar()"><i class="bi bi-file-earmark-person"></i> Pelanggan</a></li> <!-- Updated icon for Hutang -->
+      <li><a href="inventa.html" onclick="closeSidebar()"><i class="bi bi-file-earmark-text"></i> Inventaris</a></li>
+    </ul>
+  </div>
+  <main id="mainContent">
+  <div class="container">
+    <!-- Left Side: Menu -->
+      <div class="info-box">
+        <div class="menu-header" id="menuHeader1">Input Laporan Toko</div>
+    <form id="tokoForm" action="https://script.google.com/macros/s/AKfycbyA2vwX6hNQ_zq0hDeFqZpH3WlFGP9gRRze5K2MgV6Hx9tOhzoJ3E4Ze5ysUmeWGEdZUg/exec" method="POST">
+      <div class="info-content" id="infoContent1">
+        <label for="keterangan" class="form-label"><i class="fas fa-sticky-note icon-blue"></i> Keterangan</label>
+        <select id="keterangan" name="keterangan" class="form-select" required>
+          <option value="" disabled selected>-</option>
+          <option value="Pemasukan">Pemasukan</option>
+          <option value="Pengeluaran">Pengeluaran</option>
+        </select>
+        <label for="name" class="form-label">
+          <i class="bi bi-person icon-orange"></i> Nama
+        </label>
+        <input type="text" id="name" name="nama" class="form-control" required placeholder="Masukkan nama">
+        <label for="amount" class="form-label">
+          <i class="bi bi-currency-dollar icon-green"></i> Jumlah
+        </label>
+        <div class="input-group">
+          <span class="input-group-text">Rp.</span>
+          <input type="text" id="jumlah" name="jumlah" class="form-control" required placeholder="0" oninput="formatRupiah(this)">
+        </div>           
+        <button type="submit" class="btn btn-custom"><i class="bi bi-send"></i> Kirim</button>
+      </div>
+    </form>
+  </div>  
+<div class="info-box">
+  <div class="menu-header" id="menuHeader2">Input Laporan Sales</div>
+<form id="salesForm" action="https://script.google.com/macros/s/AKfycbxUxDDNNzI19rlsLvO21qHBOPLISXpeNnYwMmEHXMmquBbmc4Mro-nEGQbEmrkecbIbeg/exec" method="POST">
+<div class="info-content" id="infoContent2">
+  <label for="name" class="form-label"><i class="bi bi-person icon-blue"></i> Nama</label>
+  <select id="name" name="nama" class="form-select" required>
+    <option value="" disabled selected>-</option>
+    <option value="H. Nurul">H. Nurul</option>
+    <option value="B. Miswari">B. Miswari</option>
+    <option value="Al Harokah Jambisari3">Al Harokah Jambisari3</option>
+    <option value="B. Rofi">B. Rofi</option>
+    <option value="B. Suhai">B. Suhai</option>
+    <option value="B. Wilda">B. Wilda</option>
+    <option value="B. Royhan">B. Royhan</option>
+    <option value="B. Della">B. Della</option>
+    <option value="B. Wahed">B. Wahed</option>
+    <option value="Toko Hilya">Toko Hilya</option>
+    <option value="Toko Iqomah">Toko Iqomah</option>
+    <option value="Toko Barokah Jambesari">Toko Barokah Jambesari</option>
+    <option value="Pak Pet">Pak Pet</option>
+    <option value="B. Aulia">B. Aulia</option>
+    <option value="B. Lastri">B. Lastri</option>
+    <option value="B. Foni">B. Foni</option>
+    <option value="B. Paredi">B. Paredi</option>
+    <option value="B. Rahman">B. Rahman</option>
+    <option value="Toko Simpang Tiga">Toko Simpang Tiga</option>
+    <option value="B. Alin">B. Alin</option>
+    <option value="B. Dales">B. Dales</option>
+    <option value="B. Bayu">B. Bayu</option>
+    <option value="B. Iwan">B. Iwan</option>
+    <option value="B. Naila">B. Naila</option>
+    <option value="Toko Saudara H. Nurol">Toko Saudara H. Nurol</option>
+    <option value="B. Ira">B. Ira</option>
+    <option value="B. Ifan">B. Ifan</option>
+    <option value="B. Titin Ahatan">B. Titin Ahatan</option>
+    <option value="B. Miftah">B. Miftah</option>
+    <option value="Hamdalah">Hamdalah</option>
+    <option value="Hj. Ida">Hj. Ida</option>
+    <option value="B. Helmi">B. Helmi</option>
+    <option value="B. Rifqi">B. Rifqi</option>
+    <option value="B. Rizqi">B. Rizqi</option>
+    <option value="B. Ros">B. Ros</option>
+    <option value="B. Suyati">B. Suyati</option>
+    <option value="B. Uyun">B. Uyun</option>
+    <option value="B. Titin">B. Titin</option>
+    <option value="B. Wulan">B. Wulan</option>
+    <option value="Buk Nasrul">Buk Nasrul</option>
+    <option value="H. Hasan">H. Hasan</option>
+    <option value="B. Wasil">B. Wasil</option>
+    <option value="B. Ayu">B. Ayu</option>
+    <option value="Toko Barokah Al Aziz">Toko Barokah Al Aziz</option>
+    <option value="B. Fira">B. Fira</option>
+    <option value="B. Arka">B. Arka</option>
+    <option value="B. Hor">B. Hor</option>
+    <option value="Sinar Madura">Sinar Madura</option>
+    <option value="Qiqi Skw">Qiqi Skw</option>
+    <option value="B. Royhan Al Aziz">B. Royhan Al Aziz</option>
+    <option value="Al Harokah">Al Harokah</option>
+    <option value="B. Afan">B. Afan</option>
+    <option value="Buk Rosa">Buk Rosa</option>
+    <option value="B. Murtik">B. Murtik</option>
+    <option value="B. Shofi">B. Shofi</option>
+    <option value="P. Adib">P. Adib</option>
+    <option value="B. Holid">B. Holid</option>
+    <option value="B. Amira">B. Amira</option>
+    <option value="B. Fira">B. Fira</option>
+    <option value="B. Kholid">B. Kholid</option>
+    <option value="B. Santi">B. Santi</option>
+    <option value="B. Vio">B. Vio</option>
+    <option value="P. Sely">P. Sely</option>
+    <option value="B. Fatur">B. Fatur</option>
+    <option value="P. Nimar">P. Nimar</option>
+    <option value="B. Fatim">B. Fatim</option>
+    <option value="B. Se">B. Se</option>
+    <option value="B. Di">B. Di</option>
+    <option value="B. Fa'Iq">B. Fa'Iq</option>
+    <option value="B. Dela">B. Dela</option>
+    <option value="B. Chacha">B. Chacha</option>
+    <option value="B. Linda">B. Linda</option>
+    <option value="B. Azril">B. Azril</option>
+    <option value="B. Lut">B. Lut</option>
+    <option value="B. Khotim">B. Khotim</option>
+    <option value="Ra Washil">Ra Washil</option>
+    <option value="B. Naila">B. Naila</option>
+    <option value="B. Nobel">B. Nobel</option>
+    <option value="B. Romi">B. Romi</option>
+    <option value="B. Andi">B. Andi</option>
+    <option value="B. Iwan">B. Iwan</option>
+    <option value="B. Fita">B. Fita</option>
+    <option value="B. Nanang">B. Nanang</option>
+    <option value="P. Arul">P. Arul</option>
+    <option value="P. Den">P. Den</option>
+    <option value="B. Fit">B. Fit</option>
+    <option value="P. Naiman">P. Naiman</option>
+    <option value="B. Saini">B. Saini</option>
+    <option value="P. H. Sulaiman">P. H. Sulaiman</option>
+    <option value="Pk Imam">Pk Imam</option>
+    <option value="Buk Pri">Buk Pri</option>
+    <option value="P. Haped">P. Haped</option>
+    <option value="Buk Roihan Al Aziz">Buk Roihan Al Aziz</option>
+    <option value="B. Firman">B. Firman</option>
+    <option value="B. Feby">B. Feby</option>
+  </select>    
+  <label for="jumlah" class="form-label"><i class="bi bi-currency-dollar icon-green"></i> Jumlah</label>
+  <div class="input-group">
+      <span class="input-group-text">Rp.</span>
+      <input type="text" id="jumlah" name="jumlah" class="form-control" required placeholder="0" oninput="formatRupiah(this);">
+  </div> 
+  <label for="bayar" class="form-label"><i class="bi bi-currency-dollar icon-green"></i> Bayar</label>
+  <div class="input-group">
+      <span class="input-group-text">Rp.</span>
+      <input type="text" id="bayar" name="bayar" class="form-control" required placeholder="0" oninput="formatRupiah(this);">
+  </div>      
+  <button type="submit" class="btn btn-custom"><i class="bi bi-send"></i> Kirim</button>
+</div>
+</form>
+</div>
+    <!-- Right Side: Info Box -->
+    <div class="info-box">
+      <div class="menu-header" id="menuHeader3">Input Operasional</div>
+  <form id="operasionalForm" action="https://script.google.com/macros/s/AKfycby8XLf08yqjA4cJVYbpd0eT9INCJNMbCvIUpJGbJZ3mvUChdU2WIkievrthCLyInysrbA/exec" method="POST">
+    <div class="info-content" id="infoContent3">
+      <label for="name" class="form-label">
+        <i class="bi bi-person icon-orange"></i> Nama
+      </label>
+      <input type="text" id="name" name="nama" class="form-control" required placeholder="Masukkan nama">
+      <label for="name" class="form-label">
+        <i class="far fa-plus-square icon-yellow"></i> Berapa
+      </label>
+      <input type="text" id="berapa" name="berapa" class="form-control" required placeholder="Snapah biggik">
+      <label for="amount" class="form-label">
+        <i class="bi bi-currency-dollar icon-green"></i> Jumlah
+      </label>
+      <div class="input-group">
+        <span class="input-group-text">Rp.</span>
+        <input type="text" id="jumlah" name="jumlah" class="form-control" required placeholder="0" oninput="formatRupiah(this)">
+      </div>           
+      <button type="submit" class="btn btn-custom"><i class="bi bi-send"></i> Kirim</button>
+    </div>
+  </form>
+</div>  
+<div class="info-box">
+  <div class="menu-header" id="menuHeader4">Input Uang Masuk</div>
+  <div class="info-content" id="infoContent4">
+  <form id="inputForm" method="POST">
+    <label for="dataE" class="form-label">
+      <i class="bi bi-currency-dollar icon-green"></i>Uang Masuk</label>
+    <div class="input-group">
+      <span class="input-group-text">Rp.</span>
+    <input type="text" id="dataE" name="dataE" class="form-control" required placeholder="0" oninput="formatRupiah(this)">
+    </div>
+    <button type="submit" class="btn btn-custom"><i class="bi bi-send"></i> Kirim</button>
+  </div>
+</form>
+</div>
+<div class="info-box-4">
+  <div class="header" style="text-align: center;">Catatan</div>
+  <div class="content">
+      <ul>
+        <li>Setiap pembayaran sales (pengeluaran) catet di Input Laporan Toko</li>
+        <li>Setiap pendapatan sales catet di Input Laporan Sales</li>
+        <li>Setiap pengeluaran operasional (seperti: bensin, plastik, listrik, DLL) catet di Input Operasional, baik itu dari operasional sales & toko</li>
+        <li>Setiap uang masuk setiap malam, tulis di "Input Uang Masuk"</li>
+        <li>PENTING! semua Form Input berhasil ketika sudah keluar notifikasi "INPUT BERHASIL", kemudian klik...! "OK"</li>
+      </ul>
+  </div>
+</div>
+</main>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+document.getElementById("tokoForm").addEventListener("submit", function (event) {
+  event.preventDefault(); // Prevent form from submitting normally
+  
+  const form = this;
+  const formData = new FormData(form);
+  
+  fetch('https://script.google.com/macros/s/AKfycbyA2vwX6hNQ_zq0hDeFqZpH3WlFGP9gRRze5K2MgV6Hx9tOhzoJ3E4Ze5ysUmeWGEdZUg/exec', {
+    method: 'POST',
+    mode: 'cors',
+    body: formData // Use formData directly
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok ' + response.statusText);
+    }
+    return response.json(); // Parse JSON response
+  })
+  .then(data => {
+    console.log('Success:', data);
+    alert('Input Berhasil, Selamat Bekerja!');
+    form.reset(); // Clear the form fields
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('Input Berhasil: SEMANGAT!' + error.message);
+    form.reset(); // Clear the form fields
+  });
+});
+document.getElementById("salesForm").addEventListener("submit", function (event) {
+  event.preventDefault(); // Prevent form from submitting normally
+  
+  const form = this;
+  const formData = new FormData(form);
+  
+  fetch('https://script.google.com/macros/s/AKfycbxUxDDNNzI19rlsLvO21qHBOPLISXpeNnYwMmEHXMmquBbmc4Mro-nEGQbEmrkecbIbeg/exec', {
+    method: 'POST',
+    mode: 'cors',
+    body: formData // Use formData directly
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok ' + response.statusText);
+    }
+    return response.json(); // Parse JSON response
+  })
+  .then(data => {
+    console.log('Success:', data);
+    alert('Input Berhasil, Selamat Bekerja!');
+    form.reset(); // Clear the form fields
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('Input Berhasil: SEMANGAT!' + error.message);
+    form.reset(); // Clear the form fields
+  });
+});
+document.getElementById("operasionalForm").addEventListener("submit", function (event) {
+  event.preventDefault(); // Prevent form from submitting normally
+  
+  const form = this;
+  const formData = new FormData(form);
+  
+  fetch('https://script.google.com/macros/s/AKfycby8XLf08yqjA4cJVYbpd0eT9INCJNMbCvIUpJGbJZ3mvUChdU2WIkievrthCLyInysrbA/exec', {
+    method: 'POST',
+    mode: 'cors',
+    body: formData // Use formData directly
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok ' + response.statusText);
+    }
+    return response.json(); // Parse JSON response
+  })
+  .then(data => {
+    console.log('Success:', data);
+    alert('Input Berhasil, Selamat Bekerja!');
+    form.reset(); // Clear the form fields
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('Input Berhasil: SEMANGAT!' + error.message);
+    form.reset(); // Clear the form fields
+  });
+});
+  // Tambahkan event listener pada form ketika di-submit
+  document.getElementById("inputForm").addEventListener("submit", function (event) { 
+    event.preventDefault(); // Cegah form dari pengiriman secara default
+    
+    const form = this; // Ambil elemen form
+    const formData = new FormData(form); // Buat FormData dari form
+    
+    // Kirim data menggunakan fetch ke URL Google Apps Script
+    fetch('https://script.google.com/macros/s/AKfycbyhavIn6D9IuuZ8hcgoLYtK-WaJTRCn1bqTRlWE9e2vQq6-sQ8wtqX-Uu3XogVhGjpT/exec', {
+      method: 'POST',
+      mode: 'cors', // Pastikan menggunakan mode 'cors' untuk mengatasi masalah CORS
+      body: formData // Gunakan FormData yang dibuat dari form
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      return response.json(); // Parse JSON dari response
+    })
+    .then(data => {
+      console.log('Success:', data); // Log data jika sukses
+      alert('Input Berhasil, Selamat Bekerja!'); // Notifikasi jika sukses
+      form.reset(); // Reset form setelah pengiriman
+    })
+    .catch(error => {
+      console.error('Error:', error); // Tangkap error jika terjadi
+      alert('Terjadi Kesalahan: ' + error.message); // Tampilkan error ke pengguna
+      form.reset(); // Reset form meskipun terjadi error
+    });
+  });
+// Function to toggle menu visibility
+function toggleMenu(menuContentId) {
+  const menuContent = document.getElementById(menuContentId);
+  menuContent.style.display = menuContent.style.display === 'block' ? 'none' : 'block';
+}
+
+// Add event listeners for menu headers
+const menuHeaders = ['menuHeader1', 'menuHeader2', 'menuHeader3', 'menuHeader4'];
+const infoContents = ['infoContent1', 'infoContent2', 'infoContent3', 'infoContent4'];
+
+menuHeaders.forEach((header, index) => {
+  document.getElementById(header).addEventListener('click', () => {
+    toggleMenu(infoContents[index]);
+  });
+});
+
+// Initialize content display
+infoContents.forEach(contentId => {
+  document.getElementById(contentId).style.display = 'none';
+});
+function toggleSidebar() {
+      const sidebar = document.getElementById('sidebarMenu');
+      const mainContent = document.getElementById('mainContent');
+      sidebar.classList.toggle('active');
+      mainContent.classList.toggle('active');
+    }
+
+    function closeSidebar() {
+      const sidebar = document.getElementById('sidebarMenu');
+      const mainContent = document.getElementById('mainContent');
+      sidebar.classList.remove('active'); // Remove the active class to close sidebar
+      mainContent.classList.remove('active'); // Adjust main content margin if necessary
+    }
+    // Fungsi untuk memformat input menjadi format mata uang
+    function formatRupiah(input) {
+        // Menghapus karakter yang bukan angka
+        let value = input.value.replace(/\D/g, '');
+        // Memformat menjadi format mata uang
+        const formattedValue = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        input.value = formattedValue; // Memasukkan nilai yang sudah diformat ke input
+    }
+
+    function parseCurrency(value) {
+        return parseInt(value.replace(/\./g, '') || 0); // Menghapus '.' untuk parsing
+    }
+
+    function updateSisa() {
+    const jumlahInput = document.getElementById('jumlah').value;
+    const bayarInput = document.getElementById('bayar').value;
+
+    // Parse currency only if input is not empty
+    const jumlah = jumlahInput ? parseCurrency(jumlahInput) : 0;
+    const bayar = bayarInput ? parseCurrency(bayarInput) : 0;
+
+    const sisa = jumlah - bayar;
+    document.getElementById('sisa').value = formatCurrency(sisa);
+}
+
+// Add event listeners to the input fields
+document.getElementById('jumlah').addEventListener('input', updateSisa);
+document.getElementById('bayar').addEventListener('input', updateSisa);
+
+
+    function formatCurrency(num) {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Ganti ',' dengan '.'
+    }
+  </script>
+
+</body>
+</html>

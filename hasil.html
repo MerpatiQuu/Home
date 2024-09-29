@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+body {
+  font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; /* Mengatur font untuk seluruh halaman */
+  background-color: #fefefe; /* Warna latar belakang halaman */
+  margin: 0;
+  padding: 20px;
+}
+
+.section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2px;
+  padding: 15px; /* Menambahkan padding untuk setiap section */
+  border-radius: 8px; /* Menambahkan sudut yang membulat */
+  box-shadow: 0 2px 8px rgba(255, 0, 0, 0.1); /* Menambahkan bayangan untuk efek kedalaman */
+  background-color: #1b7eff; /* Warna latar belakang section */
+}
+
+.column {
+  width: 48%; /* Menjaga lebar kolom tetap proporsional */
+}
+
+.column h3 {
+    margin-top: 0;
+  margin-bottom: 2px;
+  background-color: #000000; /* Warna latar belakang header */
+  color: white; /* Warna teks header */
+  padding: 5px;
+  border-radius: 5px; /* Menambahkan sudut membulat pada header */
+  text-align: center;
+  font-size: small;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  padding: 5px; /* Mengurangi padding untuk baris */
+  border-bottom: 1px solid #ffc800; /* Garis batas bawah pada setiap row */
+  text-align: center;
+  background-color:ghostwhite
+}
+
+.row:last-child {
+  border-bottom: none; /* Menghapus batas bawah pada baris terakhir */
+}
+
+.row div {
+  width: 48%; /* Menjaga lebar div tetap proporsional */
+}
+.label {
+    font-size: small;
+    font-weight: bold;
+    color: #ff01b7;
+    white-space: nowrap; /* Menjaga label agar tidak membungkus */
+    text-align: center;
+}
+.value {    
+    font-size: small;
+    font-weight: bold;
+    color: #a10d0d;
+    white-space: nowrap; /* Menjaga label agar tidak membungkus */
+    text-align: center;}
+/* Menambahkan warna untuk teks ID */
+#pendapatan-komputer,
+#pendapatan-sales,
+#pengeluaran,
+#saldo-awal,
+#sisa-saldo,
+#tagihan,
+#hutang-toko,
+#hutang-sales,
+#operasional {
+  color: #000000; /* Warna teks */
+  font-weight: bold; /* Menebalkan teks */
+}
+
+/* Gaya hover untuk baris */
+.row:hover {
+  background-color:aqua; /* Mengubah warna latar belakang saat hover */
+}
+/* Existing styles remain unchanged... */
+
+/* Media query for tablets and mobile devices */
+@media (max-width: 768px) {
+  .section {
+    flex-direction: column; /* Stack columns vertically on smaller screens */
+    width: 100%; /* Full width for sections */
+  }
+
+  .column {
+    width: 100%; /* Each column takes full width */
+    margin-bottom: 15px; /* Add space between stacked columns */
+  }
+
+  .row {
+    flex-direction: column; /* Stack items vertically in each row */
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text alignment */
+  }
+
+  .row div {
+    width: 100%; /* Full width for divs in a row */
+  }
+}
+
+/* Additional styling for very small screens */
+@media (max-width: 480px) {
+  .column h3 {
+    font-size: medium; /* Increase header font size for better readability */
+  }
+
+  .label, .value {
+    font-size: medium; /* Increase font size for labels and values */
+  }
+}
+
+  </style>
+</head>
+<body>
+
+    <div class="section">
+        <div class="column">
+            <h3>Pendapatan</h3>
+            <div class="row">
+                <div class="column">
+                    <div class="label" style="text-align: center;">Komputer</div>
+                    <div class="value" id="pendapatan-komputer">Rp 0</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <div class="label">Sales</div>
+                    <div class="value" id="pendapatan-sales">Rp 0</div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="column">
+            <h3>Pengeluaran</h3>
+            <div class="row">
+                <div class="value" id="pengeluaran">Rp 0</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <div class="column">
+            <h3>Saldo</h3>
+            <div class="row">
+                <div class="column">
+                    <div class="label">Saldo Awal</div>
+                    <div class="value" id="saldo-awal">Rp 0</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <div class="label">Sisa Saldo</div>
+                    <div class="value" id="sisa-saldo">Rp 0</div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="column">
+            <h3>Tagihan</h3>
+            <div class="row">
+                <div class="value" id="tagihan">Rp 0</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <div class="column">
+            <h3>Hutang</h3>
+            <div class="row">
+                <div class="column">
+                    <div class="label">Toko</div>
+                    <div class="value" id="hutang-toko">Rp 0</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <div class="label">Sales</div>
+                    <div class="value" id="hutang-sales">Rp 0</div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="column">
+            <h3>Operasional</h3>
+            <div class="row">
+                <div class="value" id="operasional">Rp 0</div>
+            </div>
+        </div>
+    </div>
+    
+  <script>
+    function formatNumber(num) {
+      if (typeof num === 'number') {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      }
+      return num; // Jika bukan angka, kembalikan seperti semula
+    }
+
+    const url = 'https://script.google.com/macros/s/AKfycbwl_pLGFgK9D3WrfG5BmtX5XQDe2EDGlt340KeMTZ9qq-gY70aokhTsF4rdfSyemhV7Aw/exec?action=FetchData';
+    
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        // Update HTML with fetched data
+        document.getElementById('pendapatan-komputer').innerText = 'Rp ' + formatNumber(data[1].Pendapatan);
+        document.getElementById('pendapatan-sales').innerText = 'Rp ' + formatNumber(data[1][""]);
+        document.getElementById('pengeluaran').innerText = 'Rp ' + formatNumber(data[1].Pengeluaran);
+
+        document.getElementById('saldo-awal').innerText = 'Rp ' + formatNumber(data[4].Pendapatan);
+        document.getElementById('sisa-saldo').innerText = 'Rp ' + formatNumber(data[4][""]);
+
+        document.getElementById('tagihan').innerText = 'Rp ' + formatNumber(data[4].Pengeluaran);
+
+        document.getElementById('hutang-toko').innerText = 'Rp ' + formatNumber(data[7].Pendapatan);
+        document.getElementById('hutang-sales').innerText = 'Rp ' + formatNumber(data[7][""]);
+        document.getElementById('operasional').innerText = 'Rp ' + formatNumber(data[7].Pengeluaran);
+      })
+      .catch(error => console.error('Error fetching data:', error));
+  </script>
+
+</body>
+</html>

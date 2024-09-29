@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laporan</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" type="image/x-icon" />
+  <meta property="og:image" content="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" />
+
+  <!-- Bootstrap Icons CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden; /* Prevent horizontal scroll */
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background-color: #007bff;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between; /* Space between logo and menu */
+      padding: 0 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      z-index: 1000; /* Ensure it's above the sidebar and content */
+    }
+
+    /* Updated span styling for header title */
+    .header-title {
+      font-size: 24px; /* Keep the same size as h1 */
+      font-weight: bold; /* Optional: Keep the same boldness as h1 */
+      color: white; /* Match the color for the header */
+      margin-left: 2px; /* Add space from the menu icon */
+      display: inline-block; /* Keep it inline but treat it like a block-level element */
+    }
+
+    /* Sidebar Menu */
+    .sidebar {
+      height: 100%;
+      width: 250px;
+      position: fixed;
+      top: 30px; /* Disesuaikan agar berada di bawah header */
+      left: -250px;
+      background-color: #ffffff;
+      transition: 0.3s;
+      padding-top: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      z-index: 900;
+    }
+
+    .sidebar.active {
+      left: 0;
+    }
+
+    .sidebar ul {
+      padding: 0;
+      list-style-type: none;
+    }
+
+    .sidebar ul li {
+      padding: 5px 20px;
+      text-align: left;
+    }
+
+    .sidebar ul li a {
+      text-decoration: none;
+      font-size: 16px;
+      color: #333;
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+    }
+
+    .sidebar ul li a:hover {
+      color: #007bff;
+    }
+
+    .sidebar ul li i {
+      margin-right: 10px;
+      margin-left: 4px;
+      font-size: 20px;
+    }
+
+    /* Main content */
+    main {
+      margin-left: 0;
+      margin-top: 30px; /* Start below the header */
+      padding: 20px;
+      transition: margin-left 0.3s;
+    }
+
+    main.active {
+      margin-left: 250px; /* Push content when sidebar is visible */
+    }
+
+    /* Menu Icon in Header */
+    .menu-icon {
+      font-size: 1.75rem;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    .menu-icon img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    /* Adjust for mobile responsiveness */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 150px;
+      }
+
+      .sidebar.active {
+        left: 0;
+      }
+
+      main.active {
+        margin-left: 150px;
+      }
+    }
+        /* Gaya untuk info box dan tabel */
+        .info-box-3 {
+      border: 1px solid #ccc;
+      padding: 16px;
+      margin: 20px;
+      border-radius: 8px;
+      overflow: auto;
+    }
+    .menu-header {
+      cursor: pointer;
+      font-weight: bold;
+      margin-bottom: 10px;
+      background-color: #f0f0f0;
+      padding: 10px;
+      border-radius: 5px;
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center; /* Menyelaraskan teks di tengah */
+    }
+    th {
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="menu-icon" onclick="toggleSidebar()">
+      <i class="bi bi-list"></i>
+      <img src="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" alt="Menu Logo">
+      <span class="header-title">Inventaris</span>
+    </div>
+  </header>  
+
+  <!-- Sidebar Menu -->
+  <div class="sidebar" id="sidebarMenu">
+    <ul>
+      <li><a href="index.html" onclick="closeSidebar()"><i class="bi bi-house-door"></i> Home</a></li>
+      <li><a href="input.html" onclick="closeSidebar()"><i class="bi bi-plus-circle"></i> Input</a></li> <!-- Updated icon for Input -->
+      <li><a href="lapor.html" onclick="closeSidebar()"><i class="bi bi-bar-chart"></i> Pendapatan</a></li> <!-- Updated icon for Pendapatan -->
+      <li><a href="tagih.html" onclick="closeSidebar()"><i class="bi bi-bell"></i> Tagihan</a></li> <!-- Updated icon for Tagihan -->
+      <li><a href="pelanggan.html" onclick="closeSidebar()"><i class="bi bi-file-earmark-person"></i> Pelanggan</a></li> <!-- Updated icon for Hutang -->
+      <li><a href="inventa.html" onclick="closeSidebar()"><i class="bi bi-file-earmark-text"></i> Inventaris</a></li>      
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <main id="mainContent">
+    <div class="info-box-3">
+      <div class="menu-header" id="menuHeader4">Inventaris</div>
+      <div class="info-content" id="infoContent4">
+        <table>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Nama</th>
+              <th>Jumlah</th>
+              <th>Kondisi</th>
+            </tr>
+          </thead>
+          <tbody id="dataBody4">
+            <!-- Data akan diisi melalui JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="info-box-3">
+      <div class="menu-header" id="menuHeader5">Operasional</div>
+      <div class="info-content" id="infoContent5">
+        <table>
+          <thead>
+            <tr>
+              <th>Tanggal</th>
+              <th>Nama</th>
+              <th>Berapa</th>
+              <th>Jumlah</th>
+            </tr>
+          </thead>
+          <tbody id="dataBody5">
+            <!-- Data akan diisi melalui JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebarMenu');
+      const mainContent = document.getElementById('mainContent');
+      sidebar.classList.toggle('active');
+      mainContent.classList.toggle('active');
+    }
+
+    function closeSidebar() {
+      const sidebar = document.getElementById('sidebarMenu');
+      const mainContent = document.getElementById('mainContent');
+      sidebar.classList.remove('active'); // Remove the active class to close sidebar
+      mainContent.classList.remove('active'); // Adjust main content margin if necessary
+    }
+// Fungsi untuk memuat data dari Google Apps Script
+function loadSheetData(scriptUrl, tableBodyId) {
+  fetch(scriptUrl)
+    .then(response => response.json())
+    .then(data => displayData(data, tableBodyId))
+    .catch(error => console.error('Error fetching data:', error));
+}
+
+// Fungsi untuk menampilkan data dalam tabel HTML
+function displayData(data, tableBodyId) {
+  const tableBody = document.getElementById(tableBodyId);
+  tableBody.innerHTML = ''; // Kosongkan isi tabel sebelumnya
+
+  // Loop untuk menambahkan data ke tabel
+  data.forEach(row => {
+    let tr = document.createElement('tr');
+    row.forEach((cell, index) => {
+      let td = document.createElement('td');
+
+      // Format sebagai angka bulat untuk kolom 0 di dataBody4
+      if (tableBodyId === 'dataBody4' && index === 0) {
+        td.textContent = formatAsWholeNumber(cell);
+      } else {
+        td.textContent = cell; // Menampilkan nilai default untuk kolom lain
+      }
+      
+      tr.appendChild(td);
+    });
+    tableBody.appendChild(tr);
+  });
+}
+
+// Fungsi untuk format data sebagai angka bulat
+function formatAsWholeNumber(value) {
+  // Convert value to number and return as a whole number
+  return Number(value).toLocaleString('id-ID', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+}
+
+// Fungsi untuk toggle visibility menu
+function toggleMenu(menuContentId) {
+  const menuContent = document.getElementById(menuContentId);
+  // Menutup semua menu kecuali yang saat ini di toggle
+  const allContents = ['infoContent4', 'infoContent5'];
+  allContents.forEach(contentId => {
+    if (contentId !== menuContentId) {
+      document.getElementById(contentId).style.display = 'none';
+    }
+  });
+
+  menuContent.style.display = menuContent.style.display === 'block' ? 'none' : 'block';
+}
+
+// Inisialisasi tampilan konten
+document.addEventListener('DOMContentLoaded', () => {
+  const menuItems = [
+    { headerId: 'menuHeader4', sheetName: 'Inventaris', contentId: 'infoContent4', dataBodyId: 'dataBody4' },
+    { headerId: 'menuHeader5', sheetName: 'Operasional', contentId: 'infoContent5', dataBodyId: 'dataBody5' }
+  ];
+
+  menuItems.forEach(item => {
+    const menuHeader = document.getElementById(item.headerId);
+    menuHeader.addEventListener('click', () => {
+      toggleMenu(item.contentId);
+      if (document.getElementById(item.contentId).style.display === 'block') {
+        loadSheetData(`https://script.google.com/macros/s/AKfycbxtNoypgCgB3La4P4LOI3IuBCGP3qS__zr648zeGFEr9aeUc1zB-yrqLbomXQxILSM3/exec?sheet=${item.sheetName}`, item.dataBodyId);
+      }
+    });
+  });
+
+  // Set initial state of content to hidden
+  const allContents = ['infoContent4', 'infoContent5'];
+  allContents.forEach(contentId => {
+    document.getElementById(contentId).style.display = 'none'; // Set all content sections to hidden
+  });
+});
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laporan</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Favicon -->
+  <link rel="icon" href="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" type="image/x-icon" />
+  <meta property="og:image" content="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden; /* Prevent horizontal scroll */
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background-color: #007bff;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between; /* Space between logo and menu */
+      padding: 0 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      z-index: 1000; /* Ensure it's above the sidebar and content */
+    }
+
+    /* Updated span styling for header title */
+    .header-title {
+      font-size: 24px; /* Keep the same size as h1 */
+      font-weight: bold; /* Optional: Keep the same boldness as h1 */
+      color: white; /* Match the color for the header */
+      margin-left: 2px; /* Add space from the menu icon */
+      display: inline-block; /* Keep it inline but treat it like a block-level element */
+    }
+
+    /* Sidebar Menu */
+    .sidebar {
+      height: 100%;
+      width: 250px;
+      position: fixed;
+      top: 30px; /* Disesuaikan agar berada di bawah header */
+      left: -250px;
+      background-color: #ffffff;
+      transition: 0.3s;
+      padding-top: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      z-index: 900;
+    }
+
+    .sidebar.active {
+      left: 0;
+    }
+
+    .sidebar ul {
+      padding: 0;
+      list-style-type: none;
+    }
+
+    .sidebar ul li {
+      padding: 5px 20px;
+      text-align: left;
+    }
+
+    .sidebar ul li a {
+      text-decoration: none;
+      font-size: 16px;
+      color: #333;
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+    }
+
+    .sidebar ul li a:hover {
+      color: #007bff;
+    }
+
+    .sidebar ul li i {
+      margin-right: 10px;
+      margin-left: 4px;
+      font-size: 20px;
+    }
+
+    /* Main content */
+    main {
+      margin-left: 0;
+      margin-top: 30px; /* Start below the header */
+      padding: 20px;
+      transition: margin-left 0.3s;
+    }
+
+    main.active {
+      margin-left: 250px; /* Push content when sidebar is visible */
+    }
+
+    /* Menu Icon in Header */
+    .menu-icon {
+      font-size: 1.75rem;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    .menu-icon img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    /* Adjust for mobile responsiveness */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 150px;
+      }
+
+      .sidebar.active {
+        left: 0;
+      }
+
+      main.active {
+        margin-left: 150px;
+      }
+    }
+        /* Gaya untuk info box dan tabel */
+        .info-box-3 {
+      border: 1px solid #ccc;
+      padding: 16px;
+      margin: 20px;
+      border-radius: 8px;
+      overflow: auto;
+    }
+    .menu-header {
+      cursor: pointer;
+      font-weight: bold;
+      margin-bottom: 10px;
+      background-color: #f0f0f0;
+      padding: 10px;
+      border-radius: 5px;
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center; /* Menyelaraskan teks di tengah */
+    }
+    th {
+      background-color: #f9f9f9;
+    }
+    .icon-red {
+      color: red; /* Mengatur warna ikon menjadi merah */
+    }
+/* General Modal Styling */
+.modal-content {
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    background-color: #f8f9fa;
+}
+
+/* Modal Header */
+.modal-header {
+    background-color: #007bff;
+    color: white;
+    border-bottom: none;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.modal-header h5 {
+    font-weight: bold;
+    margin: 0;
+}
+
+.modal-header .btn-close {
+    background-color: white;
+    border-radius: 50%;
+    padding: 5px 10px;
+    transition: background-color 0.3s ease;
+}
+
+.modal-header .btn-close:hover {
+    background-color: #ccc;
+}
+
+/* Modal Body */
+.modal-body {
+    padding: 20px;
+}
+
+.modal-body label {
+    font-weight: bold;
+}
+
+.modal-body .form-control {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    box-shadow: none;
+    transition: border-color 0.3s ease;
+}
+
+.modal-body .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+.input-group-text {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px 0 0 5px;
+}
+
+/* Modal Footer */
+.modal-footer {
+    border-top: none;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: right;
+}
+
+.modal-footer .btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.modal-footer .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Custom Button Styling */
+button {
+    font-size: 14px;
+    padding: 8px 12px;
+}
+
+@media (max-width: 768px) {
+    /* Responsiveness */
+    .modal-dialog {
+        max-width: 95%;
+        margin: 20px auto;
+    }
+}
+/* Hide the label and input for 'Nomor Baris' */
+.form-label[for="row"],
+#row {
+    display: none; /* Hides the label and input field */
+}
+/* Hide the label and input for 'Nomor Baris' */
+.form-label[for="rowSol"],
+#rowSol {
+    display: none; /* Hides the label and input field */
+}
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="menu-icon" onclick="toggleSidebar()">
+      <i class="bi bi-list"></i>
+      <img src="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" alt="Menu Logo">
+      <span class="header-title">Pendapatan</span>
+    </div>
+  </header>  
+
+  <!-- Sidebar Menu -->
+  <div class="sidebar" id="sidebarMenu">
+    <ul>
+      <li><a href="index.html" onclick="closeSidebar()"><i class="bi bi-house-door"></i> Home</a></li>
+      <li><a href="input.html" onclick="closeSidebar()"><i class="bi bi-plus-circle"></i> Input</a></li> <!-- Updated icon for Input -->
+      <li><a href="lapor.html" onclick="closeSidebar()"><i class="bi bi-bar-chart"></i> Pendapatan</a></li> <!-- Updated icon for Pendapatan -->
+      <li><a href="tagih.html" onclick="closeSidebar()"><i class="bi bi-bell"></i> Tagihan</a></li> <!-- Updated icon for Tagihan -->
+      <li><a href="pelanggan.html" onclick="closeSidebar()"><i class="bi bi-file-earmark-person"></i> Pelanggan</a></li> <!-- Updated icon for Hutang -->
+      <li><a href="inventa.html" onclick="closeSidebar()"><i class="bi bi-file-earmark-text"></i> Inventaris</a></li>      
+    </ul>
+  </div>
+
+<!-- Main Content -->
+<main id="mainContent">
+  <div class="info-box-3">
+    <div class="menu-header" id="menuHeader4">Komputer</div>
+    <div class="info-content" id="infoContent4" style="display: none;">
+      <table>
+        <thead>
+          <tr>
+            <th>Tanggal</th>
+            <th>Pemasukan</th>
+            <th>Pengeluaran</th>
+            <th>Sisa</th>
+          </tr>
+        </thead>
+        <tbody id="dataBody4">
+          <!-- Data akan diisi melalui JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div class="info-box-3">
+    <div class="menu-header" id="menuHeader5">Sales</div>
+    <div class="info-content" id="infoContent5" style="display: none;">
+      <table>
+        <thead>
+          <tr>
+            <th>Tanggal</th>
+            <th>Pemasukan</th>
+            <th>Laba</th>
+            <th>Operasional</th>
+            <th>Sisa</th>
+          </tr>
+        </thead>
+        <tbody id="dataBody5">
+          <!-- Data akan diisi melalui JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div class="info-box-3">
+    <div class="menu-header" id="menuHeader6">Rincian 1</div>
+    <div class="info-content" id="infoContent6" style="display: none;">
+      <table>
+        <thead>
+          <tr>
+            <th>Tanggal</th>
+            <th>Keterangan</th>
+            <th>Nama</th>
+            <th>Jumlah</th>
+          </tr>
+        </thead>
+        <tbody id="dataBody6">
+          <!-- Data akan diisi melalui JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div class="info-box-3">
+    <div class="menu-header" id="menuHeader7">Rincian 2</div>
+    <div class="info-content" id="infoContent7" style="display: none;">
+      <table>
+        <thead>
+          <tr>
+            <th>Tanggal</th>
+            <th>Nama</th>
+            <th>Jumlah</th>
+            <th>Bayar</th>
+            <th>Sisa</th>
+          </tr>
+        </thead>
+        <tbody id="dataBody7">
+          <!-- Data akan diisi melalui JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div class="info-box-3">
+    <div class="menu-header" id="menuHeader8">Hutang Toko</div>
+    <div class="info-content" id="infoContent8" style="display: none;"> <!-- Set to hidden by default -->
+      <table>
+        <thead>
+          <tr>
+            <th>Tanggal</th>
+            <th>Nama</th>
+            <th>Hutang</th>
+            <th>Bayar</th>
+            <th>Sisa</th>
+            <th>Lunas</th>
+            <th>Edit</th>
+          </tr>
+        </thead>
+        <tbody id="dataBody8">
+          <!-- Data akan diisi melalui JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div class="info-box-3">
+    <div class="menu-header" id="menuHeader9">Hutang Sales</div>
+    <div class="info-content" id="infoContent9" style="display: none;"> <!-- Set to hidden by default -->
+      <table>
+        <thead>
+          <tr>
+            <th>Tanggal</th>
+            <th>Nama</th>
+            <th>Hutang</th>
+            <th>Bayar</th>
+            <th>Sisa</th>
+            <th>Lunas</th>
+            <th>Edit</th>
+          </tr>
+        </thead>
+        <tbody id="dataBody9">
+          <!-- Data akan diisi melalui JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+<!-- Modal -->
+<div class="modal fade" id="inputModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="myModalLabel">Form Bayar Hutang</h5>
+        <button type="button" class="btn-close" id="closeModalBtn" aria-label="Close"></button>
+      </div>
+<!-- Modal Body -->
+<div class="modal-body">
+  <form id="inputForm" method="POST">
+      <div class="container">
+          <div class="row mb-3">
+              <div class="col-12 mb-3">
+                  <label for="row" class="form-label">Nomor Baris:</label>
+                  <input type="number" id="row" name="row" class="form-control" required placeholder="Masukkan baris" min="1">
+              </div>
+              <div class="col-12 mb-3">
+                  <label for="dataD" class="form-label">Bayar Hutang:</label>
+                  <div class="input-group">
+                      <span class="input-group-text">Rp.</span>
+                      <input type="text" id="dataD" name="dataD" class="form-control" required placeholder="0">
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Kirim</button>
+      </div>
+  </form>
+</div>
+</div>
+</div>
+</div>
+<!-- Modal 2 -->
+<div class="modal fade" id="inputModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+              <h5 class="modal-title" id="myModalLabel">Form Bayar Hutang</h5>
+              <button type="button" class="btn-close" id="closeModalBtn2" aria-label="Close"></button>
+          </div>
+          <!-- Modal Body -->
+          <div class="modal-body">
+              <form id="solForm" method="POST">
+                  <div class="container">
+                      <div class="row mb-3">
+                          <div class="col-12 mb-3">
+                              <label for="rowSol" class="form-label">Nomor Baris:</label>
+                              <input type="number" id="rowSol" name="row" class="form-control" required placeholder="Masukkan baris" min="1">
+                          </div>
+                          <div class="col-12 mb-3">
+                              <label for="dataDSol" class="form-label">Bayar Hutang:</label>
+                              <div class="input-group">
+                                  <span class="input-group-text">Rp.</span>
+                                  <input type="text" id="dataDSol" name="dataD" class="form-control" required placeholder="0">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <!-- Modal Footer -->
+                  <div class="modal-footer">
+                      <button type="submit" class="btn btn-primary">Kirim</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+</main>
+    <!-- Bootstrap 5 JS (tanpa jQuery) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebarMenu');
+      const mainContent = document.getElementById('mainContent');
+      sidebar.classList.toggle('active');
+      mainContent.classList.toggle('active');
+    }
+
+    function closeSidebar() {
+      const sidebar = document.getElementById('sidebarMenu');
+      const mainContent = document.getElementById('mainContent');
+      sidebar.classList.remove('active'); // Remove the active class to close sidebar
+      mainContent.classList.remove('active'); // Adjust main content margin if necessary
+    }
+// Fungsi untuk memuat data dari Google Apps Script
+function loadSheetData(scriptUrl, tableBodyId) {
+  fetch(scriptUrl)
+    .then(response => response.json())
+    .then(data => displayData(data, tableBodyId))
+    .catch(error => console.error('Error fetching data:', error));
+}
+
+// Fungsi untuk toggle visibility menu
+function toggleMenu(menuContentId) {
+  const menuContent = document.getElementById(menuContentId);
+  // Menutup semua menu kecuali yang saat ini di toggle
+  const allContents = ['infoContent4', 'infoContent5', 'infoContent6', 'infoContent7', 'infoContent8', 'infoContent9'];
+  allContents.forEach(contentId => {
+    if (contentId !== menuContentId) {
+      document.getElementById(contentId).style.display = 'none';
+    }
+  });
+
+  menuContent.style.display = menuContent.style.display === 'block' ? 'none' : 'block';
+}
+
+// Inisialisasi tampilan konten
+document.addEventListener('DOMContentLoaded', () => {
+  const menuItems = [
+    { headerId: 'menuHeader4', sheetName: 'Komputer', contentId: 'infoContent4', dataBodyId: 'dataBody4' },
+    { headerId: 'menuHeader5', sheetName: 'Sales', contentId: 'infoContent5', dataBodyId: 'dataBody5' },
+    { headerId: 'menuHeader6', sheetName: 'Rinciansatu', contentId: 'infoContent6', dataBodyId: 'dataBody6' },
+    { headerId: 'menuHeader7', sheetName: 'Rinciandua', contentId: 'infoContent7', dataBodyId: 'dataBody7' },
+    { headerId: 'menuHeader8', sheetName: 'Hutangtoko', contentId: 'infoContent8', dataBodyId: 'dataBody8' },
+    { headerId: 'menuHeader9', sheetName: 'Hutangsales', contentId: 'infoContent9', dataBodyId: 'dataBody9' },
+  ];
+
+  // Menambahkan event listener untuk semua menu
+  menuItems.forEach(item => {
+    const menuHeader = document.getElementById(item.headerId);
+    menuHeader.addEventListener('click', () => {
+      toggleMenu(item.contentId);
+      if (document.getElementById(item.contentId).style.display === 'block') {
+        loadSheetData(`https://script.google.com/macros/s/AKfycbxziiAH4kyZxCgzsKpwUnctcx7YzawJtKHaviXH8workNHRK5tKAWKU9hGSWzMuKbBG/exec?sheet=${item.sheetName}`, item.dataBodyId);
+      }
+    });
+  });
+});
+// Function to format the input as accounting
+function formatNumber(value) {
+    // Remove non-digit characters
+    let numericValue = value.replace(/\D/g, '');
+
+    // Format the number with thousands separators
+    return numericValue.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+
+// Function to format currency
+function formatCurrency(value) {
+    // Check if value is null or undefined
+    if (value == null) return ''; // Return empty string for null or undefined
+
+    // Convert the input to a string and trim any whitespace
+    const stringValue = String(value).trim();
+
+    // Replace commas or spaces and convert to a number
+    const numericValue = Number(stringValue.replace(/[, ]/g, '')); // Remove commas and spaces and convert to number
+
+    // If numericValue is NaN, return the original stringValue
+    if (isNaN(numericValue)) return stringValue;
+
+    // Format and return as currency string
+    return numericValue.toLocaleString('id-ID', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+}
+// Function to display data in the table
+function displayData(data, tableBodyId) {
+    const tableBody = document.getElementById(tableBodyId);
+    tableBody.innerHTML = ''; // Clear previous table content
+    const accountingColumns = {
+        'dataBody4': [1, 2, 3, 4],
+        'dataBody5': [1, 2, 3, 4],
+        'dataBody6': [3],
+        'dataBody7': [2, 3, 4],
+        'dataBody8': [2, 3, 4], // Columns that need formatting
+        'dataBody9': [2, 3, 4], // Columns that need formatting
+    };
+
+    // Loop through data and append to table
+    data.forEach((row, rowIndex) => {
+        let tr = document.createElement('tr');
+        row.forEach((cell, index) => {
+            let td = document.createElement('td');
+            // Format the cell if necessary
+            if (accountingColumns[tableBodyId] && accountingColumns[tableBodyId].includes(index)) {
+                td.textContent = formatCurrency(cell); // Accounting format
+            } else {
+                td.textContent = cell;
+            }
+            tr.appendChild(td);
+        });
+
+        // Add edit icon only for dataBody8 and dataBody9
+        if (tableBodyId === 'dataBody8' || tableBodyId === 'dataBody9') {
+            let editTd = document.createElement('td');
+            let editIcon = document.createElement('i');
+            editIcon.className = `fa fa-pencil icon-${tableBodyId === 'dataBody8' ? 'red' : 'yellow'}`; // Different colors for different tables
+            editIcon.style.cursor = 'pointer';
+            
+            // Set the onclick event for opening the modal and setting row index
+            editIcon.onclick = () => {
+                if (tableBodyId === 'dataBody8') {
+                    document.getElementById('row').value = rowIndex + 2; // For the first modal
+                    new bootstrap.Modal(document.getElementById('inputModal1')).show();
+                } else if (tableBodyId === 'dataBody9') {
+                    document.getElementById('rowSol').value = rowIndex + 2; // For the second modal
+                    new bootstrap.Modal(document.getElementById('inputModal2')).show();
+                }
+            };
+
+            editTd.appendChild(editIcon);
+            tr.appendChild(editTd);
+        }
+
+        tableBody.appendChild(tr);
+    });
+}
+
+// Function to handle input formatting
+function handleInputFormat(inputId) {
+    const inputElement = document.getElementById(inputId);
+
+    // Store the raw numeric value without formatting
+    let rawValue = '';
+
+    inputElement.addEventListener('input', (event) => {
+        const value = event.target.value;
+
+        // Update the raw value for later submission
+        rawValue = value.replace(/\D/g, ''); // Keep only digits
+
+        // Format the number and update the input value for display
+        inputElement.value = formatNumber(value);
+    });
+
+    inputElement.addEventListener('blur', () => {
+        // Final format when the input loses focus
+        inputElement.value = formatCurrency(rawValue); // Format as currency for display
+    });
+
+    // To capture the raw value for submission
+    inputElement.addEventListener('change', () => {
+        // This can be used when submitting the form
+        console.log('Raw value for submission:', rawValue);
+    });
+}
+
+// Initialize formatting for both inputs
+handleInputFormat('dataD');
+handleInputFormat('dataDSol');
+
+// Close modal when close button is clicked
+document.querySelectorAll(".closeModalBtn").forEach(button => {
+    button.addEventListener("click", function () {
+        let modalId = button.getAttribute('data-target');
+        let modalElement = document.getElementById(modalId);
+        let modal = bootstrap.Modal.getInstance(modalElement);
+        if (modal) {
+            modal.hide();
+        }
+    });
+});
+
+    // General function for handling form submissions
+    function handleSubmit(formId, scriptUrl, modalId) {
+        document.getElementById(formId).addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent default form submission
+            
+            const formData = new FormData(this); // Create FormData from the form
+            
+            // Send data using fetch to Google Apps Script URL
+            fetch(scriptUrl, {
+                method: 'POST',
+                mode: 'cors', // Ensure to use 'cors' mode to avoid CORS issues
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json(); // Parse JSON from response
+            })
+            .then(data => {
+                console.log('Success:', data); // Log data if successful
+                alert('Input Berhasil, Selamat Bekerja!'); // Notification on success
+                
+                // Close the modal after successful submission
+                let modalElement = document.getElementById(modalId);
+                let modal = bootstrap.Modal.getInstance(modalElement);
+                if (modal) {
+                    modal.hide();
+                }
+
+                // Reset the form after successful submission
+                this.reset();
+            })
+            .catch(error => {
+                console.error('Error:', error); // Catch any errors
+                alert('Terjadi Kesalahan: ' + error.message); // Display error to the user
+            });
+        });
+    }
+
+    // Initialize form submissions for both forms
+    handleSubmit('inputForm', 'https://script.google.com/macros/s/AKfycbxUML736iliQZ3nrDEn48YJLuDVIb3G4Vi5TFzxXTW30UeH1_z8WdVq09GR8sISLjvz/exec', 'inputModal1');
+    handleSubmit('solForm', 'https://script.google.com/macros/s/AKfycbxnC9d-GDdx6DC-snnJfse_6GhcU309GnDaXB8MuQODWghp6Au6juanv2EYDRyhvXCp/exec', 'inputModal2');
+
+    // Close modal when close button is clicked
+    document.querySelectorAll(".btn-close").forEach(button => {
+        button.addEventListener("click", function () {
+            let modalElement = button.closest('.modal');
+            let modal = bootstrap.Modal.getInstance(modalElement);
+            if (modal) {
+                modal.hide();
+            }
+        });
+    });
+
+  </script>
+
+</body>
+</html>

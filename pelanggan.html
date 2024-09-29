@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Pelanggan</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="icon" href="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" type="image/x-icon" />
+    <meta property="og:image" content="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" />
+    <link rel="icon" href="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" type="image/x-icon" />
+    <!-- Bootstrap Icons CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+body {
+    font-size: 0.875rem; /* Ukuran font lebih kecil untuk tampilan mobile */
+}
+header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background-color: #007bff;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between; /* Space between logo and menu */
+      padding: 0 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      z-index: 1000; /* Ensure it's above the sidebar and content */
+    }
+
+    /* Updated span styling for header title */
+    .header-title {
+      font-size: 24px; /* Keep the same size as h1 */
+      font-weight: bold; /* Optional: Keep the same boldness as h1 */
+      color: white; /* Match the color for the header */
+      margin-left: 2px; /* Add space from the menu icon */
+      display: inline-block; /* Keep it inline but treat it like a block-level element */
+    }
+
+    /* Sidebar Menu */
+    .sidebar {
+      height: 100%;
+      width: 250px;
+      position: fixed;
+      top: 30px; /* Disesuaikan agar berada di bawah header */
+      left: -250px;
+      background-color: #ffffff;
+      transition: 0.3s;
+      padding-top: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      z-index: 900;
+    }
+
+    .sidebar.active {
+      left: 0;
+    }
+
+    .sidebar ul {
+      padding: 0;
+      list-style-type: none;
+    }
+
+    .sidebar ul li {
+      padding: 5px 20px;
+      text-align: left;
+    }
+
+    .sidebar ul li a {
+      text-decoration: none;
+      font-size: 16px;
+      color: #333;
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+    }
+
+    .sidebar ul li a:hover {
+      color: #007bff;
+    }
+
+    .sidebar ul li i {
+      margin-right: 10px;
+      margin-left: 4px;
+      font-size: 20px;
+    }
+
+    /* Main content */
+    main {
+      margin-left: 0;
+      margin-top: 30px; /* Start below the header */
+      padding: 20px;
+      transition: margin-left 0.3s;
+    }
+
+    main.active {
+      margin-left: 250px; /* Push content when sidebar is visible */
+    }
+
+    /* Menu Icon in Header */
+    .menu-icon {
+      font-size: 1.75rem;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    .menu-icon img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    /* Adjust for mobile responsiveness */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 150px;
+      }
+
+      .sidebar.active {
+        left: 0;
+      }
+
+      main.active {
+        margin-left: 150px;
+      }
+    }
+.container {
+    padding: 15px; /* Padding untuk kontainer */
+}
+
+h2 {
+    text-align: center; /* Pusatkan judul */
+}
+
+.table {
+    margin-top: 20px; /* Jarak antara tabel dan elemen di atasnya */
+}
+
+.table-responsive {
+    overflow-x: auto; /* Membuat tabel scrollable pada layar kecil */
+}
+
+.form-control, .btn {
+    font-size: 0.875rem; /* Ukuran font lebih kecil untuk input dan tombol */
+    padding: 0.375rem 0.75rem; /* Padding untuk input dan tombol */
+}
+
+@media (max-width: 576px) {
+    .form-group {
+        margin-bottom: 15px; /* Jarak antar form group */
+    }
+
+    .table th, .table td {
+        font-size: 1rem; /* Ukuran font lebih kecil untuk tabel */
+        text-align: center;
+    }
+}
+    </style>
+    
+</head>
+<body>
+    <header>
+        <div class="menu-icon" onclick="toggleSidebar()">
+          <i class="bi bi-list"></i>
+          <img src="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" alt="Menu Logo">
+          <span class="header-title">Pendapatan</span>
+        </div>
+      </header>  
+    
+      <!-- Sidebar Menu -->
+      <div class="sidebar" id="sidebarMenu">
+        <ul>
+          <li><a href="index.html" onclick="closeSidebar()"><i class="bi bi-house-door"></i> Home</a></li>
+          <li><a href="input.html" onclick="closeSidebar()"><i class="bi bi-plus-circle"></i> Input</a></li> <!-- Updated icon for Input -->
+          <li><a href="lapor.html" onclick="closeSidebar()"><i class="bi bi-bar-chart"></i> Pendapatan</a></li> <!-- Updated icon for Pendapatan -->
+          <li><a href="tagih.html" onclick="closeSidebar()"><i class="bi bi-bell"></i> Tagihan</a></li> <!-- Updated icon for Tagihan -->
+          <li><a href="pelanggan.html" onclick="closeSidebar()"><i class="bi bi-file-earmark-person"></i> Pelanggan</a></li> <!-- Updated icon for Hutang -->
+          <li><a href="inventa.html" onclick="closeSidebar()"><i class="bi bi-file-earmark-text"></i> Inventaris</a></li>      
+        </ul>
+      </div>
+      <main id="mainContent">
+<div class="container">
+    <h2 class="text-center">Daftar Pelanggan</h2>
+
+    <div class="form-group">
+        <label for="daySelect">Pilih Hari:</label>
+        <select class="form-control" id="daySelect" onchange="showTable()">
+            <option value="Semua">Semua</option>
+            <option value="Selasa">Selasa</option>
+            <option value="Kamis">Kamis</option>
+            <option value="Ahad">Ahad</option>
+        </select>
+    </div>
+
+    <form id="customerForm" class="mb-3" onsubmit="addCustomer(event)">
+        <div class="form-group">
+            <label for="customerName">Nama Pelanggan:</label>
+            <input type="text" class="form-control" id="customerName" required>
+        </div>
+        <div class="form-group">
+            <label for="customerAddress">Alamat:</label>
+            <input type="text" class="form-control" id="customerAddress" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Tambah Pelanggan</button>
+    </form>
+
+    <h4 id="selectedDay"></h4>
+    
+    <table class="table table-bordered" id="customerTable">
+        <thead>
+            <tr>
+                <th>Nama Pelanggan</th>
+                <th>Alamat</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody id="customerList">
+            <!-- Initial customer rows will be populated here -->
+        </tbody>
+    </table>
+</div>
+      </main>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+        function toggleSidebar() {
+      const sidebar = document.getElementById('sidebarMenu');
+      const mainContent = document.getElementById('mainContent');
+      sidebar.classList.toggle('active');
+      mainContent.classList.toggle('active');
+    }
+
+    function closeSidebar() {
+      const sidebar = document.getElementById('sidebarMenu');
+      const mainContent = document.getElementById('mainContent');
+      sidebar.classList.remove('active'); // Remove the active class to close sidebar
+      mainContent.classList.remove('active'); // Adjust main content margin if necessary
+    }
+    const customers = JSON.parse(localStorage.getItem('customers')) || {
+        "Ahad": [
+            { name: "B.Murtik", address: "" },
+            { name: "B. shofi", address: "" },
+            { name: "P. Adib", address: "" },
+            { name: "B. Holid", address: "" },
+            { name: "B. Amira", address: "" },
+            { name: "B. fira", address: "" },
+            { name: "B. Kholid", address: "" },
+            { name: "B. Santi", address: "" },
+            { name: "B. Vio", address: "" },
+            { name: "P.Sely", address: "" },
+            { name: "B. Fatur", address: "" },
+            { name: "P. Nimar", address: "" },
+            { name: "B. Fatim", address: "" },
+            { name: "B. Se", address: "" },
+            { name: "B. Di", address: "" },
+            { name: "B. Fa'Iq", address: "" },
+            { name: "B. Dela", address: "" },
+            { name: "B. Chacha", address: "" },
+            { name: "B. Linda", address: "" },
+            { name: "B. Azril", address: "" },
+            { name: "B. Lut", address: "" },
+            { name: "B. Khotim", address: "" },
+            { name: "Ra Washil", address: "" },
+            { name: "B. Naila", address: "" },
+            { name: "B. Nobel", address: "" },
+            { name: "b romi", address: "" },
+            { name: "B. Andi", address: "" },
+            { name: "B. Iwan", address: "" },
+            { name: "B. Fita", address: "" },
+            { name: "B. Nanang", address: "" },
+            { name: "P. Arul", address: "" },
+            { name: "P. Den", address: "" },
+            { name: "b fit", address: "" },
+            { name: "P. Naiman", address: "" },
+            { name: "B. Saini", address: "" },
+            { name: "p.h.sulaiman", address: "" },
+            { name: "pk imam", address: "" },
+            { name: "buk pri", address: "" },
+            { name: "p.haped", address: "" },
+            { name: "buk roihan Al aziz", address: "" },
+            { name: "b firman", address: "" },
+            { name: "b feby", address: "" }
+        ],
+        "Kamis": [
+            { name: "B. Titin ahatan", address: "" },
+            { name: "B. Miftah", address: "" },
+            { name: "Hamdalah", address: "" },
+            { name: "Hj. Ida", address: "" },
+            { name: "B. Helmi", address: "" },
+            { name: "B. Rifqi", address: "" },
+            { name: "B. Rizqi", address: "" },
+            { name: "B. Ros", address: "" },
+            { name: "B. Suyati", address: "" },
+            { name: "B. Uyun", address: "" },
+            { name: "B. Titin", address: "" },
+            { name: "B. Wulan", address: "" },
+            { name: "Buk Nasrul", address: "" },
+            { name: "H. Hasan", address: "" },
+            { name: "B. Wasil", address: "" },
+            { name: "B. Ayu", address: "" },
+            { name: "Toko Barokah Al Aziz", address: "" },
+            { name: "B. Fira", address: "" },
+            { name: "B. Arka", address: "" },
+            { name: "B. Hor", address: "" },
+            { name: "Sinar Madura", address: "" },
+            { name: "qiqi skw", address: "" },
+            { name: "b royhan Al aziz", address: "" },
+            { name: "Al harokah", address: "" },
+            { name: "b afan", address: "" },
+            { name: "buk Rosa", address: "" }
+        ],
+        "Selasa": [
+            { name: "h.nurul", address: "" },
+            { name: "B. Miswari", address: "" },
+            { name: "Al Harokah Jambisari3", address: "" },
+            { name: "B. Rofi", address: "" },
+            { name: "B. Suhai", address: "" },
+            { name: "B. wilda", address: "" },
+            { name: "B. Royhan", address: "" },
+            { name: "b. della", address: "" },
+            { name: "B. Wahed", address: "" },
+            { name: "Toko Hilya", address: "" },
+            { name: "Toko Iqomah", address: "" },
+            { name: "Toko Barokah Jambesari", address: "" },
+            { name: "Pak Pet", address: "" },
+            { name: "B. aulia", address: "" },
+            { name: "B. Lastri", address: "" },
+            { name: "B. Foni", address: "" },
+            { name: "B. Paredi", address: "" },
+            { name: "B. Rahman", address: "" },
+            { name: "toko simpang tiga", address: "" },
+            { name: "B. alin", address: "" },
+            { name: "B. dales", address: "" },
+            { name: "b.bayu", address: "" },
+            { name: "b. iwan", address: "" },
+            { name: "b naila", address: "" },
+            { name: "toko saudara h.nurol", address: "" },
+            { name: "b ira", address: "" },
+            { name: "b Ifan", address: "" }
+        ]
+    };
+    function showTable() {
+    const selectedDay = document.getElementById("daySelect").value;
+    document.getElementById("selectedDay").innerText = selectedDay;
+    displayCustomers(selectedDay);
+}
+
+function displayCustomers(day) {
+    const tbody = document.getElementById("customerList");
+    tbody.innerHTML = ""; // Clear existing rows
+
+    if (day === "Semua") {
+        // Display all customers from all days
+        for (const key in customers) {
+            customers[key].forEach((customer, index) => {
+                const row = `<tr>
+                    <td>${customer.name}</td>
+                    <td>${customer.address}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm" onclick="editCustomer('${key}', ${index})">Edit</button>
+                        <button class="btn btn-danger btn-sm" onclick="removeCustomer('${key}', ${index})">Hapus</button>
+                    </td>
+                </tr>`;
+                tbody.innerHTML += row;
+            });
+        }
+    } else {
+        // Display customers for the selected day
+        customers[day].forEach((customer, index) => {
+            const row = `<tr>
+                <td>${customer.name}</td>
+                <td>${customer.address}</td>
+                <td>
+                    <button class="btn btn-warning btn-sm" onclick="editCustomer('${day}', ${index})">Edit</button>
+                    <button class="btn btn-danger btn-sm" onclick="removeCustomer('${day}', ${index})">Hapus</button>
+                </td>
+            </tr>`;
+            tbody.innerHTML += row;
+        });
+    }
+}
+
+function addCustomer(event) {
+    event.preventDefault();
+    const customerName = document.getElementById("customerName").value;
+    const customerAddress = document.getElementById("customerAddress").value;
+    const selectedDay = document.getElementById("daySelect").value;
+
+    // Add customer to the selected day's list
+    customers[selectedDay].push({ name: customerName, address: customerAddress });
+    localStorage.setItem('customers', JSON.stringify(customers)); // Save to localStorage
+    displayCustomers(selectedDay);
+
+    // Clear the input fields
+    document.getElementById("customerName").value = "";
+    document.getElementById("customerAddress").value = "";
+}
+
+function removeCustomer(day, index) {
+    // Remove the customer from the specified day's list
+    customers[day].splice(index, 1);
+    localStorage.setItem('customers', JSON.stringify(customers)); // Save to localStorage
+    displayCustomers(day);
+}
+
+function editCustomer(day, index) {
+    const customer = customers[day][index];
+    const newName = prompt("Edit Nama Pelanggan:", customer.name);
+    const newAddress = prompt("Edit Alamat:", customer.address);
+
+    if (newName !== null && newAddress !== null) {
+        customers[day][index] = { name: newName, address: newAddress };
+        localStorage.setItem('customers', JSON.stringify(customers)); // Save to localStorage
+        displayCustomers(day);
+    }
+}
+
+// Initialize the table with customers based on the selected day
+document.addEventListener("DOMContentLoaded", () => {
+    showTable();
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Absen</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="icon" href="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" type="image/x-icon" />
+  <meta property="og:image" content="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #007BFF;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Menu Icon Section */
+    .menu-icon {
+    display: flex; /* Align items horizontally */
+    align-items: center; /* Center items vertically */
+    gap: 10px; /* Space between logo and text */
+    cursor: pointer; /* Pointer cursor on hover */
+    padding: 10px 15px; /* Padding around the menu icon */
+    background-color: #ffffff; /* White background for clean look */
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s; /* Smooth transition for hover effects */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+}
+
+.menu-icon:hover {
+    background-color: #fb64e7; /* Slightly darker background on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Increased shadow on hover */
+    transform: scale(1); /* Slightly enlarge on hover */
+}
+
+.menu-icon .menu-icon-toggle {
+    font-size: 1.5rem; /* Larger icon for emphasis */
+    color: #007bff; /* Blue color for the icon */
+}
+    .menu-icon img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .menu-content {
+      display: none;
+      margin-top: 10px;
+      background-color: white;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .menu-content ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .menu-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      color: #000;
+    }
+
+    .menu-item i {
+      margin-right: 1px;
+      font-size: 24px;
+    }
+
+    .menu-item a {
+      text-decoration: none;
+      color: rgb(20, 18, 18);
+      font-size: 10px;
+      transition: color 0.3s ease;
+    }
+
+    .menu-item a:hover {
+      color: rgb(251, 122, 195);
+      opacity: 0.8;
+    }
+
+    .home i {
+      color: #007bff;
+    }
+
+    .kasir i {
+      color: #28a745;
+    }
+
+    .gudang i {
+      color: #ffc107;
+    }
+
+    .pengumuman i {
+      color: #17a2b8;
+    }
+
+    .absen i {
+      color: #ff5722;
+    }
+
+    .laporan i {
+      color: #6f42c1;
+    }
+    body {
+  background-color: #0d80f3;
+}
+.container-main {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+    }
+.info-box {
+  background-color: #f9f9f9;
+  margin: 3px auto;
+  padding: 5px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: left; /* Center content */
+}
+.form-label {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.form-label i {
+  margin-right: 8px;
+}
+
+.btn-custom {
+  font-size: 0.575rem;              /* Ukuran font sesuai yang diminta */
+  padding: .3rem;                    /* Padding diatur menjadi 0 */
+  border: 1px solid #007bff;       /* Border berwarna biru */
+  color: #007bff;                   /* Warna teks biru */
+  background-color: transparent;    /* Latar belakang transparan */
+  margin-top: 5px;                  /* Margin atas */
+  margin-left: auto;                /* Membuat tombol bergerak ke kanan */
+  margin-right: auto;               /* Membuat tombol bergerak ke kiri */
+  display: block;                   /* Memastikan tombol sebagai blok */
+  border-radius: 4px;   
+}
+
+.btn-custom:hover {
+  background-color: #007bff;
+  color: #ff68c5;
+}
+
+.form-check-label {
+  font-size: 14px;
+}
+
+.icon-blue {
+  color: #007bff;
+}
+
+.icon-green {
+  color: #28a745;
+}
+
+.icon-orange {
+  color: #ff5722;
+}
+
+.icon-yellow {
+  color: #ffc107;
+}
+
+.info-box h3 {
+  margin-bottom: 2px;
+}
+
+.info-box .info-item {
+  margin-bottom: 15px;
+}
+
+.info-box .info-item:last-child {
+  margin-bottom: 0;
+}
+
+.info-box .info-item span {
+  display: block;
+  font-weight: bold;
+}
+
+.menu-header {
+  cursor: pointer;
+  background-color: #007bff;
+  color: #ffffff;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  text-align: center; /* Center text */
+  font-weight: bold;
+  border: 1px solid #007bff;
+}
+.menu-header:hover {
+  background-color: #fe93f4;
+}
+.menu-content {
+  display: none;
+  margin-top: 10px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 15px;
+}
+
+.info-item i {
+  font-size: 24px;
+  margin-right: 15px;
+  color: #007bff;
+}
+
+.info-item p {
+  margin: 0;
+}
+
+h5 {
+  font-size: small;
+}
+
+p {
+  font-size: small;
+}
+/* General info-box styling */
+.info-box-3 {
+  background-color: #f9f9f9;
+  margin: 1px auto;
+  padding: 5px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: left; /* Center content */
+}
+.info-box-4 {
+    max-width: 10px;
+  background-color: #f9f9f9;
+  margin: 1px auto;
+  padding: 5px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: left; /* Center content */
+}
+.info-box {
+  max-width: 200px;
+  margin: 5px auto;
+  background-color: #fff;
+  padding: 5px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  
+
+
+}
+/* Menu header styling */
+.menu-header {
+  font-size: 1.2em;
+  font-weight: bold;
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* Info content (hidden initially) */
+.info-content {
+  display: none;
+  padding-top: 1px;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9em;
+  margin-top: 10px;
+}
+
+table th, table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+  white-space: nowrap; /* Prevents text from wrapping to new line */
+}
+
+/* Table header styling */
+table thead {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+table thead th {
+  font-weight: bold;
+}
+
+/* Horizontal scrolling for table */
+.info-content {
+  overflow-x: auto; /* Enables horizontal scrolling */
+}
+
+/* Styling for alternate row colors */
+table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Styling to keep the first row fixed */
+table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+/* Rata kiri khusus untuk kolom NAMA */
+.info-box-3 td:nth-child(2) {
+  text-align: left; /* Rata kiri untuk kolom NAMA */
+}
+/* Smaller font and padding for better fitting on small screens */
+@media (max-width: 768px) {
+  table th, table td {
+    padding: 8px;
+    font-size: 0.8em;
+  }
+}
+.info-box-5 {
+    background-color: #f9f9f9;       /* Warna latar belakang */
+    margin: 10px auto;               /* Margin untuk jarak */
+    padding: 15px;                   /* Padding di dalam box */
+    border-radius: 8px;              /* Sudut membulat */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Bayangan */
+    max-width: 300px;                /* Lebar maksimum */
+}
+
+.header {
+    font-size: 1rem;                 /* Ukuran font header */
+    font-weight: bold;               /* Membuat teks tebal */
+    margin-bottom: 1px;             /* Jarak bawah dari header */
+    text-align: center;              /* Rata tengah untuk header */
+}
+
+.content {
+    font-size: 0.75rem;              /* Ukuran font konten */
+    line-height: 1.5;                /* Jarak antar baris */
+    text-align: justify;              /* Rata kiri dan kanan */
+}
+
+.content ul {
+    list-style: none;                /* Menghapus bullet list */
+    padding: 0;                      /* Menghapus padding */
+    margin: 0;                       /* Menghapus margin */
+}
+
+.content li {
+    margin-bottom: 5px;              /* Jarak antar item */
+    padding-left: 10px;              /* Jarak dari kiri */
+    position: relative;              /* Untuk posisi item */
+    text-align: justify;              /* Mengatur teks dalam li rata justify */
+}
+
+.content li::before {
+    content: counter(item) ". ";     /* Menambahkan nomor sebagai konten */
+    color: #007bff;                  /* Warna nomor */
+    position: absolute;              /* Posisi absolut */
+    left: 0;                         /* Jarak dari kiri */
+}
+
+.content li {
+    counter-increment: item;         /* Menghitung nomor item */
+    text-align: justify;             /* Memastikan teks dalam li rata justify */
+}
+        #menuHeader5 {
+            display: none; /* Menyembunyikan elemen */
+        }
+        .menu-text {
+    font-size: 1.25rem; /* Larger font size for emphasis */
+    font-weight: 700; /* Bold text */
+    color: #333; /* Dark grey color for text */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15); /* Subtle text shadow */
+    letter-spacing: 1px; /* Increased letter spacing */
+    transition: color 0.3s; /* Smooth color transition on hover */
+}
+
+.menu-icon:hover .menu-text {
+    color: #fcfcfd; /* Change text color on hover */
+}
+  </style>
+</head>
+<body>
+  <div class="menu-icon" onclick="Menu()">
+    <i class="bi bi-list"></i>
+    <img src="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" alt="Menu Logo">
+    <span class="menu-text">Toko MerpatiQuu</span>
+  </div>
+
+  <div class="menu-content" id="menuContent">
+    <ul>
+      <div class="menu-row">
+        <li class="menu-item home"><i class="bi bi-house-door"></i><a href="index.html">Home</a></li>
+        <li class="menu-item kasir"><i class="bi bi-cash"></i><a href="trx.html">Sales Order</a></li>
+        <li class="menu-item gudang"><i class="bi bi-box"></i><a href="https://docs.google.com/spreadsheets/d/1jXhP5804xTNqvVObvtZiU5GqUAalcNqs2L6JJfWd-J0/edit?gid=1850812155#gid=1850812155">Gudang</a></li>
+      </div>
+      <div class="menu-row">
+        <li class="menu-item pengumuman"><i class="bi bi-megaphone"></i><a href="pengumuman.html">Pengumuman</a></li>
+        <li class="menu-item absen"><i class="bi bi-person-check"></i><a href="absen.html">Absen</a></li>
+        <li class="menu-item laporan"><i class="bi bi-file-earmark-text"></i><a href="lapor.html">Laporan</a></li>
+      </div>
+    </ul>
+  </div>
+
+  <div class="container">
+    <!-- Left Side: Menu -->
+      <div class="info-box">
+        <div class="menu-header" id="menuHeader1">Absen Karyawan</div>
+    <form id="absenceForm" action="https://script.google.com/macros/s/AKfycbwRrCXvVVpdtgKqqhqYITViI6HxYppm04KE4uwID5c-8yjtAYGpxH42odj10ueF-CEt/exec" method="POST">
+      <div class="info-content" id="infoContent1">
+        <label for="name" class="form-label"><i class="bi bi-person icon-blue"></i> Nama</label>
+        <select id="name" name="nama" class="form-select" required>
+          <option value="" disabled selected>-</option>
+          <option value="Wafir">Wafir</option>
+          <option value="Mif">Mif</option>
+          <option value="Farhan">Farhan</option>
+          <option value="Qosim">Qosim</option>
+          <option value="Wasil">Wasil</option>
+          <option value="Taufiq">Taufiq</option>
+          <option value="Ervan">Ervan</option>
+          <option value="Basri">Basri</option>
+        </select>
+        <label for="day" class="form-label"><i class="bi bi-calendar-day icon-green"></i> Hari</label>
+        <select id="day" name="hari" class="form-select" required>
+          <option value="" disabled selected>-</option>
+          <option value="Ahad">Ahad</option>
+          <option value="Senin">Senin</option>
+          <option value="Selasa">Selasa</option>
+          <option value="Rabu">Rabu</option>
+          <option value="Kamis">Kamis</option>
+          <option value="Jumat">Jumat</option>
+          <option value="Sabtu">Sabtu</option>
+        </select>
+        <label for="time" class="form-label"><i class="bi bi-clock icon-orange"></i> Waktu</label>
+        <select id="time" name="waktu" class="form-select" required>
+          <option value="" disabled selected>-</option>
+          <option value="Pagi">Pagi</option>
+          <option value="Siang">Siang</option>
+          <option value="Malam">Malam</option>
+        </select>
+        <label for="remarks" class="form-label"><i class="bi bi-info-circle icon-yellow"></i> Keterangan</label>
+        <select id="remarks" name="keterangan" class="form-select" required>
+          <option value="" disabled selected>-</option>
+          <option value="Masuk">Masuk</option>
+          <option value="Ijin">ijin</option>
+          <option value="Pulang">Pulang</option>
+        </select>      
+        <button type="submit" class="btn btn-custom"><i class="bi bi-send"></i> Kirim</button>
+      </div>
+    </form>
+  </div>  
+  <div class="info-box">
+    <div class="menu-header" id="menuHeader2">Absen Sales</div>
+<form id="absenForm" action="https://script.google.com/macros/s/AKfycbxJJtTkCY1w6yDeeW59MD9vyIAW0g7BxIrn1kNFcWRvd0GTi8XOEdZ6mtkIksITSa74Kw/exec" method="POST">
+  <div class="info-content" id="infoContent2">
+    <label for="name" class="form-label"><i class="bi bi-person icon-blue"></i> Nama</label>
+    <select id="name" name="nama" class="form-select" required>
+      <option value="" disabled selected>-</option>
+      <option value="Farhan">Farhan</option>
+      <option value="Basri">Basri</option>
+      <option value="Lutfi">Lutfi</option>
+      <option value="Ghazi">Ghazi</option>
+      <option value="Qosim">Qosim</option>
+      <option value="Wasil">Wasil</option>
+      <option value="Taufiq">Taufiq</option>
+      <option value="Ervan">Ervan</option>
+      <option value="Wafir">Wafir</option>
+      <option value="Mif">Mif</option>
+    </select>
+    <label for="day" class="form-label"><i class="bi bi-calendar-day icon-green"></i> Hari</label>
+    <select id="day" name="hari" class="form-select" required>
+      <option value="" disabled selected>-</option>
+      <option value="Ahad">Ahad</option>
+      <option value="Senin">Senin</option>
+      <option value="Selasa">Selasa</option>
+      <option value="Rabu">Rabu</option>
+      <option value="Kamis">Kamis</option>
+      <option value="Jumat">Jumat</option>
+      <option value="Sabtu">Sabtu</option>
+    </select>
+    <label for="remarks" class="form-label"><i class="bi bi-info-circle icon-yellow"></i> Keterangan</label>
+    <select id="remarks" name="keterangan" class="form-select" required>
+      <option value="" disabled selected>-</option>
+      <option value="Masuk">Masuk</option>
+      <option value="Ijin">ijin</option>
+    </select>      
+    <button type="submit" class="btn btn-custom"><i class="bi bi-send"></i> Kirim</button>
+  </div>
+</form>
+</div>
+    <!-- Right Side: Info Box -->
+    <div class="info-box">
+    <div class="menu-header" id="menuHeader3">
+      Jam Masuk
+    </div>
+    <div class="info-content" id="infoContent3">
+      <div class="info-item">
+        <i class="fas fa-sun"></i>
+        <div>
+          <h5>Shift Pagi</h5>
+          <p>06.00 - 13.00 WIB</p>
+        </div>
+      </div>
+      
+      <div class="info-item">
+        <i class="fas fa-sun"></i>
+        <div>
+          <h5>Shift Siang</h5>
+          <p>13.00 - 17.00 WIB</p>
+        </div>
+      </div>
+      
+      <div class="info-item">
+        <i class="fas fa-coffee"></i>
+        <div>
+          <h5>Istirahat</h5>
+          <p>17.00 - 18.00 WIB</p>
+        </div>
+      </div>
+      
+      <div class="info-item">
+        <i class="fas fa-moon"></i>
+        <div>
+          <h5>Shift Malam</h5>
+          <p>18.00 - 22.00 WIB</p>
+        </div>
+      </div>
+      
+      <div class="info-item">
+        <i class="fas fa-calendar-alt"></i>
+        <div>
+          <h5>Jadwal Masuk Sales</h5>
+          <p>Waktu Tentatif</p>
+        </div>
+      </div>
+      
+      <div class="info-item">
+        <i class="fas fa-sticky-note"></i>
+        <div>
+          <h5>Catatan</h5>
+          <p>Jam Menggunakan WIB</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="info-box-3">
+    <div class="menu-header" id="menuHeader4">Rekap Absen Karyawan</div>
+    <div class="info-content" id="infoContent4">
+      <table>
+        <thead>
+          <tr>
+            <th>NO</th>
+            <th>NAMA</th>
+            <th>BEBAN JAM</th>
+            <th>EFEKTIF</th>
+            <th>HADIR</th>
+            <th>TH</th>
+            <th>IJIN</th>
+            <th>LEMBUR</th>
+            <th>PERSENTASE</th>
+            <th>POKOK</th>
+            <th>H</th>
+            <th>L</th>
+            <th>BONUS</th>
+            <th>TOTAL</th>
+            <th>RAPAT</th>
+            <th>POTONGAN</th>
+            <th>KET</th>
+            <th>SISA</th>
+          </tr>
+        </thead>
+        <tbody id="dataBody">
+          <!-- Data akan diisi melalui JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+  <div class="info-box-4">
+    <div class="menu-header" id="menuHeader5">Rekap Absen Sales</div>
+    <div class="info-content" id="infoContent5">
+      <table>
+        <thead>
+          <tr>
+            <th>NO</th>
+            <th>NAMA</th>
+            <th>BEBAN</th>
+            <th>EFEKTIF</th>
+            <th>HADIR</th>
+            <th>TH</th>
+            <th>IJIN</th>
+            <th>LEMBUR</th>
+            <th>PERSENTASE</th>
+            <th>POKOK</th>
+            <th>H</th>
+            <th>L</th>
+            <th>BONUS</th>
+            <th>TOTAL</th>
+            <th>RAPAT</th>
+            <th>POTONGAN</th>
+            <th>KET</th>
+            <th>SISA</th>
+          </tr>
+        </thead>
+        <tbody id="dataBody">
+          <!-- Data akan diisi melalui JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="info-box-5">
+  <div class="header" style="text-align: center;">Catatan</div>
+  <div class="content">
+      <ul>
+        <li>Bonus Bisyaroh Rp. 50.000 Jika sampai target bulanan</li>
+        <li>Persentase kehadiran Karyawan & Sales bulan <span id="currentMonth"></span> mencapai</li>
+        <li>Total biaya operasional untuk Bisyaroh Karyawan di bulan <span id="currentMonth2"></span> mencapai</li>
+        <li>100% kehadiran akan dapat royalti langsung dari Owner Lora Muhammadil Baqir Ghazali</li>
+        <li>PENTING! semua Form Absen berhasil ketika sudah ada notifikasi "ABSEN BERHASIL"</li>
+      </ul>
+  </div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+document.getElementById("absenceForm").addEventListener("submit", handleFormSubmit);
+document.getElementById("absenForm").addEventListener("submit", handleFormSubmit);
+
+function handleFormSubmit(event) {
+  event.preventDefault(); // Prevent form from submitting normally
+
+  const form = this;
+  const formData = new FormData(form);
+
+  const scriptUrl = form.id === "absenceForm" ? 
+                    'https://script.google.com/macros/s/AKfycbyaQEFByCX8eW6EOsetUDsR2Srts2ci-IZmgIZjDSBXWyXvtcZvFJEeWJkorAciTVGSmQ/exec' :
+                    'https://script.google.com/macros/s/AKfycbxJJtTkCY1w6yDeeW59MD9vyIAW0g7BxIrn1kNFcWRvd0GTi8XOEdZ6mtkIksITSa74Kw/exec';
+
+  fetch(scriptUrl, {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams(formData)
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Success:', data);
+    alert('Absen Berhasil, Selamat Bekerja!');
+    form.reset(); // Clear the form fields
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('Absen Berhasil, SEMANGAT! ' + error.message);
+    form.reset(); // Clear the form fields
+  });
+}
+
+// Function to toggle menu visibility
+function toggleMenu(menuContentId) {
+  const menuContent = document.getElementById(menuContentId);
+  menuContent.style.display = menuContent.style.display === 'block' ? 'none' : 'block';
+}
+
+// Add event listeners for menu headers
+const menuHeaders = ['menuHeader1', 'menuHeader2', 'menuHeader3', 'menuHeader4', 'menuHeader5'];
+const infoContents = ['infoContent1', 'infoContent2', 'infoContent3', 'infoContent4', 'infoContent5'];
+
+menuHeaders.forEach((header, index) => {
+  document.getElementById(header).addEventListener('click', () => {
+    toggleMenu(infoContents[index]);
+  });
+});
+
+// Initialize content display
+infoContents.forEach(contentId => {
+  document.getElementById(contentId).style.display = 'none';
+});
+function Menu() {
+      const menuContent = document.getElementById('menuContent');
+      menuContent.style.display = menuContent.style.display === 'block' ? 'none' : 'block';
+    }
+
+// Function to fetch and update data from both URLs
+function fetchDataFromBothURLs() {
+  const scriptUrl1 = 'https://script.google.com/macros/s/AKfycbzqYMwt0RL8D2msfjud8oU5UOEsrXINNET7lQ5URfaAHLu5J9xwi7PZbl04R2QhriDEfg/exec';
+  const scriptUrl2 = 'https://script.google.com/macros/s/AKfycbyDpQOMF8hdrrDHxnxhKma9ZZPH632FCvCKSixnaKaHMb4KAG65wdw2jnXUMsiOr7xVaA/exec';
+
+  // Create an array of fetch promises
+  const fetchPromises = [fetch(scriptUrl1), fetch(scriptUrl2)];
+
+  Promise.all(fetchPromises)
+    .then(responses => {
+      return Promise.all(responses.map(response => response.json()));
+    })
+    .then(dataArray => {
+      // Combine data from both responses
+      const combinedData = [].concat(...dataArray);
+      updateTable(combinedData);
+    })
+    .catch(error => console.error('Error fetching data from URLs:', error));
+}
+
+// Function to update the table with data
+function updateTable(data) {
+  let tableBody = document.getElementById('dataBody');
+  let rows = '';
+
+  data.forEach(row => {
+    console.log('Processing row:', row);
+    rows += `
+      <tr>
+        <td>${Math.round(row.no)}</td>
+        <td>${row.nama}</td>
+        <td>${Math.round(row.beban)}</td>
+        <td>${Math.round(row.efektif)}</td>
+        <td>${Math.round(row.hadir)}</td>
+        <td>${Math.round(row.th)}</td>
+        <td>${Math.round(row.ijin)}</td>
+        <td>${Math.round(row.lembur)}</td>
+        <td>${Math.round(row.persentase * 100)}%</td>
+        <td>${Math.round(row.pokok)}</td>
+        <td>${Math.round(row.h)}</td>
+        <td>${Math.round(row.l)}</td>
+        <td>${Math.round(row.bonus)}</td>
+        <td>${Math.round(row.total)}</td>
+        <td>${Math.round(row.rapat)}</td>
+        <td>${Math.round(row.potongan)}</td>
+        <td>${Math.round(row.ket)}</td>
+        <td>${Math.round(row.sisa)}</td>
+      </tr>
+    `;
+  });
+  
+  console.log('Table rows:', rows);
+  tableBody.innerHTML = rows;
+}
+
+// Initial fetch
+fetchDataFromBothURLs();
+
+// Set interval to fetch data every 5 minutes (300,000 milliseconds)
+setInterval(fetchDataFromBothURLs, 1000);
+
+
+// Display the current month
+const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", 
+                    "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+const currentMonth = monthNames[new Date().getMonth()]; // Get current month name
+document.getElementById("currentMonth").textContent = currentMonth;
+document.getElementById("currentMonth2").textContent = currentMonth;
+  </script>
+
+</body>
+</html>
