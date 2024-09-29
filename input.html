@@ -565,11 +565,33 @@ table thead th {
 </div>
 </form>
 </div>
+<div class="info-box">
+  <div class="menu-header" id="menuHeader3">Input Orang Nge-Bon</div>
+<form id="bonForm" action="https://script.google.com/macros/s/AKfycby_5GvU2vajN9D37-EAcAjw5VDTU_2c6BrdrFgV42ZwFzRvzqha2pzhzeymjtD0uDuN/exec" method="POST">
+<div class="info-content" id="infoContent3">
+<label for="name" class="form-label">
+  <i class="bi bi-person icon-orange"></i> Nama
+</label>
+<input type="text" id="name" name="nama" class="form-control" required placeholder="Masukkan nama">
+<label for="jumlah" class="form-label"><i class="bi bi-currency-dollar icon-green"></i> Jumlah</label>
+<div class="input-group">
+    <span class="input-group-text">Rp.</span>
+    <input type="text" id="jumlah" name="jumlah" class="form-control" required placeholder="0" oninput="formatRupiah(this);">
+</div> 
+<label for="bayar" class="form-label"><i class="bi bi-currency-dollar icon-green"></i> Bayar</label>
+<div class="input-group">
+    <span class="input-group-text">Rp.</span>
+    <input type="text" id="bayar" name="bayar" class="form-control" required placeholder="0" oninput="formatRupiah(this);">
+</div>      
+<button type="submit" class="btn btn-custom"><i class="bi bi-send"></i> Kirim</button>
+</div>
+</form>
+</div>
     <!-- Right Side: Info Box -->
     <div class="info-box">
-      <div class="menu-header" id="menuHeader3">Input Operasional</div>
+      <div class="menu-header" id="menuHeader4">Input Operasional</div>
   <form id="operasionalForm" action="https://script.google.com/macros/s/AKfycby8XLf08yqjA4cJVYbpd0eT9INCJNMbCvIUpJGbJZ3mvUChdU2WIkievrthCLyInysrbA/exec" method="POST">
-    <div class="info-content" id="infoContent3">
+    <div class="info-content" id="infoContent4">
       <label for="name" class="form-label">
         <i class="bi bi-person icon-orange"></i> Nama
       </label>
@@ -590,8 +612,8 @@ table thead th {
   </form>
 </div>  
 <div class="info-box">
-  <div class="menu-header" id="menuHeader4">Input Uang Masuk</div>
-  <div class="info-content" id="infoContent4">
+  <div class="menu-header" id="menuHeader5">Input Uang Masuk</div>
+  <div class="info-content" id="infoContent5">
   <form id="inputForm" method="POST">
     <label for="dataE" class="form-label">
       <i class="bi bi-currency-dollar icon-green"></i>Uang Masuk</label>
@@ -609,6 +631,7 @@ table thead th {
       <ul>
         <li>Setiap pembayaran sales (pengeluaran) catet di Input Laporan Toko</li>
         <li>Setiap pendapatan sales catet di Input Laporan Sales</li>
+        <li>Setiap orang aotang catet di "Input Orang Nge-Bon"</li>
         <li>Setiap pengeluaran operasional (seperti: bensin, plastik, listrik, DLL) catet di Input Operasional, baik itu dari operasional sales & toko</li>
         <li>Setiap uang masuk setiap malam, tulis di "Input Uang Masuk"</li>
         <li>PENTING! semua Form Input berhasil ketika sudah keluar notifikasi "INPUT BERHASIL", kemudian klik...! "OK"</li>
@@ -657,6 +680,34 @@ document.getElementById("salesForm").addEventListener("submit", function (event)
   const formData = new FormData(form);
   
   fetch('https://script.google.com/macros/s/AKfycbxUxDDNNzI19rlsLvO21qHBOPLISXpeNnYwMmEHXMmquBbmc4Mro-nEGQbEmrkecbIbeg/exec', {
+    method: 'POST',
+    mode: 'cors',
+    body: formData // Use formData directly
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok ' + response.statusText);
+    }
+    return response.json(); // Parse JSON response
+  })
+  .then(data => {
+    console.log('Success:', data);
+    alert('Input Berhasil, Selamat Bekerja!');
+    form.reset(); // Clear the form fields
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('Input Berhasil: SEMANGAT!' + error.message);
+    form.reset(); // Clear the form fields
+  });
+});
+document.getElementById("bonForm").addEventListener("submit", function (event) {
+  event.preventDefault(); // Prevent form from submitting normally
+  
+  const form = this;
+  const formData = new FormData(form);
+  
+  fetch('https://script.google.com/macros/s/AKfycby_5GvU2vajN9D37-EAcAjw5VDTU_2c6BrdrFgV42ZwFzRvzqha2pzhzeymjtD0uDuN/exec', {
     method: 'POST',
     mode: 'cors',
     body: formData // Use formData directly
@@ -743,8 +794,8 @@ function toggleMenu(menuContentId) {
 }
 
 // Add event listeners for menu headers
-const menuHeaders = ['menuHeader1', 'menuHeader2', 'menuHeader3', 'menuHeader4'];
-const infoContents = ['infoContent1', 'infoContent2', 'infoContent3', 'infoContent4'];
+const menuHeaders = ['menuHeader1', 'menuHeader2', 'menuHeader3', 'menuHeader4', 'menuHeader5'];
+const infoContents = ['infoContent1', 'infoContent2', 'infoContent3', 'infoContent4', 'infoContent5'];
 
 menuHeaders.forEach((header, index) => {
   document.getElementById(header).addEventListener('click', () => {
