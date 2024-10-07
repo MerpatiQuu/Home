@@ -7,424 +7,393 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="icon" href="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" type="image/x-icon" />
     <meta property="og:image" content="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" />
-    <link rel="icon" href="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" type="image/x-icon" />
-    <!-- Bootstrap Icons CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css" rel="stylesheet">
     <style>
-body {
-    font-size: 0.875rem; /* Ukuran font lebih kecil untuk tampilan mobile */
-}
-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 60px;
-      background-color: #007bff;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: space-between; /* Space between logo and menu */
-      padding: 0 20px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-      z-index: 1000; /* Ensure it's above the sidebar and content */
-    }
+                body {
+            font-size: 0.875rem; /* Ukuran font lebih kecil untuk tampilan mobile */
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: #007bff;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Space between logo and menu */
+            padding: 0 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            z-index: 1000; /* Ensure it's above the sidebar and content */
+        }
 
-    /* Updated span styling for header title */
-    .header-title {
-      font-size: 24px; /* Keep the same size as h1 */
-      font-weight: bold; /* Optional: Keep the same boldness as h1 */
-      color: white; /* Match the color for the header */
-      margin-left: 2px; /* Add space from the menu icon */
-      display: inline-block; /* Keep it inline but treat it like a block-level element */
-    }
+        .header-title {
+            font-size: 24px; /* Keep the same size as h1 */
+            font-weight: bold; /* Optional: Keep the same boldness as h1 */
+            color: white; /* Match the color for the header */
+            margin-left: 2px; /* Add space from the menu icon */
+        }
 
-    /* Sidebar Menu */
-    .sidebar {
-      height: 100%;
-      width: 250px;
-      position: fixed;
-      top: 30px; /* Disesuaikan agar berada di bawah header */
-      left: -250px;
-      background-color: #ffffff;
-      transition: 0.3s;
-      padding-top: 30px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-      z-index: 900;
-    }
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 30px; /* Disesuaikan agar berada di bawah header */
+            left: -250px;
+            background-color: #ffffff;
+            transition: 0.3s;
+            padding-top: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            z-index: 900;
+        }
 
-    .sidebar.active {
-      left: 0;
-    }
+        .sidebar.active {
+            left: 0;
+        }
 
-    .sidebar ul {
-      padding: 0;
-      list-style-type: none;
-    }
+        .sidebar ul {
+            padding: 0;
+            list-style-type: none;
+        }
 
-    .sidebar ul li {
-      padding: 5px 20px;
-      text-align: left;
-    }
+        .sidebar ul li {
+            padding: 5px 20px;
+            text-align: left;
+        }
 
-    .sidebar ul li a {
-      text-decoration: none;
-      font-size: 16px;
-      color: #333;
-      transition: color 0.3s;
-      display: flex;
-      align-items: center;
-    }
+        .sidebar ul li a {
+            text-decoration: none;
+            font-size: 16px;
+            color: #333;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+        }
 
-    .sidebar ul li a:hover {
-      color: #007bff;
-    }
+        .sidebar ul li a:hover {
+            color: #007bff;
+        }
 
-    .sidebar ul li i {
-      margin-right: 10px;
-      margin-left: 4px;
-      font-size: 20px;
-    }
+        .sidebar ul li i {
+            margin-right: 10px;
+            margin-left: 4px;
+            font-size: 20px;
+        }
 
-    /* Main content */
-    main {
-      margin-left: 0;
-      margin-top: 30px; /* Start below the header */
-      padding: 20px;
-      transition: margin-left 0.3s;
-    }
+        main {
+            margin-left: 0;
+            margin-top: 30px; /* Start below the header */
+            padding: 20px;
+            transition: margin-left 0.3s;
+        }
 
-    main.active {
-      margin-left: 250px; /* Push content when sidebar is visible */
-    }
+        main.active {
+            margin-left: 250px; /* Push content when sidebar is visible */
+        }
 
-    /* Menu Icon in Header */
-    .menu-icon {
-      font-size: 1.75rem;
-      color: white;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-    }
+        .menu-icon {
+            font-size: 1.75rem;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
 
-    .menu-icon img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      margin-right: 10px;
-    }
+        .menu-icon img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
 
-    /* Adjust for mobile responsiveness */
-    @media (max-width: 768px) {
-      .sidebar {
-        width: 150px;
-      }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 150px;
+            }
 
-      .sidebar.active {
-        left: 0;
-      }
+            .sidebar.active {
+                left: 0;
+            }
 
-      main.active {
-        margin-left: 150px;
-      }
-    }
-.container {
-    padding: 15px; /* Padding untuk kontainer */
-}
+            main.active {
+                margin-left: 150px;
+            }
+        }
 
-h2 {
-    text-align: center; /* Pusatkan judul */
-}
+        .container {
+            padding: 15px; /* Padding untuk kontainer */
+        }
 
-.table {
-    margin-top: 20px; /* Jarak antara tabel dan elemen di atasnya */
-}
+        h2 {
+            text-align: center; /* Pusatkan judul */
+        }
 
-.table-responsive {
-    overflow-x: auto; /* Membuat tabel scrollable pada layar kecil */
-}
+        .table {
+            margin-top: 20px; /* Jarak antara tabel dan elemen di atasnya */
+        }
 
-.form-control, .btn {
-    font-size: 0.875rem; /* Ukuran font lebih kecil untuk input dan tombol */
-    padding: 0.375rem 0.75rem; /* Padding untuk input dan tombol */
-}
+        .table-responsive {
+            overflow-x: auto; /* Membuat tabel scrollable pada layar kecil */
+        }
 
-@media (max-width: 576px) {
-    .form-group {
-        margin-bottom: 15px; /* Jarak antar form group */
-    }
+        .form-control, .btn {
+            font-size: 0.875rem; /* Ukuran font lebih kecil untuk input dan tombol */
+            padding: 0.375rem 0.75rem; /* Padding untuk input dan tombol */
+        }
 
-    .table th, .table td {
-        font-size: 1rem; /* Ukuran font lebih kecil untuk tabel */
-        text-align: center;
-    }
-}
+        @media (max-width: 576px) {
+            .form-group {
+                margin-bottom: 15px; /* Jarak antar form group */
+            }
+
+            .table th, .table td {
+                font-size: 1rem; /* Ukuran font lebih kecil untuk tabel */
+                text-align: left;
+            }
+        }
     </style>
-    
 </head>
 <body>
     <header>
         <div class="menu-icon" onclick="toggleSidebar()">
-          <i class="bi bi-list"></i>
-          <img src="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" alt="Menu Logo">
-          <span class="header-title">Pendapatan</span>
+            <i class="bi bi-list"></i>
+            <img src="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" alt="Menu Logo">
+            <span class="header-title">Daftar Pelanggan</span>
         </div>
-      </header>  
-    
-      <!-- Sidebar Menu -->
-      <div class="sidebar" id="sidebarMenu">
+    </header>
+
+    <!-- Sidebar Menu -->
+    <div class="sidebar" id="sidebarMenu">
         <ul>
-          <li><a href="index.html" onclick="closeSidebar()"><i class="bi bi-house-door"></i> Home</a></li>
-          <li><a href="input.html" onclick="closeSidebar()"><i class="bi bi-plus-circle"></i> Input</a></li> <!-- Updated icon for Input -->
-          <li><a href="lapor.html" onclick="closeSidebar()"><i class="bi bi-bar-chart"></i> Pendapatan</a></li> <!-- Updated icon for Pendapatan -->
-          <li><a href="tagih.html" onclick="closeSidebar()"><i class="bi bi-bell"></i> Tagihan</a></li> <!-- Updated icon for Tagihan -->
-          <li><a href="pelanggan.html" onclick="closeSidebar()"><i class="bi bi-file-earmark-person"></i> Pelanggan</a></li> <!-- Updated icon for Hutang -->
-          <li><a href="inventa.html" onclick="closeSidebar()"><i class="bi bi-file-earmark-text"></i> Inventaris</a></li>      
+            <li><a href="index.html" onclick="closeSidebar()"><i class="bi bi-house-door"></i> Home</a></li>
+            <li><a href="input.html" onclick="closeSidebar()"><i class="bi bi-plus-circle"></i> Input</a></li>
+            <li><a href="lapor.html" onclick="closeSidebar()"><i class="bi bi-bar-chart"></i> Pendapatan</a></li>
+            <li><a href="tagih.html" onclick="closeSidebar()"><i class="bi bi-bell"></i> Tagihan</a></li>
+            <li><a href="pelanggan.html" onclick="closeSidebar()"><i class="bi bi-file-earmark-person"></i> Pelanggan</a></li>
+            <li><a href="inventa.html" onclick="closeSidebar()"><i class="bi bi-file-earmark-text"></i> Inventaris</a></li>
         </ul>
-      </div>
-      <main id="mainContent">
-<div class="container">
-    <h2 class="text-center">Daftar Pelanggan</h2>
-
-    <div class="form-group">
-        <label for="daySelect">Pilih Hari:</label>
-        <select class="form-control" id="daySelect" onchange="showTable()">
-            <option value="Semua">Semua</option>
-            <option value="Selasa">Selasa</option>
-            <option value="Kamis">Kamis</option>
-            <option value="Ahad">Ahad</option>
-        </select>
     </div>
-
-    <form id="customerForm" class="mb-3" onsubmit="addCustomer(event)">
-        <div class="form-group">
-            <label for="customerName">Nama Pelanggan:</label>
-            <input type="text" class="form-control" id="customerName" required>
-        </div>
-        <div class="form-group">
-            <label for="customerAddress">Alamat:</label>
-            <input type="text" class="form-control" id="customerAddress" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Tambah Pelanggan</button>
-    </form>
-
-    <h4 id="selectedDay"></h4>
+    <main id="mainContent">
+        <div class="container">
+            <div class="form-group">
+                <label for="daySelect">Pilih Hari:</label>
+                <select class="form-control" id="daySelect">
+                    <option value="Semua">Semua</option>
+                    <option value="Selasa">Selasa</option>
+                    <option value="Kamis">Kamis</option>
+                    <option value="Ahad">Ahad</option>
+                </select>
+            </div>
     
-    <table class="table table-bordered" id="customerTable">
-        <thead>
-            <tr>
-                <th>Nama Pelanggan</th>
-                <th>Alamat</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody id="customerList">
-            <!-- Initial customer rows will be populated here -->
-        </tbody>
-    </table>
-</div>
-      </main>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
-        function toggleSidebar() {
-      const sidebar = document.getElementById('sidebarMenu');
-      const mainContent = document.getElementById('mainContent');
-      sidebar.classList.toggle('active');
-      mainContent.classList.toggle('active');
-    }
-
-    function closeSidebar() {
-      const sidebar = document.getElementById('sidebarMenu');
-      const mainContent = document.getElementById('mainContent');
-      sidebar.classList.remove('active'); // Remove the active class to close sidebar
-      mainContent.classList.remove('active'); // Adjust main content margin if necessary
-    }
-    const customers = JSON.parse(localStorage.getItem('customers')) || {
-        "Ahad": [
-            { name: "B.Murtik", address: "" },
-            { name: "B. shofi", address: "" },
-            { name: "P. Adib", address: "" },
-            { name: "B. Holid", address: "" },
-            { name: "B. Amira", address: "" },
-            { name: "B. fira", address: "" },
-            { name: "B. Kholid", address: "" },
-            { name: "B. Santi", address: "" },
-            { name: "B. Vio", address: "" },
-            { name: "P.Sely", address: "" },
-            { name: "B. Fatur", address: "" },
-            { name: "P. Nimar", address: "" },
-            { name: "B. Fatim", address: "" },
-            { name: "B. Se", address: "" },
-            { name: "B. Di", address: "" },
-            { name: "B. Fa'Iq", address: "" },
-            { name: "B. Dela", address: "" },
-            { name: "B. Chacha", address: "" },
-            { name: "B. Linda", address: "" },
-            { name: "B. Azril", address: "" },
-            { name: "B. Lut", address: "" },
-            { name: "B. Khotim", address: "" },
-            { name: "Ra Washil", address: "" },
-            { name: "B. Naila", address: "" },
-            { name: "B. Nobel", address: "" },
-            { name: "b romi", address: "" },
-            { name: "B. Andi", address: "" },
-            { name: "B. Iwan", address: "" },
-            { name: "B. Fita", address: "" },
-            { name: "B. Nanang", address: "" },
-            { name: "P. Arul", address: "" },
-            { name: "P. Den", address: "" },
-            { name: "b fit", address: "" },
-            { name: "P. Naiman", address: "" },
-            { name: "B. Saini", address: "" },
-            { name: "p.h.sulaiman", address: "" },
-            { name: "pk imam", address: "" },
-            { name: "buk pri", address: "" },
-            { name: "p.haped", address: "" },
-            { name: "buk roihan Al aziz", address: "" },
-            { name: "b firman", address: "" },
-            { name: "b feby", address: "" }
-        ],
-        "Kamis": [
-            { name: "B. Titin ahatan", address: "" },
-            { name: "B. Miftah", address: "" },
-            { name: "Hamdalah", address: "" },
-            { name: "Hj. Ida", address: "" },
-            { name: "B. Helmi", address: "" },
-            { name: "B. Rifqi", address: "" },
-            { name: "B. Rizqi", address: "" },
-            { name: "B. Ros", address: "" },
-            { name: "B. Suyati", address: "" },
-            { name: "B. Uyun", address: "" },
-            { name: "B. Titin", address: "" },
-            { name: "B. Wulan", address: "" },
-            { name: "Buk Nasrul", address: "" },
-            { name: "H. Hasan", address: "" },
-            { name: "B. Wasil", address: "" },
-            { name: "B. Ayu", address: "" },
-            { name: "Toko Barokah Al Aziz", address: "" },
-            { name: "B. Fira", address: "" },
-            { name: "B. Arka", address: "" },
-            { name: "B. Hor", address: "" },
-            { name: "Sinar Madura", address: "" },
-            { name: "qiqi skw", address: "" },
-            { name: "b royhan Al aziz", address: "" },
-            { name: "Al harokah", address: "" },
-            { name: "b afan", address: "" },
-            { name: "buk Rosa", address: "" }
-        ],
-        "Selasa": [
-            { name: "h.nurul", address: "" },
-            { name: "B. Miswari", address: "" },
-            { name: "Al Harokah Jambisari3", address: "" },
-            { name: "B. Rofi", address: "" },
-            { name: "B. Suhai", address: "" },
-            { name: "B. wilda", address: "" },
-            { name: "B. Royhan", address: "" },
-            { name: "b. della", address: "" },
-            { name: "B. Wahed", address: "" },
-            { name: "Toko Hilya", address: "" },
-            { name: "Toko Iqomah", address: "" },
-            { name: "Toko Barokah Jambesari", address: "" },
-            { name: "Pak Pet", address: "" },
-            { name: "B. aulia", address: "" },
-            { name: "B. Lastri", address: "" },
-            { name: "B. Foni", address: "" },
-            { name: "B. Paredi", address: "" },
-            { name: "B. Rahman", address: "" },
-            { name: "toko simpang tiga", address: "" },
-            { name: "B. alin", address: "" },
-            { name: "B. dales", address: "" },
-            { name: "b.bayu", address: "" },
-            { name: "b. iwan", address: "" },
-            { name: "b naila", address: "" },
-            { name: "toko saudara h.nurol", address: "" },
-            { name: "b ira", address: "" },
-            { name: "b Ifan", address: "" }
-        ]
+            <form id="customerForm" class="mb-3">
+                <div class="form-group">
+                    <label for="customerName">Nama:</label>
+                    <input type="text" class="form-control" id="customerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="customerAddress">Alamat:</label>
+                    <input type="text" class="form-control" id="customerAddress" required>
+                </div>
+                <button type="button" class="btn btn-primary" id="addCustomerBtn">Tambah</button>
+                <button type="button" class="btn btn-success" id="saveCustomerBtn">Simpan</button>
+            </form>
+    
+            <h4 id="selectedDay"></h4>
+    
+            <table class="table table-bordered" id="customerTable">
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Alamat</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="customerList"></tbody>
+            </table>
+        </div>
+    </main>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+        import { getDatabase, ref, set, get, update, remove } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
+    
+        const firebaseConfig = {
+            apiKey: "AIzaSyDYtzLiDarYVTxcvvXj9roQ5cVAa9Ft80U",
+            authDomain: "tuai-a45a4.firebaseapp.com",
+            projectId: "tuai-a45a4",
+            storageBucket: "tuai-a45a4.appspot.com",
+            messagingSenderId: "968671269440",
+            appId: "1:968671269440:web:b3729cca169ad0495485a5"
+        };
+    
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        let customers = {
+            "Ahad": [],
+            "Kamis": [],
+            "Selasa": []
+        };
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            const daySelect = document.getElementById("daySelect");
+            const customerForm = document.getElementById("customerForm");
+            const addCustomerBtn = document.getElementById("addCustomerBtn");
+            const saveCustomerBtn = document.getElementById("saveCustomerBtn");
+            const sidebar = document.getElementById("sidebarMenu");
+            const mainContent = document.getElementById("mainContent");
+            // Event listeners
+            daySelect.addEventListener('change', showTable);
+            addCustomerBtn.addEventListener('click', addCustomer);
+            saveCustomerBtn.addEventListener('click', updateCustomer);
+                // Toggle the sidebar
+    window.toggleSidebar = () => {
+        sidebar.classList.toggle('active');
+        mainContent.classList.toggle('active');
     };
-    function showTable() {
-    const selectedDay = document.getElementById("daySelect").value;
-    document.getElementById("selectedDay").innerText = selectedDay;
-    displayCustomers(selectedDay);
-}
 
-function displayCustomers(day) {
-    const tbody = document.getElementById("customerList");
-    tbody.innerHTML = ""; // Clear existing rows
-
-    if (day === "Semua") {
-        // Display all customers from all days
-        for (const key in customers) {
-            customers[key].forEach((customer, index) => {
-                const row = `<tr>
-                    <td>${customer.name}</td>
-                    <td>${customer.address}</td>
-                    <td>
-                        <button class="btn btn-warning btn-sm" onclick="editCustomer('${key}', ${index})">Edit</button>
-                        <button class="btn btn-danger btn-sm" onclick="removeCustomer('${key}', ${index})">Hapus</button>
-                    </td>
-                </tr>`;
-                tbody.innerHTML += row;
+    // Close the sidebar
+    window.closeSidebar = () => {
+        sidebar.classList.remove('active');
+        mainContent.classList.remove('active');
+    };
+            // Load customers from Firebase
+            function loadCustomers() {
+                const customersRef = ref(db, 'customers/');
+                get(customersRef).then((snapshot) => {
+                    if (snapshot.exists()) {
+                        customers = snapshot.val();
+                    }
+                    showTable();
+                }).catch((error) => {
+                    console.error("Error loading customers: ", error);
+                });
+            }
+    
+            // Show selected day's customers
+            function showTable() {
+                const selectedDay = daySelect.value;
+                document.getElementById("selectedDay").innerText = selectedDay;
+                displayCustomers(selectedDay);
+            }
+    
+            // Display customers in the table
+            function displayCustomers(day) {
+                const tbody = document.getElementById("customerList");
+                tbody.innerHTML = "";
+                const customersToShow = day === "Semua" ? customers : { [day]: customers[day] };
+                for (const key in customersToShow) {
+                    customersToShow[key].forEach((customer, index) => {
+                        const row = `<tr>
+                            <td>${customer.name}</td>
+                            <td>${customer.address}</td>
+                            <td>
+                            <button class="btn btn-warning btn-sm" onclick="editCustomer('${key}', ${index})">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button class="btn btn-danger btn-sm" onclick="removeCustomer('${key}', ${index})">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                            </td>
+                        </tr>`;
+                        tbody.innerHTML += row;
+                    });
+                }
+            }
+    
+            // Add a new customer
+            function addCustomer(event) {
+                event.preventDefault();
+                const customerName = document.getElementById("customerName").value.trim();
+                const customerAddress = document.getElementById("customerAddress").value.trim();
+                const selectedDay = daySelect.value;
+    
+                // Validate inputs
+                if (!customerName || !customerAddress) {
+                    alert("Please enter both the name and address.");
+                    return;
+                }
+    
+                const newCustomer = { name: customerName, address: customerAddress };
+    
+                // Add the new customer to the local `customers` object
+                if (!customers[selectedDay]) {
+                    customers[selectedDay] = [];
+                }
+                customers[selectedDay].push(newCustomer);
+    
+                // Convert the array to an object before updating Firebase
+                const customersObject = {};
+                customers[selectedDay].forEach((customer, index) => {
+                    customersObject[index] = customer;
+                });
+    
+                // Use `set` instead of `update` to overwrite the entire data for the selected day
+                set(ref(db, `customers/${selectedDay}`), customersObject)
+                    .then(() => {
+                        displayCustomers(selectedDay);
+                        customerForm.reset();
+                        alert("Pelanggan berhasil ditambahkan");
+                    })
+                    .catch((error) => {
+                        console.error("Error adding customer: ", error);
+                    });
+            }
+            
+            // Function to update the customer in Firebase
+            function updateCustomer() {
+                const customerForm = document.getElementById("customerForm");
+                const index = customerForm.dataset.editIndex;
+                const day = customerForm.dataset.editDay;
+                const customerName = document.getElementById("customerName").value;
+                const customerAddress = document.getElementById("customerAddress").value;
+    
+                if (index !== undefined) {
+                    customers[day][index] = { name: customerName, address: customerAddress };
+                    update(ref(db, `customers/${day}`), { [index]: customers[day][index] })
+                        .then(() => {
+                            displayCustomers(day);
+                            customerForm.reset();
+                            delete customerForm.dataset.editIndex; // Clear the edit index
+                            delete customerForm.dataset.editDay; // Clear the edit day
+                            alert("Pelanggan berhasil diperbarui");
+                        })
+                        .catch((error) => {
+                            console.error("Error updating customer: ", error);
+                        });
+                }
+            }
+    
+            // Function to prepare the form for editing
+            window.editCustomer = function(day, index) {
+                const customer = customers[day][index];
+                document.getElementById("customerName").value = customer.name;
+                document.getElementById("customerAddress").value = customer.address;
+                const customerForm = document.getElementById("customerForm");
+                customerForm.dataset.editIndex = index; // Store the index for editing
+                customerForm.dataset.editDay = day; // Store the day for editing
+            };
+    
+    // Function to remove a customer
+    window.removeCustomer = function(day, index) {
+        customers[day].splice(index, 1); // Remove customer from the local array
+        update(ref(db, `customers/${day}`), { [index]: null }) // Set the specific index to null in Firebase
+            .then(() => {
+                displayCustomers(day);
+                alert("Pelanggan berhasil dihapus");
+            })
+            .catch((error) => {
+                console.error("Error removing customer: ", error);
             });
-        }
-    } else {
-        // Display customers for the selected day
-        customers[day].forEach((customer, index) => {
-            const row = `<tr>
-                <td>${customer.name}</td>
-                <td>${customer.address}</td>
-                <td>
-                    <button class="btn btn-warning btn-sm" onclick="editCustomer('${day}', ${index})">Edit</button>
-                    <button class="btn btn-danger btn-sm" onclick="removeCustomer('${day}', ${index})">Hapus</button>
-                </td>
-            </tr>`;
-            tbody.innerHTML += row;
+    };
+    
+            loadCustomers();
         });
-    }
-}
 
-function addCustomer(event) {
-    event.preventDefault();
-    const customerName = document.getElementById("customerName").value;
-    const customerAddress = document.getElementById("customerAddress").value;
-    const selectedDay = document.getElementById("daySelect").value;
-
-    // Add customer to the selected day's list
-    customers[selectedDay].push({ name: customerName, address: customerAddress });
-    localStorage.setItem('customers', JSON.stringify(customers)); // Save to localStorage
-    displayCustomers(selectedDay);
-
-    // Clear the input fields
-    document.getElementById("customerName").value = "";
-    document.getElementById("customerAddress").value = "";
-}
-
-function removeCustomer(day, index) {
-    // Remove the customer from the specified day's list
-    customers[day].splice(index, 1);
-    localStorage.setItem('customers', JSON.stringify(customers)); // Save to localStorage
-    displayCustomers(day);
-}
-
-function editCustomer(day, index) {
-    const customer = customers[day][index];
-    const newName = prompt("Edit Nama Pelanggan:", customer.name);
-    const newAddress = prompt("Edit Alamat:", customer.address);
-
-    if (newName !== null && newAddress !== null) {
-        customers[day][index] = { name: newName, address: newAddress };
-        localStorage.setItem('customers', JSON.stringify(customers)); // Save to localStorage
-        displayCustomers(day);
-    }
-}
-
-// Initialize the table with customers based on the selected day
-document.addEventListener("DOMContentLoaded", () => {
-    showTable();
-});
-</script>
-
-</body>
-</html>
+    </script>
+                </body>
+    </html>
