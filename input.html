@@ -8,6 +8,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
   <link rel="icon" href="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" type="image/x-icon" />
   <meta property="og:image" content="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" />
   <style>
@@ -452,9 +453,9 @@ table thead th {
   <div class="menu-header" id="menuHeader2">Input Laporan Sales</div>
 <form id="salesForm" action="https://script.google.com/macros/s/AKfycbxUxDDNNzI19rlsLvO21qHBOPLISXpeNnYwMmEHXMmquBbmc4Mro-nEGQbEmrkecbIbeg/exec" method="POST">
 <div class="info-content" id="infoContent2">
-  <label for="name" class="form-label"><i class="bi bi-person icon-blue"></i> Nama</label>
-  <select id="name" name="nama" class="form-select" required>
-    <option value="" disabled selected>-</option>
+<label for="name" class="form-label"><i class="bi bi-person icon-blue"></i> Nama</label>
+<input list="names" id="name" name="nama" class="form-control" required>
+<datalist id="names">
     <option value="H. Nurul">H. Nurul</option>
     <option value="B. Miswari">B. Miswari</option>
     <option value="Al Harokah Jambisari3">Al Harokah Jambisari3</option>
@@ -554,7 +555,7 @@ table thead th {
     <option value="B. Topek">B. Topek</option>
     <option value="B. Bahrud">B. Bahrud</option>
     <option value="Basri Ucup">Basri Ucup</option>
-  </select>    
+  </datalist>    
   <label for="jumlah" class="form-label"><i class="bi bi-currency-dollar icon-green"></i> Jumlah</label>
   <div class="input-group">
       <span class="input-group-text">Rp.</span>
@@ -648,6 +649,8 @@ table thead th {
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
   <script>
 document.getElementById("tokoForm").addEventListener("submit", function (event) {
   event.preventDefault(); // Prevent form from submitting normally
@@ -857,6 +860,10 @@ document.getElementById('bayar').addEventListener('input', updateSisa);
     function formatCurrency(num) {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Ganti ',' dengan '.'
     }
+    $('#name').select2({
+      placeholder: "Pilih atau ketik nama",
+      allowClear: true
+    });
   </script>
 
 </body>
