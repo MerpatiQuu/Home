@@ -453,7 +453,7 @@ table thead th {
   <div class="menu-header" id="menuHeader2">Input Laporan Sales</div>
 <form id="salesForm" action="https://script.google.com/macros/s/AKfycbxUxDDNNzI19rlsLvO21qHBOPLISXpeNnYwMmEHXMmquBbmc4Mro-nEGQbEmrkecbIbeg/exec" method="POST">
 <div class="info-content" id="infoContent2">
-<label for="name" class="form-label"><i class="bi bi-person icon-blue"></i> Nama</label>
+<label for="name1" class="form-label"><i class="bi bi-person icon-blue"></i> Nama</label>
 <input list="names" id="name" name="nama" class="form-control" required>
 <datalist id="names">
     <option value="H. Nurul">H. Nurul</option>
@@ -860,7 +860,7 @@ document.getElementById('bayar').addEventListener('input', updateSisa);
     function formatCurrency(num) {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Ganti ',' dengan '.'
     }
-    $('#name').select2({
+    $('#name1').select2({
       placeholder: "Pilih atau ketik nama",
       allowClear: true
     });
