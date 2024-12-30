@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" href="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" type="image/x-icon" />
+  <meta property="og:image" content="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" />
+    <title>Harga Produk - MerpatiQuu</title>
+    <style>
+        /* Resetting default margins and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* General body styling */
+        body {
+            font-family: monospace;
+            background-color: #ff68c5;
+            color: #333;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        /* Header */
+    header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #007bff;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Memusatkan semua konten di tengah */
+  padding: 0 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.header-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  margin: 0 10px; /* Jarak antara judul dan ikon */
+  display: inline-block;
+}
+
+/* Menu Icon in Header */
+.menu-icon {
+  font-size: 1.75rem;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-left: 10px; /* Jarak antara menu dan judul */
+}
+
+.menu-icon img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 3px;
+  margin-left: 10px;
+}
+
+
+        /* Dropdown and Search Bar container */
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+            width: 100%;
+        }
+
+        label {
+            font-size: 1rem;
+            color: #fff;
+            margin-top: 4rem;
+        }
+
+        select, input {
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            width: 200px;
+            background-color: #fff;
+        }
+
+        select {
+            background-color: #ffebf0;
+        }
+
+        input {
+            background-color: #e8f9fd;
+            margin-bottom: 0.7rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Product Box Styling */
+        .product-box {
+        background-color: #007bff;
+        border-radius: 8px;
+        padding: 5px;
+        margin-bottom: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        border: 2px solid #fff; /* Cincin putih di sekitar box */
+        justify-content: center; /* Menyusun isi secara horizontal ke tengah */
+        align-items: center; /* Menyusun isi secara vertikal ke tengah */
+        
+        }   
+
+        .product-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            border: 2px solid #fff; /* Tetap cincin putih saat hover */
+        }
+
+        .product-box strong {
+            color: #fff;
+            font-size: 1.1rem;
+           
+        }
+
+        /* Hidden class for details */
+        .product-details {
+            display: none;
+            margin-top: 10px;
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold; /* Semua teks menjadi bold */
+            font-size: 1rem; /* Menentukan ukuran font yang sama */
+        }
+
+        /* Details text styling */
+        .product-details p {
+            color: #555;
+            font-weight: bold; /* Pastikan teks dalam <p> juga bold */
+            font-size: 1rem; /* Pastikan ukuran font konsisten */
+        }
+
+        .product-details strong {
+            color: #007bff;
+            font-weight: bold; /* Pastikan teks dalam <strong> juga bold */
+            font-size: 1rem; /* Pastikan ukuran font konsisten */
+        }
+
+        .hidden {
+            display: none;
+        }
+        .center {
+    text-align: center; /* Menyusun teks di tengah */
+    display: block;
+}
+.product-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;  /* Membuat dua kolom */
+    gap: 2px;  /* Jarak antara kolom */
+    align-items: center;  /* Menyelaraskan teks di tengah vertikal */
+    margin-bottom: 1px;  /* Jarak antar baris */
+}
+
+.product-row div {
+    padding: 1px;
+    text-align: left;  /* Menyelaraskan teks ke kiri */
+}
+
+.product-row strong {
+    
+    width: 10%; /* Mengatur lebar label untuk penataan yang rapi */
+}
+
+        /* Mobile and responsive styles */
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: center;
+                gap: 5px;
+            }
+
+            select, input {
+                width: 50%;
+                font-size: 1.1rem;
+            }
+
+            .product-box {
+                padding: 7px;
+                margin-bottom: 8px;
+            }
+
+            .product-details {
+                padding: 2px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .controls {
+                gap: 15px;
+            }
+
+            select, input {
+                font-size: 1rem;
+                width: 90%;
+            }
+
+            .product-box {
+                padding: 10px;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+    <div class="menu-icon" onclick="window.location.href='index.html'">
+      <i class="bi bi-house-door"></i>
+      <img src="https://github.com/MerpatiQuu/M/blob/main/WhatsApp%20Image%202024-09-11%20at%2014.38.17.jpeg?raw=true" alt="Menu Logo">
+      <span class="header-title">Daftar Harga Produk</span>
+    </div>
+  </header>  
+
+    <!-- Dropdown Kategori -->
+    <label for="category">Kategori:</label>
+    <select id="category">
+        <option value="all">Semua</option>
+        <option value="Sembako">Sembako</option>
+        <option value="Sabun">Sabun</option>
+        <option value="Rokok">Rokok</option>
+        <option value="Plastik">Plastik</option>
+        <option value="Pempes">Pempes</option>
+        <option value="Parfum">Parfum</option>
+        <option value="Minuman">Minuman</option>
+        <option value="Mie">Mie</option>
+        <option value="Detergen">Detergen</option>
+        <option value="Camilan">Camilan</option>
+    </select>
+
+    <!-- Input Pencarian -->
+    <input type="text" id="searchBar" placeholder="Tulis nama barang...">
+
+    <!-- Container Produk -->
+    <div id="productContainer"></div>
+
+    <script>
+        const categoryDropdown = document.getElementById('category');
+        const searchBar = document.getElementById('searchBar');
+        const productContainer = document.getElementById('productContainer');
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwtOzwLTf12BLTclApQrGy71r9bRh6dLQZqGlr6ZTs6hLo41uV3QcjzlV4ELiKDw9xk/exec';
+
+        let allProductData = [];  // Menyimpan semua data produk setelah pemuatan pertama kali
+
+        // Fungsi untuk menampilkan atau menyembunyikan detail produk
+        function toggleDetails(productBox) {
+            const details = productBox.querySelector('.product-details');
+            if (details.style.display === 'block') {
+                details.style.display = 'none';
+            } else {
+                details.style.display = 'block';
+            }
+        }
+
+        // Fungsi untuk merender produk ke dalam container berdasarkan kategori dan pencarian
+        function renderNames(category, searchTerm = '') {
+            productContainer.innerHTML = ''; // Hapus kontainer sebelum merender item baru
+
+            const filteredData = allProductData.filter(item => 
+                (category === 'all' || item.KatProduk === category) &&
+                item.NamaBrg.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+
+            if (filteredData.length === 0) {
+                productContainer.textContent = 'Tidak ada data yang cocok.';
+                return;
+            }
+
+            filteredData.forEach(item => {
+                const productBox = document.createElement('div');
+                productBox.classList.add('product-box');
+
+                // Membuat konten untuk NamaBarang dan Kategori
+                productBox.innerHTML = `
+                    <strong class="center">${item.NamaBrg}</strong> <span class="hidden">${item.KatProduk}</span>
+                    <div class="product-details">
+                        <p class="center"><strong>Isi :</strong></p>
+<div class="product-row">
+    <div><strong>Pac - </strong></div>
+    <div>${item.IsiPac}</div>
+</div>
+<div class="product-row">
+    <div><strong>Dos - </strong></div>
+    <div>${item.IsiDos}</div>
+</div>
+
+<p class="center"><strong>Harga :</strong></p>
+<div class="product-row">
+    <div><strong>Kulak - </strong></div>
+    <div>Rp ${item.HrgBeli}</div>
+</div>
+<div class="product-row">
+    <div><strong>Ecer - </strong></div>
+    <div>Rp ${item.HrgPcs}</div>
+</div>
+<div class="product-row">
+    <div><strong>Pac - </strong></div>
+    <div>Rp ${item.HrgPac}</div>
+</div>
+<div class="product-row">
+    <div><strong>Dos - </strong></div>
+    <div>Rp ${item.HrgDos}</div>
+</div>
+<div class="product-row">
+    <div><strong>Member - </strong></div>
+    <div>Rp ${item.HrgMember}</div>
+</div>
+
+                    </div>
+                `;
+
+                // Menambahkan event listener untuk klik pada box
+                productBox.addEventListener('click', () => toggleDetails(productBox));
+
+                // Menambahkan product box ke dalam container
+                productContainer.appendChild(productBox);
+            });
+        }
+
+        // Fungsi untuk memuat data produk pertama kali
+        function loadInitialData() {
+            const queryParams = new URLSearchParams();
+            queryParams.set('action', 'FetchData');
+            queryParams.set('sh', 'produk');
+            queryParams.set('category', 'all');
+            queryParams.set('searchTerm', '');
+
+            fetch(`${scriptURL}?${queryParams.toString()}`)
+                .then(response => response.json())  // Parsing response JSON
+                .then(productData => {
+                    allProductData = productData;  // Menyimpan data produk setelah pemuatan pertama
+                    renderNames('all');  // Render data pertama kali
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    productContainer.textContent = 'Terjadi kesalahan dalam memuat data.';
+                });
+        }
+
+        // Event listener untuk input pencarian
+        searchBar.addEventListener('input', (e) => {
+            renderNames(categoryDropdown.value, e.target.value); // Panggil dengan kategori yang dipilih dan term pencarian yang ada
+        });
+
+        // Event listener untuk perubahan kategori
+        categoryDropdown.addEventListener('change', () => {
+            renderNames(categoryDropdown.value, searchBar.value); // Render produk berdasarkan kategori yang dipilih
+        });
+
+        // Pemuatan data pertama kali
+        loadInitialData();
+    </script>
+</body>
+</html>
